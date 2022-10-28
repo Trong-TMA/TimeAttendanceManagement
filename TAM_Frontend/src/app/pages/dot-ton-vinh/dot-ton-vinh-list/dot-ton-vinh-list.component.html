@@ -1,0 +1,25 @@
+<nz-table #basicTable [nzData]="listDottonvinh">
+  <thead>
+    <tr>
+      <th>STT</th>
+      <th>Tên đợt tôn vinh</th>
+      <th>Mã đợt tôn vinh</th>
+      <th>Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of basicTable.data; index as i">
+      <td class="col-sm-1">{{i+1}}</td>
+      <td class="col-sm-2">{{item.tenDotTonVinh}}</td>
+      <td class="col-sm-2">{{item.maDotTonVinh}}</td>
+      <td class="col-sm-2">
+        <button pButton pRipple icon="pi pi-bookmark" (click)="showModal(item)"></button>
+        <button pButton pRipple icon="pi pi-trash" (click)="deleteDTV(item)"></button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<p-dialog header="Chỉnh sửa đợt tôn vinh" [(visible)]="isVisible" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false">
+    <app-dot-ton-vinh-edit (loadDataEmit)="loadDottonvinh()" [dottonvinh]="dtv"></app-dot-ton-vinh-edit>
+</p-dialog>

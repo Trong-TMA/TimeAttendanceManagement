@@ -1,0 +1,67 @@
+<nz-layout class="nz-demo-layout-fixed">
+  <nz-header>
+    <div class="banner-wrapper"><img _ngcontent-apu-c70 class="image" src="../../../assets/images/banner.png" alt=""></div>
+    <ul nz-menu [nzMode]="'horizontal'">
+      <li nz-submenu nzTitle="Quản lý tôn vinh" nzIcon="contacts" >
+        <ul>
+          <li nz-menu-item class="textLi">
+            <a routerLink="Tao-dot-ton-vinh" routerLinkActive="active">
+              <span>Đợt tôn vinh</span>
+            </a>
+          </li>
+          <li nz-menu-item >
+            <a routerLink="De-xuat-ca-nhan" routerLinkActive="active">
+              <span>Đề xuất cá nhân</span>
+            </a>
+          </li>
+          <li nz-menu-item>
+            <a routerLink="De-xuat-ho-gia-dinh" routerLinkActive="active">
+              <span>Đề xuất hộ gia đình</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li nz-submenu nzTitle="Quản lý người hiến máu" nzIcon="heart" >
+        <ul>
+          <li nz-menu-item class="textLi">
+            <a routerLink="Tao-moi" routerLinkActive="active">
+              <span>Tạo mới</span>
+            </a>
+          </li>
+          <li nz-menu-item >
+            <a routerLink="Danh-sach-hien-mau" routerLinkActive="active">
+              <span>Danh sách hiến máu</span>
+            </a>
+          </li>
+          <li nz-menu-item>
+            <a routerLink="Import-nguoi-hien-mau" routerLinkActive="active">
+              <span>Nhập dữ liệu</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Lịch sử tôn vinh" nzIcon="history">
+        <ul>
+          <li nz-menu-item class="textLi">
+            <a routerLink="Lich-su-ton-vinh" routerLinkActive="active">
+              <span>Lịch sử tôn vinh</span>
+            </a>
+          </li>
+          <li nz-menu-item >
+            <a routerLink="Export" routerLinkActive="active">
+              <span>Xuất người hiến máu</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Đơn vị hiến máu" routerLink="Don-vi" routerLinkActive="active"></li>
+      <li nz-submenu nzTitle="Đăng xuất" (click)="logout()"></li>
+    </ul>
+  </nz-header>
+
+  <nz-content>
+    <router-outlet></router-outlet>
+  </nz-content>
+  <nz-footer>Copyright@2021 - Hội chữ thập đỏ Tỉnh Bình Định</nz-footer>
+</nz-layout>

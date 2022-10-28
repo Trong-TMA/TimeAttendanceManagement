@@ -1,0 +1,56 @@
+<form nz-form [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-label [nzSm]="4">Họ và tên</nz-form-label>
+    <nz-form-control>
+      <nz-input-group>
+        <input formControlName="hoten" nz-input [placeholder]="nguoihienmau.HoTen"/>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="4">Giới tính</nz-form-label>
+    <nz-form-control>
+      <nz-select formControlName="gioitinh">
+          <nz-option [nzValue]="true" nzLabel="Nam"></nz-option>
+          <nz-option [nzValue]="false" nzLabel="Nữ"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="4">Năm sinh</nz-form-label>
+    <nz-form-control>
+      <nz-input-group>
+        <input formControlName="namsinh" nz-input [placeholder]="nguoihienmau.NamSinh"/>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="4">Nghề nghiệp</nz-form-label>
+    <nz-form-control>
+      <nz-input-group>
+        <input formControlName="nghenghiep" nz-input [placeholder]="nguoihienmau.NgheNghiep"/>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="4">Địa chỉ</nz-form-label>
+    <nz-form-control>
+      <nz-input-group>
+        <input formControlName="diachi" nz-input [placeholder]="nguoihienmau.DiaChi"/>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="4">Nhóm máu</nz-form-label>
+    <nz-form-control>
+      <nz-input-group>
+        <input formControlName="nhommau" nz-input [placeholder]="nguoihienmau.NhomMau"/>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button nzType="primary" (click)="submitForm()"(loadDataEmit)="loadDonvi()">Sửa</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

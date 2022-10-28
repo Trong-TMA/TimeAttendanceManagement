@@ -1,0 +1,13 @@
+
+<nz-spin [nzSpinning]="isSpinning">
+  <app-danh-sach-hien-mau-search (loadDataEmit)="loadNguoiHienMauSearch($event)" ></app-danh-sach-hien-mau-search>
+  <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+      <h3 class="col-12">DANH SÁCH NGƯỜI HIẾN MÁU</h3>
+    </div>
+    <div class="col-sm"></div>
+    <app-danh-sach-hien-mau-list (loadDataEmit)="loadNguoiHienMau()" [Listnguoihienmau]="nguoihienmaulist"></app-danh-sach-hien-mau-list>
+  </div>
+</nz-spin>
+<p-toast position="bottom-right"></p-toast>

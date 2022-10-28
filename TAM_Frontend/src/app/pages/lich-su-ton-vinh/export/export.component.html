@@ -1,0 +1,28 @@
+<form nz-form [formGroup]="validateForm" >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">Đợt tôn vinh </nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <nz-select formControlName="dottonvinhid">
+        <nz-option *ngFor="let item of dottonvinhs"
+        [nzLabel]="item.tenDotTonVinh"
+        [nzValue]="item.id"></nz-option>
+    </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">Đơn vị tôn vinh</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <nz-select formControlName="donviid">
+        <nz-option *ngFor="let item of donvis"
+        [nzLabel]="item.tenDonVi"
+        [nzValue]="item.id"></nz-option>
+    </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item class="submit-btn ant-form-item ant-row">
+    <div class="steps-action">
+      <button nz-button nzType="default" (click)="export()" value="Download">Xuất</button>
+    </div>
+
+  </nz-form-item>
+</form>

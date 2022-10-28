@@ -1,0 +1,14 @@
+<form nz-form [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Hãy nhập mã tôn vinh!">
+      <nz-input-group>
+        <input formControlName="madottonvinh" nz-input placeholder="Mã đợt tôn vinh"/>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid" (click)="submitForm()">Thêm</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

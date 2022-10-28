@@ -1,0 +1,12 @@
+<nz-spin [nzSpinning]="isSpinning">
+  <app-lich-su-ton-vinh-search (loadDataEmit)="loadNguoiHienMauSearch($event)" ></app-lich-su-ton-vinh-search>
+  <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+      <h3 class="col-12">LỊCH SỬ TÔN VINH</h3>
+    </div>
+    <div class="col-sm"></div>
+    <app-lich-su-ton-vinh-list (loadDataEmit)="loadNguoiHienMau()" [Listnguoihienmau]="nguoihienmaulist"></app-lich-su-ton-vinh-list>
+  </div>
+</nz-spin>
+<p-toast position="bottom-right"></p-toast>

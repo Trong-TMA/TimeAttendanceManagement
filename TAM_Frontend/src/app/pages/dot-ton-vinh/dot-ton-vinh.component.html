@@ -1,0 +1,18 @@
+<nz-spin [nzSpinning]="isSpinning">
+  <div class="row">
+    <div class="col-sm">
+      <h3>Tạo Đợt tôn vinh</h3>
+      <div class="inner-content">
+        <app-dot-ton-vinh-create (LoadDataEvent)="loadDottonvinh()"></app-dot-ton-vinh-create>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <h3>Danh sách Đợt tôn vinh</h3>
+      <div class="inner-content">
+        <app-dot-ton-vinh-list (loadDataEmit)="loadDottonvinh()" [listDottonvinh]="dottonvinhlist"></app-dot-ton-vinh-list>
+      </div>
+    </div>
+  </div>
+</nz-spin>
+<p-toast position="bottom-right"></p-toast>
+

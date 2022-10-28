@@ -1,0 +1,41 @@
+<nz-table #basicTable [nzData]="Listnguoihienmau">
+  <thead>
+    <tr>
+      <th>STT</th>
+      <th>Họ và Tên</th>
+      <th>Giới tính</th>
+      <th>Năm sinh</th>
+      <th>Nghề nghiệp</th>
+      <th>Địa chỉ</th>
+      <th>Nhóm máu</th>
+      <th>Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of basicTable.data; index as i">
+      <td class="col-sm-1">{{i+1}}</td>
+      <td class="col-sm-2">{{item.hoTen}}</td>
+      <td class="col-sm-1">{{showGender(item.gioiTinh)}}</td>
+      <td class="col-sm-1">{{item.namSinh}}</td>
+      <td class="col-sm-2">{{item.ngheNghiep}}</td>
+      <td class="col-sm-2">{{item.diaChi}}</td>
+      <td class="col-sm-1">{{item.nhomMau}}</td>
+      <td class="col-sm-2">
+        <button pButton pRipple icon="pi pi-bookmark" (click)="showModal(item)"></button>
+        <button pButton pRipple icon="pi pi-trash" (click)="deleteHM(item)"></button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<!-- <p-dialog header="Header" [(visible)]="isVisible" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false">
+    <app-danh-sach-hien-mau-edit (loadDataEmit)="loadDottonvinh()" [nguoihienmau]="nguoihien"></app-danh-sach-hien-mau-edit>
+</p-dialog> -->
+<nz-modal [(nzVisible)]="isVisible" (nzOnCancel)="handleCancel()">
+  <div *nzModalTitle>Chỉnh sửa thông tin</div>
+  <ng-container *nzModalContent>
+    <app-danh-sach-hien-mau-edit (loadDataEmit)="loadDottonvinh()" [nguoihienmau]="nguoihien"></app-danh-sach-hien-mau-edit>
+  </ng-container>
+
+  <ng-template [nzModalFooter]></ng-template>
+</nz-modal>
