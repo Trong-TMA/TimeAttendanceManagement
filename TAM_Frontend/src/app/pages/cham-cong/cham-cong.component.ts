@@ -12,7 +12,8 @@ interface Person {
 })
 export class ChamCongComponent implements OnInit {
 
-  public chck = false;
+  public chckweek = false;
+  public chckmonth = false;
 
   ngOnInit(): void {
     throw new Error('Method not implemented.');
