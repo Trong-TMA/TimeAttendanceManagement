@@ -2,15 +2,30 @@
   <div class="bg-light d-flex align-items-center p-3 border-bottom">
     <div class="p-3">
       <div class="d-flex align-items-center checkbox-item">
-        <img class="checkbox-label" (click)="chck = !chck" [src]="chck ? 'assets/images/checkbox.png' : 'assets/images/uncheck.png'" alt="">
-        <p>bu gà</p>
+        <img class="checkbox-label" (click)="chckweek = !chckweek" [src]="chckweek ? 'assets/images/checkbox.png' : 'assets/images/uncheck.png'" alt="">
+        <p>this week</p>
       </div>
     </div>
     <div class="p-3">
-      <nz-select ngModel="lucy">
-        <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-        <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-        <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+      <div class="d-flex align-items-center checkbox-item">
+        <img class="checkbox-label" (click)="chckmonth = !chckmonth" [src]="chckmonth ? 'assets/images/checkbox.png' : 'assets/images/uncheck.png'" alt="">
+        <p>this month</p>
+      </div>
+    </div>
+    <div class="p-3">
+      <nz-select ngModel="month1">
+        <nz-option nzValue="month1" nzLabel="Tháng 1"></nz-option>
+        <nz-option nzValue="month2" nzLabel="Tháng 2"></nz-option>
+        <nz-option nzValue="month3" nzLabel="Tháng 3"></nz-option>
+        <nz-option nzValue="month4" nzLabel="Tháng 4"></nz-option>
+        <nz-option nzValue="month5" nzLabel="Tháng 5"></nz-option>
+        <nz-option nzValue="month6" nzLabel="Tháng 6"></nz-option>
+        <nz-option nzValue="month7" nzLabel="Tháng 7"></nz-option>
+        <nz-option nzValue="month8" nzLabel="Tháng 8"></nz-option>
+        <nz-option nzValue="month9" nzLabel="Tháng 9"></nz-option>
+        <nz-option nzValue="month10" nzLabel="Tháng 10"></nz-option>
+        <nz-option nzValue="month11" nzLabel="Tháng 11"></nz-option>
+        <nz-option nzValue="month12" nzLabel="Tháng 12"></nz-option>
       </nz-select>
     </div>
     <div class="p-3">
