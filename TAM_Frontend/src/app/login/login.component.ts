@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.modelLogin).subscribe(
       (res: any)=>{
         localStorage.setItem('token', res?.token);
-        this.router.navigateByUrl('/dashboard/Danh-sach-hien-mau');
+        this.router.navigateByUrl('/dashboard');
       },
       (error)=>{
         if(error.status == 400){

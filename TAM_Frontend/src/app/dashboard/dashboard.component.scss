@@ -8,9 +8,6 @@ li{
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
 }
-span:hover{
-  color: #01645a
-}
 a{
   color: #01645a;
   text-decoration: none;
@@ -19,6 +16,7 @@ a:hover{
   color: #01645a
 }
 .banner-wrapper{
+  height: auto;
   width: 100%;
   max-width: 1600px;
   text-align: center;
@@ -36,7 +34,7 @@ nz-header {
 
 nz-content {
   padding: 0 50px;
-  margin-top: 64px;
+  margin-top: 40px;
   height: fit-content;
 }
 [nz-menu] {
@@ -67,5 +65,16 @@ nz-footer {
 
 [nzIcon] {
   size: 50px;
+}
+
+.header-login .title-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1024px;
+  margin: auto;
+  height: 50px;
+  color: #fff;
+  font-weight: bold;
 }
 
