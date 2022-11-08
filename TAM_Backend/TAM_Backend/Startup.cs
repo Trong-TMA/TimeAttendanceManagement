@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +12,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TAM_Backend.BLO;
+using TAM_Backend.DAO;
+using TAM_Backend.DAO.Impl;
+using TAM_Backend.DataContext;
 
 namespace TAM_Backend
 {
@@ -26,12 +31,22 @@ namespace TAM_Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Add connection service
+            services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(
+                Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TAM_Backend", Version = "v1" });
             });
+
+            //BLO dependence injection regist
+            services.AddTransient<IAutheBLO, AutheImplBLO>();
+
+            //DAO dependence injection regist
+            services.AddTransient<IAutheDAO, AutheImplDAO>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
