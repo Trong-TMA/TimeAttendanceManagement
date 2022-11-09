@@ -26,16 +26,18 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.loginService.login(this.modelLogin).subscribe(
-      (res: any)=>{
-        localStorage.setItem('token', res?.token);
-        this.router.navigateByUrl('/dashboard');
-      },
-      (error)=>{
-        if(error.status == 400){
-          this.errorMessage = "Tài khoản hoặc mật khẩu không đúng!"
+    this.loginService.login(this.modelLogin.username,this.modelLogin.password).subscribe(
+        (res: any)=>{
+          console.log(res?.stf_Cd);
+
+          if(res?.stf_Cd != null){
+            localStorage.setItem('token', res?.stf_Cd);
+            this.router.navigateByUrl('/dashboard');
+          }
+          else {
+            this.errorMessage = res?.message;
+          }
         }
-      }
       )
   }
 

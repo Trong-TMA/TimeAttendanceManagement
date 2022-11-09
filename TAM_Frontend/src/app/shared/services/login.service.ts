@@ -1,3 +1,4 @@
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -8,7 +9,6 @@ export interface LoginRequest{
   username: string,
   password: string
 }
-
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class LoginService {
       this._sharedHeaders = this._sharedHeaders.set('Content-Type', 'application/json');
   }
 
-  login(req: LoginRequest){
-      return this.http.post(`${environment.apiUrl}/api/Account/Login`,req,{headers: this._sharedHeaders,});
+  login(username:any, password:any){
+      return this.http.get(`${environment.apiUrl}/api/AutheApi/login?userId=${username}&password=${password}`,{headers: this._sharedHeaders,});
   }
 }

@@ -47,6 +47,8 @@ namespace TAM_Backend
 
             //DAO dependence injection regist
             services.AddTransient<IAutheDAO, AutheImplDAO>();
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +61,11 @@ namespace TAM_Backend
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TAM_Backend v1"));
             }
 
+            app.UseCors(builder =>
+                    builder.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                );
             app.UseHttpsRedirection();
 
             app.UseRouting();
