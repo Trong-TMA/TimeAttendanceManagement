@@ -28,11 +28,9 @@ export class LoginComponent implements OnInit {
   login(){
     this.loginService.login(this.modelLogin.username,this.modelLogin.password).subscribe(
         (res: any)=>{
-          console.log(res?.stf_Cd);
-
           if(res?.stf_Cd != null){
             localStorage.setItem('token', res?.stf_Cd);
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/dashboard/cham-cong');
           }
           else {
             this.errorMessage = res?.message;
