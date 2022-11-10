@@ -14,7 +14,7 @@ export class ChamCongComponent implements OnInit {
 
   public chckweek = false;
   public chckmonth = false;
-
+  public value = null;
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }

@@ -8,6 +8,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzSelectModule,
     NzInputModule,
     NzIconModule,
+    NzButtonModule,
   ]
 })
 export class ChamCongModule { }

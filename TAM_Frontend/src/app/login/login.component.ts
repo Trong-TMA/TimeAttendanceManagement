@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl('/dashboard/cham-cong');
           }
           else {
+            localStorage.removeItem('token');
+            this.router.navigateByUrl('/login');
             this.errorMessage = res?.message;
           }
         }

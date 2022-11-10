@@ -1,15 +1,21 @@
 <nz-layout>
-  <div class="bg-light d-flex align-items-center p-3 border-bottom">
+  <div class="bg-light d-flex justify-content-end align-items-center p-3 border-bottom w-100">
+    <div class="p-3">
+      <div class="d-flex align-items-center checkbox-item">
+        <p class="">MNV</p>
+        <input nz-input [(ngModel)]="value" disabled=""/>
+      </div>
+    </div>
     <div class="p-3">
       <div class="d-flex align-items-center checkbox-item">
         <img class="checkbox-label" (click)="chckweek = !chckweek" [src]="chckweek ? 'assets/images/checkbox.png' : 'assets/images/uncheck.png'" alt="">
-        <p>this week</p>
+        <p>Tuần này</p>
       </div>
     </div>
     <div class="p-3">
       <div class="d-flex align-items-center checkbox-item">
         <img class="checkbox-label" (click)="chckmonth = !chckmonth" [src]="chckmonth ? 'assets/images/checkbox.png' : 'assets/images/uncheck.png'" alt="">
-        <p>this month</p>
+        <p>Tháng này</p>
       </div>
     </div>
     <div class="p-3">
@@ -29,12 +35,15 @@
       </nz-select>
     </div>
     <div class="p-3">
-      <nz-input-group [nzSuffix]="suffixIconSearch">
-        <input type="text" nz-input placeholder="input search text" />
-      </nz-input-group>
+      <input nz-input placeholder="Tìm kiếm..." [(ngModel)]="value" />
       <ng-template #suffixIconSearch>
         <span nz-icon nzType="search"></span>
       </ng-template>
+    </div>
+    <div class="p-3">
+      <button nz-button nzType="primary">
+        Tìm kiếm
+      </button>
     </div>
   </div>
   <nz-content>
@@ -42,25 +51,45 @@
       <nz-table #basicTable [nzData]="listOfData">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Address</th>
-            <th>Action</th>
+            <th>STT</th>
+            <th>Ngày điểm danh</th>
+            <th>Thời điểm bắt đầu</th>
+            <th>Thời điểm kết thúc</th>
+            <th>Số giờ làm việc</th>
+            <th>Trạng thái</th>
+            <th>Điểm danh</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let data of basicTable.data">
+            <td>{{data.key}}</td>
             <td>{{ data.name }}</td>
             <td>{{ data.age }}</td>
             <td>{{ data.address }}</td>
+            <td></td>
+            <td>{{data.age}}</td>
             <td>
-              <a>Action 一 {{ data.name }}</a>
+              <button nz-button nzType="primary">Điểm danh</button>
               <nz-divider nzType="vertical"></nz-divider>
-              <a>Delete</a>
+              <button nz-button nzType="primary">Xem chi tiết</button>
             </td>
           </tr>
         </tbody>
       </nz-table>
+    </div>
+    <div class="row justify-content-end">
+      <div class="col-2">
+        Làm đủ giờ
+      </div>
+      <div class="col-2">
+        Làm thiếu giờ
+      </div>
+      <div class="col-2">
+        Nghỉ một buổi
+      </div>
+      <div class="col-2">
+        Nghỉ nữa buổi
+      </div>
     </div>
   </nz-content>
 </nz-layout>
