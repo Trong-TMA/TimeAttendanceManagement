@@ -330,3 +330,4 @@ ASALocalRun/
 .mfractor/
 **/wwwroot/user-attachments
 /SourceCode/src/KnowledgeSpace.BackendServer/puppeteer/Win64-970485/chrome-win
+TAM_Backend/TAM_Backend/TAM_Backend.csproj
