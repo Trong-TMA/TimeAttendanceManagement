@@ -13,5 +13,7 @@ namespace TAM_Backend.BLO
         public abstract String DoLogin(string userId, string password);
 
         public abstract JsonStaff GetUserInf(string userId);
+
+        public abstract string Authorize(string dpm_Cd, string api_Cd);
     }
 }

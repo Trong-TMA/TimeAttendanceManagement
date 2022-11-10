@@ -31,5 +31,15 @@ namespace TAM_Backend.BLO
         {
             return _autheDao.QueryUser(userId);
         }
+
+        public string Authorize(string dpm_Cd, string api_Cd)
+        {
+            if (_autheDao.QueryRoleApi(dpm_Cd, api_Cd) != 1)
+            {
+                return Constants.ERR_MSG_002;
+            }
+
+            return string.Empty;
+        }
     }
 }

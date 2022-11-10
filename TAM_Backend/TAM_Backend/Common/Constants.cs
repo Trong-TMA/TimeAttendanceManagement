@@ -8,7 +8,10 @@ namespace TAM_Backend.Common
     public class Constants
     {
         /*AutheBLO message*/
+        //Invalid user or password.
         public static string ERR_MSG_001 = "Invalid user or password.";
+        //Failed Authetication.
+        public static string ERR_MSG_002 = "Failed Authetication.";
 
         /*Api code mapping with department code*/
         /*Api Controller - Authe*/
