@@ -42,5 +42,10 @@ namespace TAM_Backend.DAO.Impl
 
             return jsStaff;
         }
+
+        public byte QueryRoleApi(string dpm_Cd, string api_Cd)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

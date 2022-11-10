@@ -17,5 +17,8 @@ namespace TAM_Backend.DataContext
         public DbSet<Department> Departments { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<TAManager> TAManagers { get; set; }
+        public DbSet<StfTamMapping> StfTamMappings { get; set; }
+        public DbSet<DpmRole> DpmRoles { get; set; }
     }
 }

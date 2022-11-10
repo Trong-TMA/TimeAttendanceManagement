@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using TAM_Backend.BLO;
+using TAM_Backend.Common;
 using TAM_Backend.Controllers.Common;
 using TAM_Backend.Model.JsonModel;
 
@@ -15,7 +16,7 @@ namespace TAM_Backend.Controllers
             this._autheBlo = autheBlo;
         }
 
-        [HttpGet("login")]
+        [HttpGet(Constants.API_AUT_LOG)]
         public IActionResult Login(string userId, string password)
         {
             String message = _autheBlo.DoLogin(userId, password);
