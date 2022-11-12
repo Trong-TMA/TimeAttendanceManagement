@@ -20,5 +20,11 @@ namespace TAM_Backend.DataContext
         public DbSet<TAManager> TAManagers { get; set; }
         public DbSet<StfTamMapping> StfTamMappings { get; set; }
         public DbSet<DpmRole> DpmRoles { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<StfTamMapping>()
+                .HasKey(p => new { p.Tam_Cd, p.Stf_Cd });
+        }
     }
 }
