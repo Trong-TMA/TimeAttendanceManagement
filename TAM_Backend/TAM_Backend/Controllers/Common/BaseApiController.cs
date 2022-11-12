@@ -1,4 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
+using System;
+using TAM_Backend.BLO;
+using TAM_Backend.DataContext;
+using TAM_Backend.Model.JsonModel;
 
 namespace TAM_Backend.Controllers.Common
 {
@@ -6,6 +11,6 @@ namespace TAM_Backend.Controllers.Common
     [ApiController]
     public class BaseApiController : ControllerBase
     {
-
+       
     }
 }
