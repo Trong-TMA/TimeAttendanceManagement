@@ -34,7 +34,7 @@ namespace TAM_Backend.BLO
 
         public string Authorize(string dpm_Cd, string api_Cd)
         {
-            if (_autheDao.QueryRoleApi(dpm_Cd, api_Cd) != 1)
+            if (!_autheDao.QueryRoleApi(dpm_Cd, api_Cd))
             {
                 return Constants.ERR_MSG_002;
             }
