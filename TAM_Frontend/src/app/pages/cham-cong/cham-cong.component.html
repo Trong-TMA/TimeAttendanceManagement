@@ -1,95 +1,20 @@
 <nz-layout>
-  <div class="bg-light d-flex justify-content-end align-items-center p-3 border-bottom w-100">
-    <div class="p-3">
-      <div class="d-flex align-items-center checkbox-item">
-        <p class="">MNV</p>
-        <input nz-input [(ngModel)]="value" disabled=""/>
-      </div>
-    </div>
-    <div class="p-3">
-      <div class="d-flex align-items-center checkbox-item">
-        <img class="checkbox-label" (click)="chckweek = !chckweek" [src]="chckweek ? 'assets/images/checkbox.png' : 'assets/images/uncheck.png'" alt="">
-        <p>Tuần này</p>
-      </div>
-    </div>
-    <div class="p-3">
-      <div class="d-flex align-items-center checkbox-item">
-        <img class="checkbox-label" (click)="chckmonth = !chckmonth" [src]="chckmonth ? 'assets/images/checkbox.png' : 'assets/images/uncheck.png'" alt="">
-        <p>Tháng này</p>
-      </div>
-    </div>
-    <div class="p-3">
-      <nz-select ngModel="month1">
-        <nz-option nzValue="month1" nzLabel="Tháng 1"></nz-option>
-        <nz-option nzValue="month2" nzLabel="Tháng 2"></nz-option>
-        <nz-option nzValue="month3" nzLabel="Tháng 3"></nz-option>
-        <nz-option nzValue="month4" nzLabel="Tháng 4"></nz-option>
-        <nz-option nzValue="month5" nzLabel="Tháng 5"></nz-option>
-        <nz-option nzValue="month6" nzLabel="Tháng 6"></nz-option>
-        <nz-option nzValue="month7" nzLabel="Tháng 7"></nz-option>
-        <nz-option nzValue="month8" nzLabel="Tháng 8"></nz-option>
-        <nz-option nzValue="month9" nzLabel="Tháng 9"></nz-option>
-        <nz-option nzValue="month10" nzLabel="Tháng 10"></nz-option>
-        <nz-option nzValue="month11" nzLabel="Tháng 11"></nz-option>
-        <nz-option nzValue="month12" nzLabel="Tháng 12"></nz-option>
-      </nz-select>
-    </div>
-    <div class="p-3">
-      <input nz-input placeholder="Tìm kiếm..." [(ngModel)]="value" />
-      <ng-template #suffixIconSearch>
-        <span nz-icon nzType="search"></span>
-      </ng-template>
-    </div>
-    <div class="p-3">
-      <button nz-button nzType="primary">
-        Tìm kiếm
-      </button>
-    </div>
+  <div class="text-center">
+    <h1>FUNY COMPANY INTRANET</h1>
+    <h5 style="color: red;">CHECK IN/OUT LIST</h5>
   </div>
+  <app-cham-cong-search></app-cham-cong-search>
   <nz-content>
-    <div class="table">
-      <nz-table #basicTable [nzData]="listOfData">
-        <thead>
-          <tr>
-            <th>STT</th>
-            <th>Ngày điểm danh</th>
-            <th>Thời điểm bắt đầu</th>
-            <th>Thời điểm kết thúc</th>
-            <th>Số giờ làm việc</th>
-            <th>Trạng thái</th>
-            <th>Điểm danh</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let data of basicTable.data">
-            <td>{{data.key}}</td>
-            <td>{{ data.name }}</td>
-            <td>{{ data.age }}</td>
-            <td>{{ data.address }}</td>
-            <td></td>
-            <td>{{data.age}}</td>
-            <td>
-              <button nz-button nzType="primary">Điểm danh</button>
-              <nz-divider nzType="vertical"></nz-divider>
-              <button nz-button nzType="primary">Xem chi tiết</button>
-            </td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </div>
-    <div class="row justify-content-end">
-      <div class="col-2">
-        Làm đủ giờ
-      </div>
-      <div class="col-2">
-        Làm thiếu giờ
-      </div>
-      <div class="col-2">
-        Nghỉ một buổi
-      </div>
-      <div class="col-2">
-        Nghỉ nữa buổi
-      </div>
-    </div>
+    <app-cham-cong-list></app-cham-cong-list>
   </nz-content>
+  <div class="bg-light d-flex justify-content-end align-items-center p-3 border-bottom w-100">
+    <div class="w-25"></div>
+    <div class="p-1 footer-item"><label>Check in/out:</label></div>
+    <div class="p-1 footer-item" style="background-color: aqua;"><label>Đi sớm</label></div>
+    <div class="p-1 footer-item" style="background-color: rgb(255, 144, 168);"><label>Đi trễ, có làm bù</label></div>
+    <div class="p-1 footer-item" style="background-color: rgb(133, 133, 133);"><label>Đi trễ, không có làm bù</label></div>
+    <div class="p-1 footer-item" style="background-color: rgb(246, 255, 0);"><label>Làm đủ giờ</label></div>
+    <div class="p-1 footer-item" style="background-color: rgb(254, 73, 251);"><label>Ngày lễ</label></div>
+    <div class="p-1 footer-item" style="background-color: rgb(245, 65, 0);"><label>Nghỉ cả ngày</label></div>
+  </div>
 </nz-layout>

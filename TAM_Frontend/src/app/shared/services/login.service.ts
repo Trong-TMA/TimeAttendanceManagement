@@ -23,6 +23,6 @@ export class LoginService {
   }
 
   login(username:any, password:any){
-      return this.http.get(`${environment.apiUrl}/api/AutheApi/login?userId=${username}&password=${password}`,{headers: this._sharedHeaders,});
+      return this.http.get(`${environment.apiUrl}/api/AutheApi/APIAUTLOG?userId=${username}&password=${password}`,{headers: this._sharedHeaders,});
   }
 }
