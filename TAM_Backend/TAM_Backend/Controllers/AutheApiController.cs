@@ -9,11 +9,9 @@ namespace TAM_Backend.Controllers
 {
     public class AutheApiController : BaseApiController
     {
-        private IAutheBLO _autheBlo { get; set; }
-
-        public AutheApiController(IAutheBLO autheBlo)
+        public AutheApiController(IAutheBLO autheBlo) : base(autheBlo)
         {
-            this._autheBlo = autheBlo;
+            
         }
 
         [HttpGet(Constants.API_AUT_LOG)]

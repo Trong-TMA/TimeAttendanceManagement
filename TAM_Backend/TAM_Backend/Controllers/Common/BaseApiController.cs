@@ -11,6 +11,11 @@ namespace TAM_Backend.Controllers.Common
     [ApiController]
     public class BaseApiController : ControllerBase
     {
-       
+        protected IAutheBLO _autheBlo { get; set; }
+
+        public BaseApiController(IAutheBLO autheBlo)
+        {
+            this._autheBlo = autheBlo;
+        }
     }
 }
