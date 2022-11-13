@@ -20,6 +20,7 @@ namespace TAM_Backend.DataContext
         public DbSet<TAManager> TAManagers { get; set; }
         public DbSet<StfTamMapping> StfTamMappings { get; set; }
         public DbSet<DpmRole> DpmRoles { get; set; }
+        public DbSet<CheckInOut> CheckInOuts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

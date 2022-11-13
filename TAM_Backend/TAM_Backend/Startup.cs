@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TAM_Backend.BLO;
+using TAM_Backend.BLO.Impl;
 using TAM_Backend.DAO;
 using TAM_Backend.DAO.Impl;
 using TAM_Backend.DataContext;
@@ -44,9 +45,12 @@ namespace TAM_Backend
 
             //BLO dependence injection regist
             services.AddTransient<IAutheBLO, AutheImplBLO>();
+            services.AddTransient<ICheckingBLO, CheckingImplBLO>();
 
             //DAO dependence injection regist
+            services.AddTransient<ICommonDAO, CommonImplDAO>();
             services.AddTransient<IAutheDAO, AutheImplDAO>();
+            services.AddTransient<ICheckingDAO, CheckingImplDAO>();
 
             services.AddMvc();
         }

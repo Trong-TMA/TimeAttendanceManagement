@@ -43,9 +43,9 @@ namespace TAM_Backend.DAO.Impl
             return jsStaff;
         }
 
-        public bool QueryRoleApi(string dpm_Cd, string api_Cd)
+        public bool QueryRoleApi(decimal dpm_Cd, string api_Cd)
         {
-            int count = _db.DpmRoles.Where(u => u.Dpm_Cd.Equals(dpm_Cd) && u.Api_Cd.Equals(api_Cd)).Count();
+            int count = _db.DpmRoles.Where(u => u.Dpm_Cd == dpm_Cd && u.Api_Cd.Equals(api_Cd)).Count();
             return count == 1 ? true : false;
         }
     }

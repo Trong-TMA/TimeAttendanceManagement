@@ -32,7 +32,7 @@ namespace TAM_Backend.BLO
             return _autheDao.QueryUser(userId);
         }
 
-        public string Authorize(string dpm_Cd, string api_Cd)
+        public string Authorize(decimal dpm_Cd, string api_Cd)
         {
             if (!_autheDao.QueryRoleApi(dpm_Cd, api_Cd))
             {

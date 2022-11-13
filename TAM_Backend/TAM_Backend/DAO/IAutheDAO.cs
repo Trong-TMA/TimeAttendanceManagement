@@ -7,6 +7,6 @@ namespace TAM_Backend.DAO
     {
         public abstract int QueryAccount(string userId, string password);
         public abstract JsonStaff QueryUser(string userId);
-        public abstract bool QueryRoleApi(string dpm_Cd, string api_Cd);
+        public abstract bool QueryRoleApi(decimal dpm_Cd, string api_Cd);
     }
 }

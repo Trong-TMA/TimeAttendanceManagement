@@ -14,6 +14,6 @@ namespace TAM_Backend.BLO
 
         public abstract JsonStaff GetUserInf(string userId);
 
-        public abstract string Authorize(string dpm_Cd, string api_Cd);
+        public abstract string Authorize(decimal dpm_Cd, string api_Cd);
     }
 }
