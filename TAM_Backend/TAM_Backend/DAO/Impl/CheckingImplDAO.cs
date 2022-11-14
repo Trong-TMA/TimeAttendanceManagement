@@ -20,6 +20,12 @@ namespace TAM_Backend.DAO.Impl
         public string CheckIn(decimal stf_Cd, Guid tam_Cd, string cio_Ymd, string cio_Day, string in_Hh_Mm)
         {
             decimal psn_Cd = _db.Accounts.FirstOrDefault(u => u.Stf_Cd.Equals(stf_Cd)).Psn_Cd;
+            CheckInOut cioInDb = _db.CheckInOuts.FirstOrDefault(u => u.Cio_Map_Cd.Equals(tam_Cd) && u.Cio_Ymd.Equals(cio_Ymd) && u.Cio_Day.Equals(cio_Day));
+
+            if (cioInDb != null)
+            {
+                return Constants.ERROR;
+            }
 
             CheckInOut cio = new CheckInOut()
             {
@@ -30,7 +36,8 @@ namespace TAM_Backend.DAO.Impl
                 In_Hh_Mm = in_Hh_Mm,
                 Out_Hh_Mm = in_Hh_Mm,
                 Cio_Duration = 1,
-                Cio_State = 3,
+                Cio_State = 0,
+                Insert_Ymd = DateTime.Now,
                 Insert_Psn_Cd = psn_Cd
             };
 
@@ -42,6 +49,7 @@ namespace TAM_Backend.DAO.Impl
 
         public string CheckOut(decimal stf_Cd, Guid tam_Cd, string cio_Ymd, string cio_Day, string out_Hh_Mm)
         {
+            decimal psn_Cd = _db.Accounts.FirstOrDefault(u => u.Stf_Cd.Equals(stf_Cd)).Psn_Cd;
             CheckInOut cioInDb = _db.CheckInOuts.FirstOrDefault(u => u.Cio_Map_Cd.Equals(tam_Cd) && u.Cio_Ymd.Equals(cio_Ymd) && u.Cio_Day.Equals(cio_Day));
 
             if (cioInDb == null)
@@ -56,10 +64,13 @@ namespace TAM_Backend.DAO.Impl
             //Set value
             cioInDb.Out_Hh_Mm = out_Hh_Mm;
             cioInDb.Cio_Duration = duration;
+            cioInDb.Update_Ymd = DateTime.Now;
+            cioInDb.Update_Psn_Cd = psn_Cd;
             //if duration more than or equal 8 hours return "1" else "0"
             cioInDb.Cio_State = duration >= 480 ? 1 : 0;
 
             _db.CheckInOuts.Update(cioInDb);
+            _db.SaveChanges();
 
             return Constants.SUCCESS;
         }

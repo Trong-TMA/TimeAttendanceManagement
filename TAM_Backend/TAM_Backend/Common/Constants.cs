@@ -31,9 +31,9 @@ namespace TAM_Backend.Common
         public const string MON = "Mon";
         public const string TUE = "Tue";
         public const string WED = "Wed";
-        public const string THU = "thu";
+        public const string THU = "Thu";
         public const string FRI = "Fri";
-        public const string SAR = "SAR";
+        public const string SAT = "Sat";
         public const string SUN = "Sun";
 
         /*Api code mapping with department code*/
