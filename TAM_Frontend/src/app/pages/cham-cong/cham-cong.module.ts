@@ -1,3 +1,4 @@
+import { DialogModule } from 'primeng/dialog';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule } from '@angular/forms';
 import { ChamCongComponent } from './cham-cong.component';
@@ -12,6 +13,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { ChamCongListComponent } from './cham-cong-list/cham-cong-list.component';
 import { ChamCongSearchComponent } from './cham-cong-search/cham-cong-search.component';
 import { ChamCongChiTietComponent } from './cham-cong-chi-tiet/cham-cong-chi-tiet.component';
+import { ChamCongItemComponent } from './cham-cong-item/cham-cong-item.component';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { ChamCongChiTietComponent } from './cham-cong-chi-tiet/cham-cong-chi-tie
     ChamCongComponent,
     ChamCongListComponent,
     ChamCongSearchComponent,
-    ChamCongChiTietComponent
+    ChamCongChiTietComponent,
+    ChamCongItemComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { ChamCongChiTietComponent } from './cham-cong-chi-tiet/cham-cong-chi-tie
     NzInputModule,
     NzIconModule,
     NzButtonModule,
+    DialogModule,
   ]
 })
 export class ChamCongModule { }
