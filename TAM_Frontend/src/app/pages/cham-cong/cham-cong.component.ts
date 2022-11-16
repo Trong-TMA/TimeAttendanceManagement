@@ -2,6 +2,7 @@ import { ChamcongService } from './../../shared/services/chamcong.service';
 import { Component, OnInit } from '@angular/core';
 import { Staff } from 'src/app/shared/models/staff.model';
 import { MessageService } from 'primeng/api';
+import { Checkinout } from 'src/app/shared/models/Checkinout.model';
 @Component({
   selector: 'app-cham-cong',
   templateUrl: './cham-cong.component.html',
@@ -42,5 +43,52 @@ export class ChamCongComponent implements OnInit {
 
   getCheckinout(){
     return this.chamcongServices.getcheckinout(localStorage.getItem("stf_Cd"),localStorage.getItem("stf_Dpm_Cd"));
+  }
+
+  checkin(){
+    var rightNow = new Date();
+    var cio_Ymd = rightNow.toISOString().slice(0,10).replace(/-/g,"");
+    var cio_Day = rightNow.getDate().toString();
+    var in_Hh_Mm = rightNow.getHours() +":"+ rightNow.getMinutes();
+    var message = "";
+
+    const checkin  = new Checkinout(
+      localStorage.getItem("stf_Cd") || '{}',
+      localStorage.getItem("stf_Dpm_Cd") || '{}',
+      localStorage.getItem("stf_Name") || '{}',
+      message,
+      cio_Ymd,
+      cio_Day,
+      in_Hh_Mm,
+      "",
+    );
+
+    console.log(checkin);
+
+    return this.chamcongServices.checkin(checkin).subscribe((item)=>{
+      console.log(item);
+    });
+  }
+
+  checkout(){
+    var rightNow = new Date();
+    var cio_Ymd = rightNow.toISOString().slice(0,10).replace(/-/g,"");
+    var cio_Day = rightNow.getDate().toString();
+    var out_Hh_Mm = rightNow.getHours() +":"+ rightNow.getMinutes();
+    var message = "";
+
+    const checkin  = new Checkinout(
+      localStorage.getItem("stf_Cd") || '{}',
+      localStorage.getItem("stf_Dpm_Cd") || '{}',
+      localStorage.getItem("stf_Name") || '{}',
+      message,
+      cio_Ymd,
+      cio_Day,
+      "",
+      out_Hh_Mm,
+    );
+    return this.chamcongServices.checkout(checkin).subscribe((item)=>{
+      console.log(item);
+    });
   }
 }

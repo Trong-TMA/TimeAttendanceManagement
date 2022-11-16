@@ -1,14 +1,15 @@
+import { Checkinout } from './../../../shared/models/Checkinout.model';
 import { ChamcongService } from './../../../shared/services/chamcong.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Staff } from 'src/app/shared/models/staff.model';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { Checkinout } from 'src/app/shared/models/checkinout.model';
 
 @Component({
   selector: 'app-cham-cong-list',
   templateUrl: './cham-cong-list.component.html',
   styleUrls: ['./cham-cong-list.component.scss']
 })
+
 export class ChamCongListComponent implements OnInit {
 
   isSpinning: boolean;
@@ -30,8 +31,4 @@ export class ChamCongListComponent implements OnInit {
       this.display = true;
   }
 
-  checkinout(){
-    console.log(localStorage.getItem("stf_Cd"));
-
-  }
 }

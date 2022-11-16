@@ -27,11 +27,11 @@ export class ChamcongService {
   }
 
   checkin(Checkinout: any){
-    this.http.post(`${environment.apiUrl}/api/CheckingApi/APICHKCIN`, Checkinout, {headers: this._sharedHeaders,});
+    return this.http.post(`${environment.apiUrl}/api/CheckingApi/APICHKCIN`, Checkinout, {headers: this._sharedHeaders,});
   }
 
   checkout(Checkinout: any){
-    this.http.post(`${environment.apiUrl}/api/CheckingApi/APICHKCOU`, Checkinout, {headers: this._sharedHeaders,});
+    return this.http.post(`${environment.apiUrl}/api/CheckingApi/APICHKCOU`, Checkinout, {headers: this._sharedHeaders,});
   }
 
 
