@@ -29,11 +29,13 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.modelLogin.username,this.modelLogin.password).subscribe(
         (res: any)=>{
           if(res?.stf_Cd != null){
-            localStorage.setItem('token', res?.stf_Cd);
+            localStorage.setItem('stf_Cd', res?.stf_Cd);
+            localStorage.setItem('stf_Dpm_Cd', res?.stf_Dpm_Cd);
+            localStorage.setItem('stf_Name', res?.stf_Name);
             this.router.navigateByUrl('/dashboard/cham-cong');
           }
           else {
-            localStorage.removeItem('token');
+            localStorage.removeItem('stf_Cd');
             this.router.navigateByUrl('/login');
             this.errorMessage = res?.message;
           }

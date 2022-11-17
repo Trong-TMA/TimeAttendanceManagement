@@ -3,18 +3,30 @@
     <h1>FUNY COMPANY INTRANET</h1>
     <h5 style="color: red;">CHECK IN/OUT LIST</h5>
   </div>
+  <div class="d-flex justify-content-end align-items-center p-1 w-100">
+    <button nz-button nzType="primary" (click)="checkin()">Check in</button>
+    <nz-divider nzType="vertical"></nz-divider>
+    <button nz-button nzType="primary" (click)="checkout()">Check out</button>
+  </div>
   <app-cham-cong-search></app-cham-cong-search>
   <nz-content>
-    <app-cham-cong-list></app-cham-cong-list>
+    <nz-spin [nzSpinning]="isSpinning">
+      <app-cham-cong-list (loadDataEmit)="loadCheckinout()" [listCheckinout]="listOfStaff"></app-cham-cong-list>
+    </nz-spin>
   </nz-content>
   <div class="bg-light d-flex justify-content-end align-items-center p-3 border-bottom w-100">
     <div class="w-25"></div>
     <div class="p-1 footer-item"><label>Check in/out:</label></div>
-    <div class="p-1 footer-item" style="background-color: aqua;"><label>Đi sớm</label></div>
     <div class="p-1 footer-item" style="background-color: rgb(255, 144, 168);"><label>Đi trễ, có làm bù</label></div>
     <div class="p-1 footer-item" style="background-color: rgb(133, 133, 133);"><label>Đi trễ, không có làm bù</label></div>
-    <div class="p-1 footer-item" style="background-color: rgb(246, 255, 0);"><label>Làm đủ giờ</label></div>
+    <div class="p-1 footer-item" style="background-color: rgb(246, 255, 0);"><label>Làm không đủ giờ</label></div>
     <div class="p-1 footer-item" style="background-color: rgb(254, 73, 251);"><label>Ngày lễ</label></div>
     <div class="p-1 footer-item" style="background-color: rgb(245, 65, 0);"><label>Nghỉ cả ngày</label></div>
+    <input type="text" value="disom" hidden>
+    <input type="text" value="ditrelambu" hidden>
+    <input type="text" value="ditrekhonglambu" hidden>
+    <input type="text" value="lamdugio" hidden>
+    <input type="text" value="ngayle" hidden>
+    <input type="text" value="nghicangay" hidden>
   </div>
 </nz-layout>

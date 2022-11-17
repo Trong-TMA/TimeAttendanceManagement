@@ -1,42 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Checkinout } from './../../../shared/models/Checkinout.model';
+import { ChamcongService } from './../../../shared/services/chamcong.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Staff } from 'src/app/shared/models/staff.model';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
-interface Person {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-}
 @Component({
   selector: 'app-cham-cong-list',
   templateUrl: './cham-cong-list.component.html',
   styleUrls: ['./cham-cong-list.component.scss']
 })
+
 export class ChamCongListComponent implements OnInit {
 
+  isSpinning: boolean;
+  @Input() listCheckinout: any;
+  @Output() loadDataEmit: EventEmitter<any>;
 
-  constructor() { }
+  display: boolean = false;
+
+  constructor(private chamcongServices: ChamcongService,
+    private modal: NzModalService) {
+    this.loadDataEmit =  new EventEmitter();
+    this.isSpinning = false;
+  }
 
   ngOnInit(): void {
   }
 
-  listOfData: Person[] = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    }
-  ];
+  showDialog() {
+      this.display = true;
+  }
+
 }

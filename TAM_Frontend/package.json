@@ -29,7 +29,7 @@
     "ng-zorro-antd": "^13.2.2",
     "ngx-bootstrap": "^8.0.0",
     "primeicons": "^5.0.0",
-    "primeng": "^13.4.0",
+    "primeng": "^13.4.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "xlsx": "^0.18.5",

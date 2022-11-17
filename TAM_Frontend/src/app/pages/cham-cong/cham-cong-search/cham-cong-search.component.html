@@ -1,12 +1,15 @@
-<div class="bg-light d-flex justify-content-start align-items-center p-3 border-bottom w-100">
+<div class="bg-light d-flex justify-content-start align-items-center p-1 w-100">
   <div class="p-1">
     <div class="d-flex align-items-center checkbox-item">
       <p class="">Dept/Team</p>
-      <nz-select nzShowSearch nzAllowClear [(ngModel)]="selectedValue">
-        <nz-option nzLabel="++Võ Minh Trọng" nzValue="jack"></nz-option>
-        <nz-option nzLabel="++Hoàng Minh Nhân" nzValue="lucy"></nz-option>
-        <nz-option nzLabel="++Đào Nhơn Tâm" nzValue="tom"></nz-option>
-      </nz-select>
+      <nz-select
+      [(ngModel)]="selectedValue"
+      [compareWith]="compareFn"
+      nzAllowClear
+      nzPlaceHolder="Choose"
+    >
+      <nz-option *ngFor="let option of optionList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+    </nz-select>
     </div>
   </div>
   <div class="p-1">
@@ -21,7 +24,7 @@
     </button>
   </div>
 </div>
-<div class="bg-light d-flex justify-content-start align-items-center p-3 border-bottom w-100">
+<div class="bg-light d-flex justify-content-start align-items-center p-1 border-bottom w-100">
   <div class="p-1">
     <div class="d-flex align-items-center checkbox-item">
       <img class="checkbox-label" (click)="chckweek = !chckweek" [src]="chckweek ? 'assets/images/checkbox.png' : 'assets/images/uncheck.png'" alt="">
@@ -39,9 +42,9 @@
       <img class="checkbox-label" (click)="chckdate = !chckdate" [src]="chckdate ? 'assets/images/checkbox.png' : 'assets/images/uncheck.png'" alt="">
       <p>SelectDate</p>
       <div class="p-1 d-flex">
-        <input nz-input [(ngModel)]="value" />
+        <input nz-input [(ngModel)]="fromdate" maxLength="10"/>
         <div>~</div>
-        <input nz-input [(ngModel)]="value" />
+        <input nz-input [(ngModel)]="todate" maxlength="10"/>
       </div>
     </div>
   </div>

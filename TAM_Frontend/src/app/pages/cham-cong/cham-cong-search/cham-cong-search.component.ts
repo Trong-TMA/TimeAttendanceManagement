@@ -11,7 +11,18 @@ export class ChamCongSearchComponent implements OnInit {
   public chckmonth = false;
   public chckdate = false;
   public value = null;
-  selectedValue = null;
+  public fromdate = null;
+  public todate = null;
+
+  optionList = [
+    { label: '++Võ Minh Trọng', value: '01'},
+    { label: '++Hoàng Minh Nhân', value: '02'}
+  ];
+  selectedValue = { label: '++Võ Minh Trọng', value: '01'};
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  compareFn = (o1: any, o2: any): boolean => (o1 && o2 ? o1.value === o2.value : o1 === o2);
+
   constructor() { }
 
   ngOnInit(): void {
