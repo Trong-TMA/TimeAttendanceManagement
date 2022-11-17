@@ -17,9 +17,19 @@ namespace TAM_Backend.DAO.Impl
             this._db = db;
         }
 
-        public string CheckIn(decimal stf_Cd, Guid tam_Cd, string cio_Ymd, string cio_Day, string in_Hh_Mm)
+        public string CheckIn(decimal stf_Cd, Guid tam_Cd, string cio_Ymd, string cio_Day, string in_Hh_Mm, string ip_In_Log)
         {
             decimal psn_Cd = _db.Accounts.FirstOrDefault(u => u.Stf_Cd.Equals(stf_Cd)).Psn_Cd;
+
+            //Check if ip is valid
+            var ipInDb = _db.IPNetworks.Find(ip_In_Log);
+
+            if (ipInDb == null)
+            {
+                return Constants.ERROR;
+            }
+
+            //Check if existing record in db
             CheckInOut cioInDb = _db.CheckInOuts.FirstOrDefault(u => u.Cio_Map_Cd.Equals(tam_Cd) && u.Cio_Ymd.Equals(cio_Ymd) && u.Cio_Day.Equals(cio_Day));
 
             if (cioInDb != null)
@@ -38,7 +48,8 @@ namespace TAM_Backend.DAO.Impl
                 Cio_Duration = 1,
                 Cio_State = 0,
                 Insert_Ymd = DateTime.Now,
-                Insert_Psn_Cd = psn_Cd
+                Insert_Psn_Cd = psn_Cd,
+                Ip_In_Log = ip_In_Log
             };
 
             _db.CheckInOuts.Add(cio);
@@ -47,11 +58,21 @@ namespace TAM_Backend.DAO.Impl
             return Constants.SUCCESS;
         }
 
-        public string CheckOut(decimal stf_Cd, Guid tam_Cd, string cio_Ymd, string cio_Day, string out_Hh_Mm)
+        public string CheckOut(decimal stf_Cd, Guid tam_Cd, string cio_Ymd, string cio_Day, string out_Hh_Mm, string ip_Out_Log)
         {
             decimal psn_Cd = _db.Accounts.FirstOrDefault(u => u.Stf_Cd.Equals(stf_Cd)).Psn_Cd;
-            CheckInOut cioInDb = _db.CheckInOuts.FirstOrDefault(u => u.Cio_Map_Cd.Equals(tam_Cd) && u.Cio_Ymd.Equals(cio_Ymd) && u.Cio_Day.Equals(cio_Day));
 
+            //Check if ip is valid
+            var ipInDb = _db.IPNetworks.Find(ip_Out_Log);
+
+            if (ipInDb == null)
+            {
+                return Constants.ERROR;
+            }
+
+            //Check if existing record in db
+            CheckInOut cioInDb = _db.CheckInOuts.FirstOrDefault(u => u.Cio_Map_Cd.Equals(tam_Cd) && u.Cio_Ymd.Equals(cio_Ymd) && u.Cio_Day.Equals(cio_Day));
+            
             if (cioInDb == null)
             {
                 return Constants.ERROR;
@@ -66,6 +87,7 @@ namespace TAM_Backend.DAO.Impl
             cioInDb.Cio_Duration = duration;
             cioInDb.Update_Ymd = DateTime.Now;
             cioInDb.Update_Psn_Cd = psn_Cd;
+            cioInDb.Ip_Out_Log = ip_Out_Log;
             //if duration more than or equal 8 hours return "1" else "0"
             cioInDb.Cio_State = duration >= 480 ? 1 : 0;
 

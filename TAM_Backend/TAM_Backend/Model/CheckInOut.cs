@@ -27,6 +27,10 @@ namespace TAM_Backend.Model
         public int Cio_Duration { get; set; }
         [Column("CIO_STATE")]
         public int Cio_State { get; set; }
+        [Column("IP_IN_LOG")]
+        public String Ip_In_Log { get; set; }
+        [Column("IP_OUT_LOG")]
+        public String Ip_Out_Log { get; set; }
         [Column("UPDATE_PSN_CD")]
         public decimal? Update_Psn_Cd { get; set; }
 

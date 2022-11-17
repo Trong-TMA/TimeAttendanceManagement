@@ -51,5 +51,22 @@ namespace TAM_Backend.Controllers
                 return new JsonResult(new { message = messageAuthorize });
             }
         }
+
+        [HttpPost(Constants.API_GET_STT)]
+        public IActionResult GetState(JsonChecking jsChecking)
+        {
+            string messageAuthorize = _autheBlo.Authorize((decimal)jsChecking.Stf_Dpm_Cd, Constants.API_CHK_COU);
+
+            if (string.IsNullOrEmpty(messageAuthorize))
+            {
+                string messageDoCheckout = _checkingBlo.DoCheckOut(jsChecking);
+
+                return new JsonResult(new { message = messageDoCheckout });
+            }
+            else
+            {
+                return new JsonResult(new { message = messageAuthorize });
+            }
+        }
     }
 }

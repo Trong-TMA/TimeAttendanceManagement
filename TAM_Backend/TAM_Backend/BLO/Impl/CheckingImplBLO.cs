@@ -28,7 +28,7 @@ namespace TAM_Backend.BLO.Impl
                 if (CheckInput(jsChecking))
                 {
                     string cio_Day = GetDayOfWeek(jsChecking.Cio_Ymd);
-                    return _checkingDao.CheckIn((decimal)jsChecking.Stf_Cd, tam_Cd, jsChecking.Cio_Ymd, cio_Day, jsChecking.In_Hh_Mm);
+                    return _checkingDao.CheckIn((decimal)jsChecking.Stf_Cd, tam_Cd, jsChecking.Cio_Ymd, cio_Day, jsChecking.In_Hh_Mm, jsChecking.Ip_In_Log);
                 }
             }
 
@@ -44,7 +44,7 @@ namespace TAM_Backend.BLO.Impl
                 if (CheckInput(jsChecking))
                 {
                     string cio_Day = GetDayOfWeek(jsChecking.Cio_Ymd);
-                    return _checkingDao.CheckOut((decimal)jsChecking.Stf_Cd, tam_Cd, jsChecking.Cio_Ymd, cio_Day, jsChecking.Out_Hh_Mm);
+                    return _checkingDao.CheckOut((decimal)jsChecking.Stf_Cd, tam_Cd, jsChecking.Cio_Ymd, cio_Day, jsChecking.Out_Hh_Mm, jsChecking.Ip_Out_Log);
                 }
                 
             }

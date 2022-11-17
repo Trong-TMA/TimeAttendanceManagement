@@ -46,5 +46,7 @@ namespace TAM_Backend.Common
         public const string API_CHK_CIN = "APICHKCIN";
         //Api Controller - Checking - Checkout
         public const string API_CHK_COU = "APICHKCOU";
+        //Api Controller - GetState
+        public const string API_GET_STT = "APIGETSTT";
     }
 }

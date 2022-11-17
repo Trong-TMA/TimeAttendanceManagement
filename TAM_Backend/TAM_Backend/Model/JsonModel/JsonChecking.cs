@@ -11,5 +11,7 @@ namespace TAM_Backend.Model.JsonModel
         public String Cio_Day { get; set; }
         public String In_Hh_Mm { get; set; }
         public String Out_Hh_Mm { get; set; }
+        public String Ip_In_Log { get; set; }
+        public String Ip_Out_Log { get; set; }
     }
 }

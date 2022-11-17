@@ -21,6 +21,7 @@ namespace TAM_Backend.DataContext
         public DbSet<StfTamMapping> StfTamMappings { get; set; }
         public DbSet<DpmRole> DpmRoles { get; set; }
         public DbSet<CheckInOut> CheckInOuts { get; set; }
+        public DbSet<IPNetwork> IPNetworks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
