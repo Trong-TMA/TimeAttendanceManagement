@@ -1,14 +1,27 @@
 <div class="bg-light d-flex justify-content-start align-items-center p-1 w-100">
   <div class="p-1">
     <div class="d-flex align-items-center checkbox-item">
+      <p class="">Dept/Team</p>
+      <nz-select
+        [(ngModel)]="selectedValueDept"
+        [compareWith]="compareFn"
+        nzAllowClear
+        nzPlaceHolder="Choose"
+      >
+        <nz-option *ngFor="let option of optionListDept" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <div class="p-1">
+    <div class="d-flex align-items-center checkbox-item">
       <p class="">Staff</p>
       <nz-select
-      [(ngModel)]="selectedValue"
+      [(ngModel)]="selectedValueStaff"
       [compareWith]="compareFn"
       nzAllowClear
       nzPlaceHolder="Choose"
     >
-      <nz-option *ngFor="let option of optionList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+      <nz-option *ngFor="let option of optionListStaff" [nzValue]="option" [nzLabel]="option.label"></nz-option>
     </nz-select>
     </div>
   </div>

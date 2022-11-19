@@ -1,7 +1,7 @@
 import { Checkinout } from './../../../shared/models/Checkinout.model';
 import { ChamcongService } from './../../../shared/services/chamcong.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Staff } from 'src/app/shared/models/staff.model';
+import { InfStaff } from 'src/app/shared/models/infstaff.model';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({

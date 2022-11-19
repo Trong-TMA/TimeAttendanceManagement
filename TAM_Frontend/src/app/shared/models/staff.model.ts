@@ -2,10 +2,10 @@ export class Staff{
 
   constructor(
   public id: string,
-  public date: string,
-  public checkin: boolean,
-  public checkout: boolean,
+  public name: string,
   public duration: string,
+  public wfh: string,
+  public onleave: string,
   public note: string){
   }
 }

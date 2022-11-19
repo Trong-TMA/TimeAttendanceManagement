@@ -15,7 +15,7 @@ import { ChamCongListComponent } from './cham-cong-list/cham-cong-list.component
 import { ChamCongSearchComponent } from './cham-cong-search/cham-cong-search.component';
 import { ChamCongChiTietComponent } from './cham-cong-chi-tiet/cham-cong-chi-tiet.component';
 import { ChamCongItemComponent } from './cham-cong-item/cham-cong-item.component';
-import { ChamCongEditCheckinoutComponent } from './cham-cong-edit-checkinout/cham-cong-edit-checkinout.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -25,7 +25,6 @@ import { ChamCongEditCheckinoutComponent } from './cham-cong-edit-checkinout/cha
     ChamCongSearchComponent,
     ChamCongChiTietComponent,
     ChamCongItemComponent,
-    ChamCongEditCheckinoutComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +37,8 @@ import { ChamCongEditCheckinoutComponent } from './cham-cong-edit-checkinout/cha
     NzIconModule,
     NzButtonModule,
     DialogModule,
-    NzSpinModule
+    NzSpinModule,
+    HttpClientModule
   ]
 })
 export class ChamCongModule { }

@@ -1,4 +1,4 @@
-import { ChamCongModule } from './pages/cham-cong/cham-cong.module';
+import { LichSuChamCongModule } from './pages/lich-su-cham-cong/lich-su-cham-cong.module';
 import { DashboardRoutingModule } from './dashboard/dashboard-routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,14 +17,13 @@ registerLocaleData(vi);
 import { NZ_DATE_LOCALE, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
-import { ChamCongComponent } from './pages/cham-cong/cham-cong.component';
-import { LichSuChamCongComponent } from './pages/lich-su-cham-cong/lich-su-cham-cong.component';
+import { LichSuChamCongEditModule } from './pages/lich-su-cham-cong/lich-su-cham-cong-edit/lich-su-cham-cong-edit.module';
 export function tokenGetter(){
   return localStorage.getItem("token");
 }
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +36,8 @@ export function tokenGetter(){
     DashboardRoutingModule,
     NzBreadCrumbModule,
     ButtonModule,
+    LichSuChamCongModule,
+    LichSuChamCongEditModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

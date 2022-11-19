@@ -1,1 +1,14 @@
-<p>lich-su-cham-cong works!</p>
+<nz-layout>
+  <div class="text-center">
+    <h1>FUNY COMPANY INTRANET</h1>
+    <h5 style="color: red;">CHECK IN/OUT LIST</h5>
+  </div>
+  <app-lich-su-cham-cong-search></app-lich-su-cham-cong-search>
+  <nz-content>
+    <nz-spin [nzSpinning]="isSpinning">
+      <app-lich-su-cham-cong-list (loadDataEmit)="loadStaff()" [listDpm]="listInfDpm"></app-lich-su-cham-cong-list>
+    </nz-spin>
+  </nz-content>
+</nz-layout>
+
+

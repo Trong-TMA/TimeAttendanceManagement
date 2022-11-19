@@ -1,3 +1,4 @@
+import { Checkinout } from 'src/app/shared/models/Checkinout.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -34,5 +35,7 @@ export class ChamcongService {
     return this.http.post(`${environment.apiUrl}/api/CheckingApi/APICHKCOU`, Checkinout, {headers: this._sharedHeaders,});
   }
 
-
+  getstatus(Checkinout: any){
+    return this.http.post(`${environment.apiUrl}/api/CheckingApi/APIGETSTT`, Checkinout, {headers: this._sharedHeaders,});
+  }
 }
