@@ -9,7 +9,7 @@ namespace TAM_Backend.BLO
     public interface ICheckingBLO
     {
         public abstract String DoCheckIn(JsonChecking jsChecking);
-
         public abstract String DoCheckOut(JsonChecking jsChecking);
+        public abstract string GetState(JsonChecking jsChecking);
     }
 }

@@ -30,7 +30,10 @@ namespace TAM_Backend.DAO.Impl
             }
 
             //Check if existing record in db
-            CheckInOut cioInDb = _db.CheckInOuts.FirstOrDefault(u => u.Cio_Map_Cd.Equals(tam_Cd) && u.Cio_Ymd.Equals(cio_Ymd) && u.Cio_Day.Equals(cio_Day));
+            CheckInOut cioInDb = _db.CheckInOuts.FirstOrDefault(
+                u => u.Cio_Map_Cd.Equals(tam_Cd) 
+                && u.Cio_Ymd.Equals(cio_Ymd) 
+                && u.Cio_Day.Equals(cio_Day));
 
             if (cioInDb != null)
             {
@@ -71,7 +74,10 @@ namespace TAM_Backend.DAO.Impl
             }
 
             //Check if existing record in db
-            CheckInOut cioInDb = _db.CheckInOuts.FirstOrDefault(u => u.Cio_Map_Cd.Equals(tam_Cd) && u.Cio_Ymd.Equals(cio_Ymd) && u.Cio_Day.Equals(cio_Day));
+            CheckInOut cioInDb = _db.CheckInOuts.FirstOrDefault(
+                u => u.Cio_Map_Cd.Equals(tam_Cd) 
+                && u.Cio_Ymd.Equals(cio_Ymd) 
+                && u.Cio_Day.Equals(cio_Day));
             
             if (cioInDb == null)
             {
@@ -100,6 +106,37 @@ namespace TAM_Backend.DAO.Impl
         public string UpdateChecking(decimal stf_Cd, Guid tam_Cd, string cio_Ymd, string cio_Day, string in_Hh_Mm, string out_Hh_Mm)
         {
             throw new NotImplementedException();
+        }
+
+        public string CheckState(Guid tam_Cd, string cio_Ymd, string cio_Day, String ip_Chk_Log)
+        {
+            //Check if ip is valid
+            var ipInDb = _db.IPNetworks.Find(ip_Chk_Log);
+
+            if (ipInDb == null)
+            {
+                return Constants.STT_IP;
+            }
+
+            //Check if checkin is exist
+            var chkInInDb = _db.CheckInOuts.FirstOrDefault(
+                u => u.Cio_Map_Cd.Equals(tam_Cd) 
+                && u.Cio_Ymd.Equals(cio_Ymd) 
+                && u.Cio_Day.Equals(cio_Day));
+
+            if (ipInDb == null)
+            {
+                return Constants.STT_IN;
+            } else
+            {
+                if (string.IsNullOrEmpty(chkInInDb.Out_Hh_Mm))
+                {
+                    return Constants.STT_OUT;
+                } else
+                {
+                    return Constants.STT_DONE;
+                }
+            }
         }
 
     }

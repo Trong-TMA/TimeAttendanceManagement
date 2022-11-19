@@ -59,9 +59,9 @@ namespace TAM_Backend.Controllers
 
             if (string.IsNullOrEmpty(messageAuthorize))
             {
-                string messageDoCheckout = _checkingBlo.DoCheckOut(jsChecking);
+                string messageDoGetState = _checkingBlo.GetState(jsChecking);
 
-                return new JsonResult(new { message = messageDoCheckout });
+                return new JsonResult(new { message = messageDoGetState });
             }
             else
             {

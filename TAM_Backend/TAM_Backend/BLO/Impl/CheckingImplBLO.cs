@@ -28,7 +28,7 @@ namespace TAM_Backend.BLO.Impl
                 if (CheckInput(jsChecking))
                 {
                     string cio_Day = GetDayOfWeek(jsChecking.Cio_Ymd);
-                    return _checkingDao.CheckIn((decimal)jsChecking.Stf_Cd, tam_Cd, jsChecking.Cio_Ymd, cio_Day, jsChecking.In_Hh_Mm, jsChecking.Ip_In_Log);
+                    return _checkingDao.CheckIn((decimal)jsChecking.Stf_Cd, tam_Cd, jsChecking.Cio_Ymd, cio_Day, jsChecking.Hh_Mm, jsChecking.Ip_Chk_Log);
                 }
             }
 
@@ -44,7 +44,7 @@ namespace TAM_Backend.BLO.Impl
                 if (CheckInput(jsChecking))
                 {
                     string cio_Day = GetDayOfWeek(jsChecking.Cio_Ymd);
-                    return _checkingDao.CheckOut((decimal)jsChecking.Stf_Cd, tam_Cd, jsChecking.Cio_Ymd, cio_Day, jsChecking.Out_Hh_Mm, jsChecking.Ip_Out_Log);
+                    return _checkingDao.CheckOut((decimal)jsChecking.Stf_Cd, tam_Cd, jsChecking.Cio_Ymd, cio_Day, jsChecking.Hh_Mm, jsChecking.Ip_Chk_Log);
                 }
                 
             }
@@ -60,16 +60,30 @@ namespace TAM_Backend.BLO.Impl
                 return false;
             }
             //Check hh:mm format
-            if (!string.IsNullOrEmpty(jsChecking.In_Hh_Mm) && TamUtils.ConvertToMinute(jsChecking.In_Hh_Mm) == -1)
+            if (!string.IsNullOrEmpty(jsChecking.Hh_Mm) && TamUtils.ConvertToMinute(jsChecking.Hh_Mm) == -1)
             {
                 return false;
             }
-            else if(!string.IsNullOrEmpty(jsChecking.Out_Hh_Mm) && TamUtils.ConvertToMinute(jsChecking.Out_Hh_Mm) == -1)
+            else if(!string.IsNullOrEmpty(jsChecking.Hh_Mm) && TamUtils.ConvertToMinute(jsChecking.Hh_Mm) == -1)
             {
                 return false;
             }
 
             return true;
+        }
+
+        public string GetState(JsonChecking jsChecking)
+        {
+            var tam_Cd = _commonDao.GetTamCd(jsChecking.Stf_Cd);
+
+            if (CheckInput(jsChecking))
+            {
+                string cio_Day = GetDayOfWeek(jsChecking.Cio_Ymd);
+                return _checkingDao.CheckState(tam_Cd, jsChecking.Cio_Ymd, cio_Day, jsChecking.Ip_Chk_Log);
+            }
+
+            return Constants.ERROR;
+            
         }
 
         //Returns day of week from yyyymmdd

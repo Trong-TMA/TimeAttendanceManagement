@@ -21,6 +21,11 @@ namespace TAM_Backend.Common
         public const string HM_12_00 = "12:00";
         public const string HM_13_15 = "13:15";
 
+        public const string STT_IP = "-1";
+        public const string STT_IN = "0";
+        public const string STT_OUT = "1";
+        public const string STT_DONE = "2";
+
         /*Database*/
         public const string STT_001 = "1";
         public const string STT_002 = "2";
