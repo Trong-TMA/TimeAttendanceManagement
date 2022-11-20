@@ -41,6 +41,12 @@ namespace TAM_Backend.Common
         public const string SAT = "Sat";
         public const string SUN = "Sun";
 
+        public const int LIMIT_500 = 500;
+
+        /*Post*/
+        public const string GET_BY_WEEK = "week";
+        public const string GET_BY_MONTH= "month";
+
         /*Api code mapping with department code*/
         /*Api Controller - Authe*/
         //Api Controller - Authe - Login
@@ -51,7 +57,13 @@ namespace TAM_Backend.Common
         public const string API_CHK_CIN = "APICHKCIN";
         //Api Controller - Checking - Checkout
         public const string API_CHK_COU = "APICHKCOU";
-        //Api Controller - GetState
+        //Api Controller - Checking - GetState
         public const string API_GET_STT = "APIGETSTT";
+        //Api Controller - Checking - GetChecking
+        public const string API_GET_CHK = "APIGETCHK";
+
+        /*Api Controller - Staff*/
+        //Api Controller - Staff - Checkin
+        public const string API_GET_STF = "APIGETSTF";
     }
 }
