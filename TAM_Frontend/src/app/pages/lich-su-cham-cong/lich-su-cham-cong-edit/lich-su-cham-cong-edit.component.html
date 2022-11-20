@@ -3,12 +3,10 @@
     <h1>FUNY COMPANY INTRANET</h1>
     <h5 style="color: red;">CHECK IN/OUT LIST</h5>
   </div>
-  <app-lich-su-cham-cong-search></app-lich-su-cham-cong-search>
+  <app-lich-su-cham-cong-edit-search [idDpm]="idDpm"></app-lich-su-cham-cong-edit-search>
   <nz-content>
     <nz-spin [nzSpinning]="isSpinning">
-      <app-lich-su-cham-cong-list (loadDataEmit)="loadStaff()" [listDpm]="listInfDpm"></app-lich-su-cham-cong-list>
+      <app-lich-su-cham-cong-edit-list [listStaff]="listStaffofDpm"></app-lich-su-cham-cong-edit-list>
     </nz-spin>
   </nz-content>
 </nz-layout>
-
-
