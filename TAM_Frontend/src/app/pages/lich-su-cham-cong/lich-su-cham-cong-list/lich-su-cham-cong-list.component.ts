@@ -1,3 +1,4 @@
+import { Staff } from './../../../shared/models/staff.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -18,13 +19,18 @@ export class LichSuChamCongListComponent implements OnInit {
 
   }
 
-  show(){
-    console.log("hihi");
-    this.router.navigateByUrl('/dashboard/lich-su-cham-cong-edit');
+
+
+  show(idDpm: any){
+    this.router.navigate(['/dashboard/lich-su-cham-cong-edit'], {
+      skipLocationChange: true,
+      queryParams:{
+        id: idDpm,
+      }
+    })
   }
 
   ngOnInit(): void {
-
   }
 
 

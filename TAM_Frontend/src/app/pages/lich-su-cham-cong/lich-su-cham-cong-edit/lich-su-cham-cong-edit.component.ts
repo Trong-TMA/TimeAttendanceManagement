@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Staff } from 'src/app/shared/models/staff.model';
 
 @Component({
   selector: 'app-lich-su-cham-cong-edit',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LichSuChamCongEditComponent implements OnInit {
 
-  constructor() { }
+  idDpm: any;
+  isSpinning: boolean;
+  constructor(private activatedRoute : ActivatedRoute) {
+      this.isSpinning = false;
+    }
+
+    stff1 = new Staff('1',"Trong-vm","8:00","","","");
+    stff2 = new Staff('1',"Nhan-hm","8:00","","","");
+    listStaffofDpm: Staff[] = [this.stff1,this.stff2];
 
   ngOnInit(): void {
+    this.activatedRoute.snapshot.queryParams['id']
   }
-
 }

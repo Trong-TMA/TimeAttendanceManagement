@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-lich-su-cham-cong-edit-search',
@@ -7,17 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LichSuChamCongEditSearchComponent implements OnInit {
 
+  @Input() idDpm: any;
+  public idDepartment: any;
   public chckweek = false;
   public chckmonth = false;
   public chckdate = false;
   public value = null;
   public fromdate = null;
   public todate = null;
-
-  optionListDept = [
-    { label: 'Dept 4', value: '01'},
-    { label: 'Dept5', value: '02'}
-  ];
 
   selectedValueDept = { label: 'Dept 4', value: '01'};
 
@@ -33,7 +30,7 @@ export class LichSuChamCongEditSearchComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
+    this.idDepartment = this.idDpm;
   }
 
 }

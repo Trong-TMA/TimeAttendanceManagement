@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Staff } from './../../../shared/models/staff.model';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-lich-su-cham-cong-edit-list',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LichSuChamCongEditListComponent implements OnInit {
 
-  constructor() { }
+  @Input() listStaff: any;
+  isSpinning: boolean;
+  products: Staff[] = [];
+
+
+  constructor() {
+    this.isSpinning = false;
+   }
 
   ngOnInit(): void {
   }
 
+  checkAllCheckBox(ev: any) {
+
+	}
+
+	isAllCheckBoxChecked() {
+
+	}
 }

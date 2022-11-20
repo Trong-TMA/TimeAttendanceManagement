@@ -21,9 +21,13 @@ export class LichSuChamCongComponent implements OnInit {
   listOfStaff: Staff[] = [this.stff1,this.stff2];
   dpm1 = new Department("101","Dept4",this.listOfStaff,"");
 
+
+
   listInfDpm: Department[] = [this.dpm1];
+
+
   constructor() {
-      this.isSpinning = false;
+    this.isSpinning = false;
   }
 
   ngOnInit(): void {

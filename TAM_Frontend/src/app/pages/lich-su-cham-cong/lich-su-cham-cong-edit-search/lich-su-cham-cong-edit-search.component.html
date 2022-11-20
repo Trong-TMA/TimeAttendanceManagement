@@ -2,14 +2,7 @@
   <div class="p-1">
     <div class="d-flex align-items-center checkbox-item">
       <p class="">Dept/Team</p>
-      <nz-select
-        [(ngModel)]="selectedValueDept"
-        [compareWith]="compareFn"
-        nzAllowClear
-        nzPlaceHolder="Choose"
-      >
-        <nz-option *ngFor="let option of optionListDept" [nzValue]="option" [nzLabel]="option.label"></nz-option>
-      </nz-select>
+      <input type="text" nz-input [(ngModel)]="idDepartment" disabled="disable"/>
     </div>
   </div>
   <div class="p-1">

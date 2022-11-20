@@ -60,7 +60,7 @@ export class ChamCongComponent implements OnInit {
     var rightNow = new Date();
     var cio_Ymd = rightNow.toISOString().slice(0,10).replace(/-/g,"");
     var cio_Day = rightNow.getDate().toString();
-    var in_Hh_Mm = rightNow.getHours() +":"+ rightNow.getMinutes();
+    var Hh_Mm = rightNow.getHours() +":"+ rightNow.getMinutes();
     var message = "";
     const checkin  = new Checkinout(
       localStorage.getItem("stf_Cd") || '{}',
@@ -69,10 +69,8 @@ export class ChamCongComponent implements OnInit {
       message,
       cio_Ymd,
       cio_Day,
-      in_Hh_Mm,
-      "",
-      this.ipAddress,
-      ""
+      Hh_Mm,
+      this.ipAddress
     );
     return this.chamcongServices.checkin(checkin).subscribe((item)=>{
       console.log(item);
@@ -83,7 +81,7 @@ export class ChamCongComponent implements OnInit {
     var rightNow = new Date();
     var cio_Ymd = rightNow.toISOString().slice(0,10).replace(/-/g,"");
     var cio_Day = rightNow.getDate().toString();
-    var out_Hh_Mm = rightNow.getHours() +":"+ rightNow.getMinutes();
+    var Hh_Mm = rightNow.getHours() +":"+ rightNow.getMinutes();
     var message = "";
     console.log(this.ipAddress);
     const checkin  = new Checkinout(
@@ -93,9 +91,7 @@ export class ChamCongComponent implements OnInit {
       message,
       cio_Ymd,
       cio_Day,
-      "",
-      out_Hh_Mm,
-      "",
+      Hh_Mm,
       this.ipAddress
     );
     return this.chamcongServices.checkout(checkin).subscribe((item)=>{
@@ -107,7 +103,7 @@ export class ChamCongComponent implements OnInit {
     var rightNow = new Date();
     var cio_Ymd = rightNow.toISOString().slice(0,10).replace(/-/g,"");
     var cio_Day = rightNow.getDate().toString();
-    var in_Hh_Mm = rightNow.getHours() +":"+ rightNow.getMinutes();
+    var Hh_Mm = rightNow.getHours() +":"+ rightNow.getMinutes();
     var message = "";
     const checkin  = new Checkinout(
       localStorage.getItem("stf_Cd") || '{}',
@@ -116,10 +112,8 @@ export class ChamCongComponent implements OnInit {
       message,
       cio_Ymd,
       cio_Day,
-      in_Hh_Mm,
-      "",
+      Hh_Mm,
       this.ipAddress,
-      this.ipAddress
     );
     return this.chamcongServices.getstatus(checkin).subscribe((item)=>{
       console.log(item);

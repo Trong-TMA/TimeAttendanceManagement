@@ -9,7 +9,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 
 @NgModule({
@@ -26,6 +26,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     NzIconModule,
     NzButtonModule,
     NzSpinModule,
+    NzCheckboxModule
   ]
 })
 export class LichSuChamCongEditModule { }
