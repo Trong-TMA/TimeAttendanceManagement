@@ -20,6 +20,6 @@ export class LichSuChamCongEditComponent implements OnInit {
     listStaffofDpm: Staff[] = [this.stff1,this.stff2];
 
   ngOnInit(): void {
-    this.activatedRoute.snapshot.queryParams['id']
+    this.idDpm = this.activatedRoute.snapshot.queryParams['id']
   }
 }

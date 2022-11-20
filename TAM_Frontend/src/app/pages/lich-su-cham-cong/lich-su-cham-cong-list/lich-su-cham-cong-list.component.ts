@@ -25,7 +25,7 @@ export class LichSuChamCongListComponent implements OnInit {
     this.router.navigate(['/dashboard/lich-su-cham-cong-edit'], {
       skipLocationChange: true,
       queryParams:{
-        id: idDpm,
+        id: idDpm
       }
     })
   }
