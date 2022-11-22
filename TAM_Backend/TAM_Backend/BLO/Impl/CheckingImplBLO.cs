@@ -10,8 +10,8 @@ namespace TAM_Backend.BLO.Impl
 {
     public class CheckingImplBLO : ICheckingBLO
     {
-        private ICommonDAO _commonDao { get; set; }
-        private ICheckingDAO _checkingDao { get; set; }
+        private readonly ICommonDAO _commonDao;
+        private readonly ICheckingDAO _checkingDao;
 
         public CheckingImplBLO(ICommonDAO commonDao, ICheckingDAO checkingDao)
         {
@@ -52,25 +52,7 @@ namespace TAM_Backend.BLO.Impl
             return Constants.ERROR;
         }
 
-        private bool CheckInput(JsonChecking jsChecking)
-        {
-            //Check yyyymmdd format
-            if (string.IsNullOrEmpty(GetDayOfWeek(jsChecking.Cio_Ymd)))
-            {
-                return false;
-            }
-            //Check hh:mm format
-            if (!string.IsNullOrEmpty(jsChecking.Hh_Mm) && TamUtils.ConvertToMinute(jsChecking.Hh_Mm) == -1)
-            {
-                return false;
-            }
-            else if(!string.IsNullOrEmpty(jsChecking.Hh_Mm) && TamUtils.ConvertToMinute(jsChecking.Hh_Mm) == -1)
-            {
-                return false;
-            }
-
-            return true;
-        }
+        
 
         public string GetState(JsonChecking jsChecking)
         {
@@ -84,6 +66,36 @@ namespace TAM_Backend.BLO.Impl
 
             return Constants.ERROR;
             
+        }
+        public object GetCheckInOut(JsonSearchChecking jsSearchChecking)
+        {
+            var tam_Cd = _commonDao.GetTamCd(jsSearchChecking.Stf_Cd);
+
+            if (CheckInputSearchChecking(jsSearchChecking))
+            {
+                switch (jsSearchChecking.GetMode)
+                {
+                    case Constants.GET_BY_WEEK:
+                        DateTime fromDay = ParseToDateTime(jsSearchChecking.StartDay);
+                        DateTime toDay = ParseToDateTime(jsSearchChecking.EndDay);
+
+                        return _checkingDao.GetCheckInOut(tam_Cd, fromDay, toDay);
+                    case Constants.GET_BY_MONTH:
+                        try
+                        {
+                            int month = Int32.Parse(jsSearchChecking.Month);
+
+                            return _checkingDao.GetCheckInOut(tam_Cd, month);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            return Constants.ERROR;
+                        }
+                }
+            }
+
+            return Constants.ERROR;
         }
 
         //Returns day of week from yyyymmdd
@@ -123,5 +135,79 @@ namespace TAM_Backend.BLO.Impl
                 return string.Empty;
             }
         }
+
+        private bool CheckInput(JsonChecking jsChecking)
+        {
+            //Check yyyymmdd format
+            if (string.IsNullOrEmpty(GetDayOfWeek(jsChecking.Cio_Ymd)))
+            {
+                return false;
+            }
+            //Check hh:mm format
+            if (!string.IsNullOrEmpty(jsChecking.Hh_Mm) && TamUtils.ConvertToMinute(jsChecking.Hh_Mm) == -1)
+            {
+                return false;
+            }
+            else if (!string.IsNullOrEmpty(jsChecking.Hh_Mm) && TamUtils.ConvertToMinute(jsChecking.Hh_Mm) == -1)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool CheckInputSearchChecking(JsonSearchChecking jsSearchChecking)
+        {
+            switch (jsSearchChecking.GetMode)
+            {
+                case Constants.GET_BY_WEEK:
+                    //Check yyyymmdd format
+                    if (string.IsNullOrEmpty(GetDayOfWeek(jsSearchChecking.StartDay)))
+                    {
+                        return false;
+                    }
+
+                    if (string.IsNullOrEmpty(GetDayOfWeek(jsSearchChecking.EndDay)))
+                    {
+                        return false;
+                    }
+                    break;
+                case Constants.GET_BY_MONTH:
+                    try
+                    {
+                        int month = Int32.Parse(jsSearchChecking.Month);
+                        if (!(1 <= month && month <= 12))
+                        {
+                            return false;
+                        }
+                    } 
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        return false;
+                    }
+                    break;
+                default:
+                    return false;
+            }
+
+            return true;
+        }
+
+        private DateTime ParseToDateTime(string yyyymmdd)
+        {
+            int date = int.Parse(yyyymmdd);
+
+            int yyyy = date / 10000;
+            date -= yyyy * 10000;
+            int mm = date / 100;
+            date -= mm * 100;
+            int dd = date;
+
+            DateTime datetime = new DateTime(yyyy, mm, dd);
+
+            return datetime;
+        }
+
     }
 }

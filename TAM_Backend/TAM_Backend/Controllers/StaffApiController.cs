@@ -12,23 +12,23 @@ namespace TAM_Backend.Controllers
 {
     public class StaffApiController  : BaseApiController
     {
-        private IStaffBLO _staffBlo;
+        private readonly IStaffBLO _staffBlo;
         public StaffApiController(IAutheBLO autheBlo, IStaffBLO staffBlo) : base(autheBlo)
         {
             _staffBlo = staffBlo;
         }
 
 
-        [HttpGet(Constants.API_GET_STF)]
-        public IActionResult GetStaffs(JsonSearchChecking jsSearchChecking)
+        [HttpPost(Constants.API_GET_STF)]
+        public IActionResult GetStaffs(JsonSearchStaff jsSearchStaff)
         {
-            string messageAuthorize = _autheBlo.Authorize((decimal)jsSearchChecking.Stf_Dpm_Cd, Constants.API_CHK_COU);
+            string messageAuthorize = _autheBlo.Authorize((decimal)jsSearchStaff.Stf_Dpm_Cd, Constants.API_GET_STF);
 
             if (string.IsNullOrEmpty(messageAuthorize))
             {
-                var messageDoGetState = _staffBlo.GetStaffs(jsSearchChecking);
+                var staff_List = _staffBlo.GetStaffs(jsSearchStaff);
 
-                return new JsonResult(messageDoGetState);
+                return new JsonResult(staff_List);
             }
             else
             {

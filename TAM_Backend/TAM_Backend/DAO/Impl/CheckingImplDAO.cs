@@ -10,7 +10,7 @@ namespace TAM_Backend.DAO.Impl
 {
     public class CheckingImplDAO : ICheckingDAO
     {
-        private AppDbContext _db { get; set; }
+        private readonly AppDbContext _db;
 
         public CheckingImplDAO(AppDbContext db)
         {
@@ -139,5 +139,24 @@ namespace TAM_Backend.DAO.Impl
             }
         }
 
+        public IEnumerable<CheckInOut> GetCheckInOut(Guid tam_Cd, DateTime startDay, DateTime endDay)
+        {
+            var checkInOutList = _db.CheckInOuts
+                .Where(u => u.Cio_Map_Cd.Equals(tam_Cd)
+                            && DateTime.Compare(startDay, (u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value : DateTime.Now)) <= 0
+                            && DateTime.Compare(endDay, (u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value : DateTime.Now)) >= 0)
+                .OrderByDescending(u => u.Insert_Ymd);
+
+            return checkInOutList;
+        }
+
+        public IEnumerable<CheckInOut> GetCheckInOut(Guid tam_Cd, int month)
+        {
+            var checkInOutList = _db.CheckInOuts
+                .Where(u => u.Cio_Map_Cd.Equals(tam_Cd)
+                            && (u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value.Month : DateTime.Now.Month) == month);
+
+            return checkInOutList;
+        }
     }
 }

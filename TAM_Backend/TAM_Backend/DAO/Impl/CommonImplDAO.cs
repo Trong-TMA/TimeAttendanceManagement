@@ -8,7 +8,7 @@ namespace TAM_Backend.DAO.Impl
 {
     public class CommonImplDAO : ICommonDAO
     {
-        private AppDbContext _db { get; set; }
+        private readonly AppDbContext _db;
 
         public CommonImplDAO(AppDbContext db)
         {

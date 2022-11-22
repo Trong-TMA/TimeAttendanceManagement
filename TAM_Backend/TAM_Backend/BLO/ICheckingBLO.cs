@@ -11,5 +11,7 @@ namespace TAM_Backend.BLO
         public abstract String DoCheckIn(JsonChecking jsChecking);
         public abstract String DoCheckOut(JsonChecking jsChecking);
         public abstract string GetState(JsonChecking jsChecking);
+        public abstract Object GetCheckInOut(JsonSearchChecking jsSearchChecking);
+
     }
 }

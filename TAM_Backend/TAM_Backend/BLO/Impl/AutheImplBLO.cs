@@ -6,7 +6,7 @@ namespace TAM_Backend.BLO
 {
     public class AutheImplBLO : IAutheBLO
     {
-        private IAutheDAO _autheDao { get; set; }
+        private readonly IAutheDAO _autheDao;
 
         public AutheImplBLO(IAutheDAO autheDao)
         {

@@ -10,7 +10,7 @@ namespace TAM_Backend.DAO.Impl
 {
     public class AutheImplDAO : IAutheDAO
     {
-        private AppDbContext _db { get; set; }
+        private readonly AppDbContext _db;
 
         public AutheImplDAO(AppDbContext db)
         {
