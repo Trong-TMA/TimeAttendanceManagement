@@ -27,11 +27,12 @@ namespace TAM_Backend.Common
         public const string STT_DONE = "2";
 
         /*Database*/
-        public const string STT_001 = "1";
-        public const string STT_002 = "2";
-        public const string STT_003 = "3";
-        public const string STT_004 = "4";
-        public const string STT_005 = "5";
+        public const int STT_000 = 0;
+        public const int STT_001 = 1;
+        public const int STT_002 = 2;
+        public const int STT_003 = 3;
+        public const int STT_004 = 4;
+        public const int STT_005 = 5;
 
         public const string MON = "Mon";
         public const string TUE = "Tue";

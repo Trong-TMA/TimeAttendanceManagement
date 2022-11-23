@@ -49,7 +49,7 @@ namespace TAM_Backend.DAO.Impl
                 In_Hh_Mm = in_Hh_Mm,
                 Out_Hh_Mm = in_Hh_Mm,
                 Cio_Duration = 1,
-                Cio_State = 0,
+                Cio_State = Constants.STT_000,
                 Insert_Ymd = DateTime.Now,
                 Insert_Psn_Cd = psn_Cd,
                 Ip_In_Log = ip_In_Log
@@ -95,7 +95,7 @@ namespace TAM_Backend.DAO.Impl
             cioInDb.Update_Psn_Cd = psn_Cd;
             cioInDb.Ip_Out_Log = ip_Out_Log;
             //if duration more than or equal 8 hours return "1" else "0"
-            cioInDb.Cio_State = duration >= 480 ? 1 : 0;
+            cioInDb.Cio_State = duration >= 480 ? Constants.STT_001 : Constants.STT_000;
 
             _db.CheckInOuts.Update(cioInDb);
             _db.SaveChanges();
@@ -141,10 +141,16 @@ namespace TAM_Backend.DAO.Impl
 
         public IEnumerable<CheckInOut> GetCheckInOut(Guid tam_Cd, DateTime startDay, DateTime endDay)
         {
+            var dateNow = DateTime.Now;
+            var dateNowInt = dateNow.Year * 10000;
+            dateNowInt += dateNow.Month * 100;
+            dateNowInt += dateNow.Day;
+
             var checkInOutList = _db.CheckInOuts
                 .Where(u => u.Cio_Map_Cd.Equals(tam_Cd)
                             && DateTime.Compare(startDay, (u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value : DateTime.Now)) <= 0
-                            && DateTime.Compare(endDay, (u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value : DateTime.Now)) >= 0)
+                            && DateTime.Compare(endDay, (u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value : DateTime.Now)) >= 0
+                            && dateNowInt >= Convert.ToInt32(u.Cio_Ymd))
                 .OrderByDescending(u => u.Insert_Ymd);
 
             return checkInOutList;
@@ -152,9 +158,15 @@ namespace TAM_Backend.DAO.Impl
 
         public IEnumerable<CheckInOut> GetCheckInOut(Guid tam_Cd, int month)
         {
+            var dateNow = DateTime.Now;
+            var dateNowInt = dateNow.Year * 10000;
+            dateNowInt += dateNow.Month * 100;
+            dateNowInt += dateNow.Day;
+
             var checkInOutList = _db.CheckInOuts
                 .Where(u => u.Cio_Map_Cd.Equals(tam_Cd)
-                            && (u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value.Month : DateTime.Now.Month) == month);
+                            && ((u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value.Month : DateTime.Now.Month) == month)
+                            && dateNowInt >= Convert.ToInt32(u.Cio_Ymd));
 
             return checkInOutList;
         }
