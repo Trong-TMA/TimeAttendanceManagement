@@ -124,7 +124,7 @@ namespace TAM_Backend.DAO.Impl
                 && u.Cio_Ymd.Equals(cio_Ymd) 
                 && u.Cio_Day.Equals(cio_Day));
 
-            if (ipInDb == null)
+            if (chkInInDb == null)
             {
                 return Constants.STT_IN;
             } else
