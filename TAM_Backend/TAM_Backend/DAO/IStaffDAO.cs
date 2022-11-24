@@ -10,5 +10,7 @@ namespace TAM_Backend.DAO
     public interface IStaffDAO
     {
         public abstract IEnumerable<Staff> GetStaffs(decimal dpm_Cd);
+
+        public abstract IEnumerable<Department> GetDepartments();
     }
 }

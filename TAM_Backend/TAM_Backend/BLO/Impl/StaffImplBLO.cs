@@ -23,5 +23,9 @@ namespace TAM_Backend.BLO.Impl
         {
             return _staffDao.GetStaffs(jsSearchStaff.Dpm_Cd);
         }
+        public IEnumerable<Department> GetDeparments()
+        {
+            return _staffDao.GetDepartments();
+        }
     }
 }

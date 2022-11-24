@@ -21,9 +21,13 @@ namespace TAM_Backend.Common
         public const string HM_12_00 = "12:00";
         public const string HM_13_15 = "13:15";
 
+        //Wrong IP
         public const string STT_IP = "-1";
+        //Waiting for checkin
         public const string STT_IN = "0";
+        //Waiting for checkout
         public const string STT_OUT = "1";
+        //Checked done
         public const string STT_DONE = "2";
 
         /*Database*/
@@ -64,7 +68,9 @@ namespace TAM_Backend.Common
         public const string API_GET_CHK = "APIGETCHK";
 
         /*Api Controller - Staff*/
-        //Api Controller - Staff - Checkin
+        //Api Controller - Staff - Get Staffs
         public const string API_GET_STF = "APIGETSTF";
+        //Api Controller - Department - Get Departments
+        public const string API_GET_DPM = "APIGETDPM";
     }
 }

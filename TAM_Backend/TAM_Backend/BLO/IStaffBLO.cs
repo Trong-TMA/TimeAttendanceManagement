@@ -12,5 +12,6 @@ namespace TAM_Backend.BLO
     public interface IStaffBLO
     {
         public abstract IEnumerable<Staff> GetStaffs(JsonSearchStaff jsSearchStaff);
+        public abstract IEnumerable<Department> GetDeparments();
     }
 }

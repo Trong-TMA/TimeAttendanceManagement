@@ -35,5 +35,23 @@ namespace TAM_Backend.Controllers
                 return new JsonResult(new { message = messageAuthorize });
             }
         }
+
+        [HttpPost(Constants.API_GET_DPM)]
+        public IActionResult GetStaffs(JsonStaff jsStaff)
+        {
+            string messageAuthorize = _autheBlo.Authorize((decimal)jsStaff.Stf_Dpm_Cd, Constants.API_GET_DPM);
+
+            if (string.IsNullOrEmpty(messageAuthorize))
+            {
+                var dpm_List = _staffBlo.GetDeparments();
+
+                return new JsonResult(dpm_List);
+            }
+            else
+            {
+                return new JsonResult(new { message = messageAuthorize });
+            }
+        }
+
     }
 }
