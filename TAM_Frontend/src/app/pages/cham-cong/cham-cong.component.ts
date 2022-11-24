@@ -30,7 +30,7 @@ export class ChamCongComponent implements OnInit {
 
   ngOnInit(): void {
     this.getIPAddress();
-    this.getStatus();
+
   }
 
   getIPAddress()
@@ -56,26 +56,6 @@ export class ChamCongComponent implements OnInit {
     return this.chamcongServices.getcheckinout(localStorage.getItem("stf_Cd"),localStorage.getItem("stf_Dpm_Cd"));
   }
 
-  checkin(){
-    var rightNow = new Date();
-    var cio_Ymd = rightNow.toISOString().slice(0,10).replace(/-/g,"");
-    var cio_Day = rightNow.getDate().toString();
-    var Hh_Mm = rightNow.getHours() +":"+ rightNow.getMinutes();
-    var message = "";
-    const checkin  = new Checkinout(
-      localStorage.getItem("stf_Cd") || '{}',
-      localStorage.getItem("stf_Dpm_Cd") || '{}',
-      localStorage.getItem("stf_Name") || '{}',
-      message,
-      cio_Ymd,
-      cio_Day,
-      Hh_Mm,
-      this.ipAddress
-    );
-    return this.chamcongServices.checkin(checkin).subscribe((item)=>{
-      console.log(item);
-    });
-  }
 
   checkout(){
     var rightNow = new Date();
@@ -83,7 +63,6 @@ export class ChamCongComponent implements OnInit {
     var cio_Day = rightNow.getDate().toString();
     var Hh_Mm = rightNow.getHours() +":"+ rightNow.getMinutes();
     var message = "";
-    console.log(this.ipAddress);
     const checkin  = new Checkinout(
       localStorage.getItem("stf_Cd") || '{}',
       localStorage.getItem("stf_Dpm_Cd") || '{}',
@@ -99,24 +78,4 @@ export class ChamCongComponent implements OnInit {
     });
   }
 
-  getStatus(){
-    var rightNow = new Date();
-    var cio_Ymd = rightNow.toISOString().slice(0,10).replace(/-/g,"");
-    var cio_Day = rightNow.getDate().toString();
-    var Hh_Mm = rightNow.getHours() +":"+ rightNow.getMinutes();
-    var message = "";
-    const checkin  = new Checkinout(
-      localStorage.getItem("stf_Cd") || '{}',
-      localStorage.getItem("stf_Dpm_Cd") || '{}',
-      localStorage.getItem("stf_Name") || '{}',
-      message,
-      cio_Ymd,
-      cio_Day,
-      Hh_Mm,
-      this.ipAddress,
-    );
-    return this.chamcongServices.getstatus(checkin).subscribe((item)=>{
-      console.log(item);
-    });
-  }
 }
