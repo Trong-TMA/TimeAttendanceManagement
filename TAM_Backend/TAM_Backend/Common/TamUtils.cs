@@ -37,5 +37,12 @@ namespace TAM_Backend.Common
 
             return -1;
         }
+
+        public static int CalculateDuration(int hh_Mm_From, int hh_Mm_To)
+        {
+            
+
+            return -1;
+        }
     }
 }

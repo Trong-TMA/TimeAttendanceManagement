@@ -20,7 +20,9 @@ namespace TAM_Backend.Model
         [Column("SAL_BASE")]
         public long Sal_Base { get; set; }
         [Column("UPDATE_PSN_CD")]
-        public Guid Update_Psn_Cd { get; set; }
+        public decimal? Update_Psn_Cd { get; set; }
 
+        [ForeignKey("Sal_Map_Cd")]
+        public virtual TAManager TAManager { get; set; }
     }
 }

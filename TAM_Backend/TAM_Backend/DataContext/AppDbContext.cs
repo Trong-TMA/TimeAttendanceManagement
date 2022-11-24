@@ -22,6 +22,10 @@ namespace TAM_Backend.DataContext
         public DbSet<DpmRole> DpmRoles { get; set; }
         public DbSet<CheckInOut> CheckInOuts { get; set; }
         public DbSet<IPNetwork> IPNetworks { get; set; }
+        public DbSet<Salary> Salary { get; set; }
+        public DbSet<AnnualLeave> AnnualLeave { get; set; }
+        public DbSet<AnnualLeaveConfirm> AnnualLeaveConfirm { get; set; }
+        public DbSet<LeavingRegistration> LeavingRegistration { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
