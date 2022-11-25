@@ -38,11 +38,31 @@ namespace TAM_Backend.Common
             return -1;
         }
 
-        public static int CalculateDuration(int hh_Mm_From, int hh_Mm_To)
+        public static int CalculateDuration(string hh_Mm_From, string hh_Mm_To)
         {
-            
+            int duration = 1;
+            int hh_Mm_From_Int = ConvertToMinute(hh_Mm_From);
+            int hh_Mm_To_Int = ConvertToMinute(hh_Mm_To);
+            int hm_12_00 = ConvertToMinute(Constants.HM_12_00);
+            int hm_13_15 = ConvertToMinute(Constants.HM_13_15);
 
-            return -1;
+            if (hh_Mm_From_Int <= hm_12_00)
+            {
+                if (hh_Mm_To_Int <= hm_13_15)
+                {
+                    duration = hh_Mm_To_Int - hh_Mm_From_Int;
+                }
+                else
+                {
+                    duration = (hm_12_00 - hh_Mm_From_Int) + (hh_Mm_To_Int - hm_13_15);
+                }
+            }
+            else
+            {
+                duration = hh_Mm_To_Int - hh_Mm_From_Int;
+            }
+
+            return duration;
         }
     }
 }

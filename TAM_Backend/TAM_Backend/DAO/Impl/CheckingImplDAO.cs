@@ -84,9 +84,7 @@ namespace TAM_Backend.DAO.Impl
                 return Constants.ERROR;
             }
 
-            int moring_Duration = TamUtils.ConvertToMinute(Constants.HM_12_00) - TamUtils.ConvertToMinute(cioInDb.In_Hh_Mm);
-            int afternoon_Duration = TamUtils.ConvertToMinute(out_Hh_Mm) - TamUtils.ConvertToMinute(Constants.HM_13_15);
-            int duration = moring_Duration + afternoon_Duration;
+            int duration = TamUtils.CalculateDuration(cioInDb.In_Hh_Mm, out_Hh_Mm);
 
             //Set value
             cioInDb.Out_Hh_Mm = out_Hh_Mm;

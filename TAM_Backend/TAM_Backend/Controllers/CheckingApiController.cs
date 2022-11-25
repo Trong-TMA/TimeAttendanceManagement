@@ -92,5 +92,6 @@ namespace TAM_Backend.Controllers
                 return new JsonResult(new { message = messageAuthorize });
             }
         }
+
     }
 }
