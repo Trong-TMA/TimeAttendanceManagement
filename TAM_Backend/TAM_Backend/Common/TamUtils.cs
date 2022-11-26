@@ -40,6 +40,14 @@ namespace TAM_Backend.Common
             return -1;
         }
 
+        public static string ConvertToHour(int minute)
+        {
+            string hh = (minute / 60).ToString("D2");
+            string mm = (minute % 60).ToString("D2");
+
+            return hh + ":" + mm;
+        }
+
         public static int CalculateDuration(string hh_Mm_From, string hh_Mm_To)
         {
             int hh_Mm_From_Int = ConvertToMinute(hh_Mm_From);

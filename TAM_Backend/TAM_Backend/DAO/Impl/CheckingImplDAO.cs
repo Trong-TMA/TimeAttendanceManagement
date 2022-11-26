@@ -97,6 +97,18 @@ namespace TAM_Backend.DAO.Impl
             _db.CheckInOuts.Update(cioInDb);
             _db.SaveChanges();
 
+            //Gennerate Absence
+            try
+            {
+                GenerateAbsence(cioInDb);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return Constants.ERROR;
+            }
+            
+
             return Constants.SUCCESS;
         }
 
@@ -168,13 +180,255 @@ namespace TAM_Backend.DAO.Impl
             return checkInOutList;
         }
 
-        public void GenerateAbsence(int state)
+        private void GenerateAbsence(CheckInOut cioInDb)
         {
-            switch (state)
+            int timeAbsence = 480 - cioInDb.Cio_Duration;
+
+            int in_Hh_Mm = TamUtils.ConvertToMinute(cioInDb.In_Hh_Mm);
+            int out_Hh_Mm = TamUtils.ConvertToMinute(cioInDb.Out_Hh_Mm);
+
+            List<LeavingRegistration> absenceList = new();
+
+            LeavingRegistration leavingRegistration;
+
+            switch (cioInDb.Cio_State)
             {
+                case Constants.STT_000:
+                    //If absence time <= 4h
+                    if (timeAbsence <= 240)
+                    {
+                        string from = Constants.HM_13_15;
+                        string to = TamUtils.ConvertToHour(TamUtils.ConvertToMinute(Constants.HM_13_15) + timeAbsence);
+
+                        leavingRegistration = Build(from, to, cioInDb);
+
+                        absenceList.Add(leavingRegistration);
+                    }
+                    else
+                    {
+                        //1
+                        leavingRegistration = new LeavingRegistration()
+                        {
+                            Cio_Cd = Guid.NewGuid(),
+                            Cio_Map_Cd = cioInDb.Cio_Map_Cd,
+                            Cio_Ymd = cioInDb.Cio_Ymd,
+                            Cio_Day = cioInDb.Cio_Day,
+                            Cio_State = 0,
+                            Insert_Ymd = DateTime.Now,
+                            Insert_Psn_Cd = cioInDb.Insert_Psn_Cd,
+                            In_Hh_Mm = Constants.HM_13_15,
+                            Out_Hh_Mm = Constants.HM_17_15
+                        };
+
+                        absenceList.Add(leavingRegistration);
+
+                        //2
+                        leavingRegistration = new LeavingRegistration()
+                        {
+                            Cio_Cd = Guid.NewGuid(),
+                            Cio_Map_Cd = cioInDb.Cio_Map_Cd,
+                            Cio_Ymd = cioInDb.Cio_Ymd,
+                            Cio_Day = cioInDb.Cio_Day,
+                            Cio_State = 0,
+                            Insert_Ymd = DateTime.Now,
+                            Insert_Psn_Cd = cioInDb.Insert_Psn_Cd,
+                            In_Hh_Mm = cioInDb.Out_Hh_Mm,
+                            Out_Hh_Mm = TamUtils.ConvertToHour(out_Hh_Mm + timeAbsence - 240)
+                        };
+
+                        absenceList.Add(leavingRegistration);
+                    }
+
+                    break;
                 case Constants.STT_002:
+                    if (in_Hh_Mm < TamUtils.ConvertToMinute(Constants.HM_12_00))
+                    {
+                        //Ra ve truoc 12h
+                        if (out_Hh_Mm < TamUtils.ConvertToMinute(Constants.HM_12_00))
+                        {
+                            //1
+                            string from = Constants.HM_08_00;
+                            string to = cioInDb.In_Hh_Mm;
+
+                            leavingRegistration = Build(from, to, cioInDb);
+
+                            absenceList.Add(leavingRegistration);
+
+                            //2
+                            from = cioInDb.Out_Hh_Mm;
+                            to = Constants.HM_17_15;
+
+                            leavingRegistration = Build(from, to, cioInDb);
+
+                            absenceList.Add(leavingRegistration);
+                        }
+                        else if (out_Hh_Mm < TamUtils.ConvertToMinute(Constants.HM_13_15)) //Ra ve truoc 13h15
+                        {
+                            if (timeAbsence <= 240)
+                            {
+                                string from = Constants.HM_13_15;
+                                string to = TamUtils.ConvertToHour(TamUtils.ConvertToMinute(Constants.HM_13_15) + timeAbsence);
+
+                                leavingRegistration = Build(from, to, cioInDb);
+
+                                absenceList.Add(leavingRegistration);
+                            }
+                            else
+                            {
+                                //1
+                                string from = Constants.HM_13_15;
+                                string to = Constants.HM_17_15;
+
+                                leavingRegistration = Build(from, to, cioInDb);
+
+                                absenceList.Add(leavingRegistration);
+
+                                //2
+                                from = TamUtils.ConvertToHour(in_Hh_Mm - (timeAbsence - 240));
+                                to = cioInDb.In_Hh_Mm;
+
+                                leavingRegistration = Build(from, to, cioInDb);
+
+                                absenceList.Add(leavingRegistration);
+                            }
+                        }
+                        else if (out_Hh_Mm < TamUtils.ConvertToMinute(Constants.HM_17_15)) //Ra ve truoc 17h15
+                        {
+                            //1
+                            string from = Constants.HM_08_00;
+                            string to = cioInDb.In_Hh_Mm;
+
+                            leavingRegistration = Build(from, to, cioInDb);
+
+                            absenceList.Add(leavingRegistration);
+
+                            //2
+                            from = cioInDb.Out_Hh_Mm;
+                            to = Constants.HM_17_15;
+
+                            leavingRegistration = Build(from, to, cioInDb);
+
+                            absenceList.Add(leavingRegistration);
+                        }
+                        else //Ra ve sau 17h15
+                        {
+                            string from = TamUtils.ConvertToHour(in_Hh_Mm - timeAbsence);
+                            string to = cioInDb.In_Hh_Mm;
+
+                            leavingRegistration = Build(from, to, cioInDb);
+
+                            absenceList.Add(leavingRegistration);
+                        }
+                    } 
+                    else if (in_Hh_Mm <= TamUtils.ConvertToMinute(Constants.HM_13_15))
+                    {
+                        if (timeAbsence <= 240)
+                        {
+                            string from = Constants.HM_08_00;
+                            string to = TamUtils.ConvertToHour(480 + timeAbsence);
+
+                            leavingRegistration = Build(from, to, cioInDb);
+
+                            absenceList.Add(leavingRegistration);
+                        }
+                        else
+                        {
+                            string from = Constants.HM_08_00;
+                            string to = Constants.HM_12_00;
+
+                            leavingRegistration = Build(from, to, cioInDb);
+
+                            absenceList.Add(leavingRegistration);
+
+                            int timeLeft = timeAbsence - 240;
+
+                            if (out_Hh_Mm <= TamUtils.ConvertToMinute(Constants.HM_13_15))
+                            {
+                                from = Constants.HM_13_15;
+                                to = TamUtils.ConvertToHour(TamUtils.ConvertToMinute(cioInDb.Out_Hh_Mm) + timeLeft);
+                            } 
+                            else
+                            {
+                                from = cioInDb.Out_Hh_Mm;
+                                to = TamUtils.ConvertToHour(TamUtils.ConvertToMinute(cioInDb.Out_Hh_Mm) + timeLeft);
+                            }
+
+                            leavingRegistration = Build(from, to, cioInDb);
+
+                            absenceList.Add(leavingRegistration);
+                        }
+                    } 
+                    else
+                    {
+                        if (timeAbsence <= 240)
+                        {
+                            string from = Constants.HM_08_00;
+                            string to = TamUtils.ConvertToHour(480 + timeAbsence);
+
+                            leavingRegistration = Build(from, to, cioInDb);
+
+                            absenceList.Add(leavingRegistration);
+                        }
+                        else 
+                        {
+                            int timeLeft = timeAbsence - 240;
+
+                            if (out_Hh_Mm <= TamUtils.ConvertToMinute(Constants.HM_17_15))
+                            {
+                                //1
+                                string from = Constants.HM_08_00;
+                                string to = cioInDb.In_Hh_Mm;
+
+                                leavingRegistration = Build(from, to, cioInDb);
+
+                                absenceList.Add(leavingRegistration);
+
+                                //2
+                                from = cioInDb.Out_Hh_Mm;
+                                to = Constants.HM_17_15;
+
+                                leavingRegistration = Build(from, to, cioInDb);
+
+                                absenceList.Add(leavingRegistration);
+                            }
+                            else
+                            {
+                                string from = Constants.HM_08_00;
+                                string to = TamUtils.ConvertToHour(TamUtils.ConvertToMinute(Constants.HM_13_15) + timeLeft);
+
+                                leavingRegistration = Build(from, to, cioInDb);
+
+                                absenceList.Add(leavingRegistration);
+                            }
+                        }
+                    }
+                    
                     break;
             }
+            //End switch
+
+            //Insert data
+            _db.AddRange(absenceList);
+            _db.SaveChanges();
+        }
+
+        private LeavingRegistration Build(string from, string to, CheckInOut cioInDb)
+        {
+            LeavingRegistration leavingRegistration = new LeavingRegistration()
+            {
+                Cio_Cd = Guid.NewGuid(),
+                Cio_Map_Cd = cioInDb.Cio_Map_Cd,
+                Cio_Ymd = cioInDb.Cio_Ymd,
+                Cio_Day = cioInDb.Cio_Day,
+                Cio_State = 0,
+                Insert_Ymd = DateTime.Now,
+                Insert_Psn_Cd = cioInDb.Insert_Psn_Cd,
+                In_Hh_Mm = from,
+                Out_Hh_Mm = to,
+                Cio_Duration = TamUtils.CalculateDuration(from, to)
+            };
+
+            return leavingRegistration;
         }
     }
 }

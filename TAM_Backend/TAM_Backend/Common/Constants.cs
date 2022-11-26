@@ -18,9 +18,11 @@ namespace TAM_Backend.Common
         public const string FAIL = "FAIL";
         public const string ERROR = "ERROR";
 
+        public const string HM_08_00 = "08:00";
         public const string HM_09_00 = "09:00";
         public const string HM_12_00 = "12:00";
         public const string HM_13_15 = "13:15";
+        public const string HM_17_15 = "17:15";
 
         //Wrong IP
         public const string STT_IP = "-1";
