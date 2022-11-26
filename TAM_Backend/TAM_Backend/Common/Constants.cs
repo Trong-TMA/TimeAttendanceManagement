@@ -18,6 +18,7 @@ namespace TAM_Backend.Common
         public const string FAIL = "FAIL";
         public const string ERROR = "ERROR";
 
+        public const string HM_09_00 = "09:00";
         public const string HM_12_00 = "12:00";
         public const string HM_13_15 = "13:15";
 
@@ -31,11 +32,17 @@ namespace TAM_Backend.Common
         public const string STT_DONE = "2";
 
         /*Database*/
+        //Early to work, work not enough required time
         public const int STT_000 = 0;
+        //Early to work, , work enough required time
         public const int STT_001 = 1;
+        //Late to work, not working stoppage
         public const int STT_002 = 2;
+        //Late to work, working stoppage
         public const int STT_003 = 3;
+        //Holiday
         public const int STT_004 = 4;
+        //Ever unknown
         public const int STT_005 = 5;
 
         public const string MON = "Mon";

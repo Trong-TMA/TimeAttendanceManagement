@@ -92,8 +92,7 @@ namespace TAM_Backend.DAO.Impl
             cioInDb.Update_Ymd = DateTime.Now;
             cioInDb.Update_Psn_Cd = psn_Cd;
             cioInDb.Ip_Out_Log = ip_Out_Log;
-            //if duration more than or equal 8 hours return "1" else "0"
-            cioInDb.Cio_State = duration >= 480 ? Constants.STT_001 : Constants.STT_000;
+            cioInDb.Cio_State = TamUtils.ExportState(cioInDb.In_Hh_Mm, duration);
 
             _db.CheckInOuts.Update(cioInDb);
             _db.SaveChanges();
