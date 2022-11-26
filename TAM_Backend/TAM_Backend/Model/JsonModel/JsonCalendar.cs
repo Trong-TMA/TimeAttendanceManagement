@@ -9,5 +9,6 @@ namespace TAM_Backend.Model.JsonModel
     {
         public string Date { get; set; }
         public string DayOfWeek { get; set; }
+        public int Week { get; set; }
     }
 }

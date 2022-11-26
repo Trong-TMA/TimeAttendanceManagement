@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TAM_Backend.Common;
 using TAM_Backend.DAO;
 using TAM_Backend.Model.JsonModel;
@@ -93,6 +94,18 @@ namespace TAM_Backend.BLO.Impl
             }
 
             return Constants.ERROR;
+        }
+
+        public Object GetCalendar(int year, int month)
+        {
+            if ((1900 <= year && year <= 9999) && (1 <= month && month <= 12))
+            {
+                return TamUtils.GetCalendar(year, month);
+            }
+            else
+            {
+                return Constants.ERROR;
+            }
         }
 
         private bool CheckInput(JsonChecking jsChecking)

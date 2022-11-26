@@ -93,5 +93,20 @@ namespace TAM_Backend.Controllers
             }
         }
 
+        [HttpGet(Constants.API_GET_CLD)]
+        public IActionResult GetCalendar(int year, int month)
+        {
+            var result = _checkingBlo.GetCalendar(year, month);
+
+            if (result.Equals(Constants.ERROR))
+            {
+                return new JsonResult(new { message = result });
+            } else
+            {
+                return new JsonResult(result);
+            }
+        }
+
+
     }
 }

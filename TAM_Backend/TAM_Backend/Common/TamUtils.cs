@@ -145,16 +145,26 @@ namespace TAM_Backend.Common
         {
             var dateList = new List<JsonCalendar>();
 
-            JsonCalendar jsCalendar = null;
+            JsonCalendar jsCalendar;
+            string dayOfWeek;
+            int week = 1;
 
             // Loop from the first day of the month until we hit the next month, moving forward a day at a time
             for (var date = new DateTime(year, month, 1); date.Month == month; date = date.AddDays(1))
             {
+                dayOfWeek = TamUtils.GetDayOfWeek(date.ToString("yyyyMMdd"));
+
                 jsCalendar = new JsonCalendar()
                 {
                     Date = date.ToString("yyyyMMdd"),
-                    DayOfWeek = GetDayOfWeek(date.ToString("yyyyMMdd"))
+                    DayOfWeek = dayOfWeek,
+                    Week = week
                 };
+
+                if (dayOfWeek.Equals(Constants.SUN))
+                {
+                    week++;
+                }
 
                 dateList.Add(jsCalendar);
             }

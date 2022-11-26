@@ -73,6 +73,8 @@ namespace TAM_Backend.Common
         public const string API_GET_STT = "APIGETSTT";
         //Api Controller - Checking - GetChecking
         public const string API_GET_CHK = "APIGETCHK";
+        //Api Controller - Checking - GetCalendar
+        public const string API_GET_CLD = "APIGETCLD";
 
         /*Api Controller - Staff*/
         //Api Controller - Staff - Get Staffs

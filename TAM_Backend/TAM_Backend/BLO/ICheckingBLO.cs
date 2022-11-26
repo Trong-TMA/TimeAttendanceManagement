@@ -12,6 +12,7 @@ namespace TAM_Backend.BLO
         public abstract String DoCheckOut(JsonChecking jsChecking);
         public abstract string GetState(JsonChecking jsChecking);
         public abstract Object GetCheckInOut(JsonSearchChecking jsSearchChecking);
+        public abstract Object GetCalendar(int year, int month);
 
     }
 }

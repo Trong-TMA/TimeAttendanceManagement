@@ -38,27 +38,5 @@ namespace TAM_Backend.Controllers
             return new JsonResult(jsStaff);
         }
 
-        [HttpGet]
-        public IActionResult ALogin(int year, int month)
-        {
-            var dateList = new List<JsonCalendar>();
-
-            JsonCalendar jsCalendar = null;
-
-            // Loop from the first day of the month until we hit the next month, moving forward a day at a time
-            for (var date = new DateTime(year, month, 1); date.Month == month; date = date.AddDays(1))
-            {
-                jsCalendar = new JsonCalendar()
-                {
-                    Date = date.ToString("yyyyMMdd"),
-                    DayOfWeek = TamUtils.GetDayOfWeek(date.ToString("yyyyMMdd"))
-                };
-
-                dateList.Add(jsCalendar);
-            }
-
-            return new JsonResult(dateList);
-        }
-
     }
 }
