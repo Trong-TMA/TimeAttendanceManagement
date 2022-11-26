@@ -23,8 +23,8 @@ export class ChamcongService {
       this._sharedHeaders = this._sharedHeaders.set('Content-Type', 'application/json');
   }
 
-  getcheckinout(stf_Cd:any, stf_Dpm_Cd: any){
-    return this.http.get(`${environment.apiUrl}/api/CheckingApi/APIGETCHKINOU?stf_Cd=${stf_Cd}&stf_Dpm_Cd=${stf_Dpm_Cd}`, {headers: this._sharedHeaders});
+  getcheckinout(Gcheckinout:any){
+    return this.http.post(`${environment.apiUrl}/api/CheckingApi/APIGETCHK`, Gcheckinout, {headers: this._sharedHeaders});
   }
 
   checkin(Checkinout: any){
@@ -38,4 +38,5 @@ export class ChamcongService {
   getstatus(Checkinout: any){
     return this.http.post(`${environment.apiUrl}/api/CheckingApi/APIGETSTT`, Checkinout, {headers: this._sharedHeaders,});
   }
+
 }

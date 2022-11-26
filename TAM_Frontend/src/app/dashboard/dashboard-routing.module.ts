@@ -1,3 +1,5 @@
+import { NghiPhepComponent } from './../pages/nghi-phep/nghi-phep/nghi-phep.component';
+import { NghiPhepModule } from './../pages/nghi-phep/nghi-phep.module';
 import { LichSuChamCongEditComponent } from './../pages/lich-su-cham-cong/lich-su-cham-cong-edit/lich-su-cham-cong-edit.component';
 import { LichSuChamCongComponent } from './../pages/lich-su-cham-cong/lich-su-cham-cong.component';
 
@@ -16,6 +18,10 @@ const routes: Routes = [
     {
       path: 'lich-su-cham-cong',
       component: LichSuChamCongComponent,
+    },
+    {
+      path: 'nghi-phep',
+      component: NghiPhepComponent,
     },
     {
       path: 'lich-su-cham-cong-edit',

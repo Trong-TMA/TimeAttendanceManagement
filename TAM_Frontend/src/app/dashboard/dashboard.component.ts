@@ -8,12 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  public role: any;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.role = localStorage.getItem("stf_Dpm_Cd");
   }
+
   logout(){
-    localStorage.removeItem('token');
+    localStorage.clear();
     this.router.navigateByUrl('/login');
   }
 }

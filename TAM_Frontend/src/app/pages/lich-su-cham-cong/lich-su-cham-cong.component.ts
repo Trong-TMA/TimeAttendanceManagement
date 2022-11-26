@@ -20,10 +20,11 @@ export class LichSuChamCongComponent implements OnInit {
   stff2 = new Staff('1',"Nhan-hm","8:00","","","");
   listOfStaff: Staff[] = [this.stff1,this.stff2];
   dpm1 = new Department("101","Dept4",this.listOfStaff,"");
+  dpm2 = new Department("102","Dept4",this.listOfStaff,"");
 
 
 
-  listInfDpm: Department[] = [this.dpm1];
+  listInfDpm: Department[] = [this.dpm1, this.dpm2];
 
 
   constructor() {

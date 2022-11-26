@@ -31,4 +31,9 @@ export class ChamCongListComponent implements OnInit {
       this.display = true;
   }
 
+  convertMinsToHrsMins (minutes : any) {
+    var h = Math.floor(minutes / 60);
+    var m = minutes % 60;
+    return (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m);
+  }
 }
