@@ -5,6 +5,8 @@ import { Checkinout } from '../shared/models/Checkinout.model';
 
 import { LoginRequest, LoginService } from '../shared/services/login.service';
 import { HttpClient } from '@angular/common/http';
+import * as moment from 'moment';
+import { Login } from '../shared/models/Login.model';
 
 @Component({
   selector: 'app-login',
@@ -34,41 +36,48 @@ export class LoginComponent implements OnInit {
 
   getIPAddress()
   {
-    this.http.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
+    return this.http.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
       this.ipAddress = res.ip;
     });
   }
 
   checkin(){
+    this.isSpinning = true;
     var rightNow = new Date();
     var cio_Ymd = rightNow.toISOString().slice(0,10).replace(/-/g,"");
     var cio_Day = rightNow.getDate().toString();
-    var Hh_Mm = rightNow.getHours() +":"+ rightNow.getMinutes();
+    var Hh_Mm = moment().format("HH:mm");
     var message = "";
-    const checkin  = new Checkinout(
-      localStorage.getItem("stf_Cd") || '{}',
-      localStorage.getItem("stf_Dpm_Cd") || '{}',
-      localStorage.getItem("stf_Name") || '{}',
-      message,
-      cio_Ymd,
-      cio_Day,
-      Hh_Mm,
-      this.ipAddress
-    );
-    console.log(checkin);
+    const checkin  = new Checkinout(localStorage.getItem("stf_Cd") || '{}', localStorage.getItem("stf_Dpm_Cd") || '{}',
+      localStorage.getItem("stf_Name") || '{}', message, cio_Ymd, cio_Day,  Hh_Mm, this.ipAddress);
+    this.chamcongServices.checkin(checkin).subscribe((item : any)=>{
+      this.getState(cio_Ymd, cio_Day, Hh_Mm, this.ipAddress);
+    });
+  }
 
-    return this.chamcongServices.checkin(checkin).subscribe((item: any)=>{
-      if(item?.message === "ERROR"){
-        this.router.navigateByUrl('/login');
-        this.errorMessage = "Please connect local";
-      }
-      else{
-        this.router.navigateByUrl('/dashboard/cham-cong');
-      }
+  getState(cio_Ymd: any, cio_Day: any, Hh_Mm: any, ipadress: any){
+    this.isSpinning = true;
+    var message = "";
+    const status  = new Checkinout(localStorage.getItem("stf_Cd") || '{}', localStorage.getItem("stf_Dpm_Cd") || '{}',
+      localStorage.getItem("stf_Name") || '{}', message, cio_Ymd, cio_Day, Hh_Mm, ipadress);
+    this.chamcongServices.getstatus(status).subscribe((item:any)=>{
+      setTimeout(() => {
+        if(item?.message === "-1" ){
+          localStorage.clear();
+          this.router.navigateByUrl('/login');
+          this.errorMessage = "Please connect local internet";
+          this.isSpinning = false;
+        }
+        else{
+          localStorage.setItem("Status", item?.message);
+          this.router.navigateByUrl('/dashboard/cham-cong');
+          this.isSpinning = false;
+        }
+      }, 2000);
     });
   }
   login(){
-    this.loginService.login(this.modelLogin.username,this.modelLogin.password).subscribe(
+    this.loginService.login(new Login(this.modelLogin.username, this.modelLogin.password)).subscribe(
         (res: any)=>{
           if(res?.stf_Cd != null){
             localStorage.setItem('stf_Cd', res?.stf_Cd);

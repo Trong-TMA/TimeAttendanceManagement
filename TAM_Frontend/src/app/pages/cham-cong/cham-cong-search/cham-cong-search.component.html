@@ -19,27 +19,18 @@
     </ng-template>
   </div>
   <div class="p-1">
-    <button nz-button nzType="primary">
+    <button nz-button nzType="primary" >
       Tìm kiếm
     </button>
   </div>
 </div>
 <div class="bg-light d-flex justify-content-start align-items-center p-1 border-bottom w-100">
+  <nz-radio-group [(ngModel)]="radioValue">
+    <label nz-radio nzValue="week">This week</label>
+    <label nz-radio nzValue="month">This month</label>
+  </nz-radio-group>
   <div class="p-1">
     <div class="d-flex align-items-center checkbox-item">
-      <img class="checkbox-label" (click)="chckweek = !chckweek" [src]="chckweek ? 'assets/images/checkbox.png' : 'assets/images/uncheck.png'" alt="">
-      <p>Tuần này</p>
-    </div>
-  </div>
-  <div class="p-1">
-    <div class="d-flex align-items-center checkbox-item">
-      <img class="checkbox-label" (click)="chckmonth = !chckmonth" [src]="chckmonth ? 'assets/images/checkbox.png' : 'assets/images/uncheck.png'" alt="">
-      <p>Tháng này</p>
-    </div>
-  </div>
-  <div class="p-1">
-    <div class="d-flex align-items-center checkbox-item">
-      <img class="checkbox-label" (click)="chckdate = !chckdate" [src]="chckdate ? 'assets/images/checkbox.png' : 'assets/images/uncheck.png'" alt="">
       <p>SelectDate</p>
       <div class="p-1 d-flex">
         <input nz-input [(ngModel)]="fromdate" maxLength="10"/>

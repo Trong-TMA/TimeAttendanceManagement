@@ -1,6 +1,7 @@
+import { GStaff } from './../../../shared/models/getStaff.model';
+import { StaffService } from './../../../shared/services/staff.sevice';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Staff } from 'src/app/shared/models/staff.model';
 
 @Component({
   selector: 'app-lich-su-cham-cong-edit',
@@ -11,15 +12,30 @@ export class LichSuChamCongEditComponent implements OnInit {
 
   idDpm: any;
   isSpinning: boolean;
-  constructor(private activatedRoute : ActivatedRoute) {
+  listStaffofDpm: any;
+  constructor(private activatedRoute : ActivatedRoute,
+      private stffservice: StaffService) {
       this.isSpinning = false;
-    }
-
-    stff1 = new Staff('1',"Trong-vm","8:00","","","");
-    stff2 = new Staff('1',"Nhan-hm","8:00","","","");
-    listStaffofDpm: Staff[] = [this.stff1,this.stff2];
+  }
 
   ngOnInit(): void {
     this.idDpm = this.activatedRoute.snapshot.queryParams['id']
+    this.getStaff();
+  }
+
+
+  getStaff(){
+    const gstaff =  new GStaff(
+      localStorage.getItem("stf_Cd") || '{}',
+      localStorage.getItem("stf_Dpm_Cd") || '{}',
+      localStorage.getItem("stf_Name") || '{}',
+      "message",
+      this.idDpm
+    );
+
+    this.stffservice.getStaff(gstaff).subscribe((item)=>{
+        this.listStaffofDpm = item;
+        this.isSpinning = false;
+    });
   }
 }

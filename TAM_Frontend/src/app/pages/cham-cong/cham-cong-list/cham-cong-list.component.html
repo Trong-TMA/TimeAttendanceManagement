@@ -1,31 +1,38 @@
-<div class="table">
-  <nz-table #basicTable [nzData]="listCheckinout">
-    <thead>
-      <tr>
-        <th>No</th>
-        <th>Date</th>
-        <th>Check in</th>
-        <th>Check out</th>
-        <th>Duration</th>
-        <th>Note</th>
-        <th>Chi tiết</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of basicTable.data index as i" >
-        <td>{{i+1}}</td>
-        <td>{{item.date}}</td>
-        <td>{{item.checkin}}</td>
-        <td>{{item.checkout }}</td>
-        <td>{{item.duration}}</td>
-        <td>{{item.note}}</td>
-        <td>
-          <button nz-button nzType="primary" (click)="showDialog()">Xem chi tiết</button>
-        </td>
-      </tr>
-    </tbody>
-  </nz-table>
-</div>
-<p-dialog header="Chi tiết ngày công" [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
-  <app-cham-cong-item></app-cham-cong-item>
-</p-dialog>
+<nz-spin [nzSpinning]="isSpinning" nzTip="Đang khởi động">
+  <div class="table">
+    <nz-table #basicTable [nzData]="listCheckinout">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Date</th>
+          <th>Check in</th>
+          <th>Check out</th>
+          <th>Duration</th>
+          <th>Note</th>
+          <th>Chi tiết</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of basicTable.data index as i" >
+          <td>{{i+1}}</td>
+          <td>{{item.cio_Day +"-"+ item.cio_Ymd}}</td>
+          <td>{{item.in_Hh_Mm}}</td>
+          <td>{{item.out_Hh_Mm}}</td>
+          <td *ngIf="item.cio_State == '0'" style="background-color: yellow;">{{convertMinsToHrsMins(item.cio_Duration)}}</td>
+          <td *ngIf="item.cio_State == '1'" >{{convertMinsToHrsMins(item.cio_Duration)}}</td>
+          <td *ngIf="item.cio_State == '2'" style="background-color: rgb(133, 133, 133);">{{convertMinsToHrsMins(item.cio_Duration)}}</td>
+          <td *ngIf="item.cio_State == '3'" style="background-color: rgb(255, 144, 168);">{{convertMinsToHrsMins(item.cio_Duration)}}</td>
+          <td *ngIf="item.cio_State == '4'" style="background-color: rgb(254, 73, 251);">{{convertMinsToHrsMins(item.cio_Duration)}}</td>
+          <td *ngIf="item.cio_State == '5'" style="background-color: rgb(245, 65, 0);">{{convertMinsToHrsMins(item.cio_Duration)}}</td>
+          <td>{{item.note}}</td>
+          <td>
+            <button nz-button nzType="primary" (click)="showDialog()">Xem chi tiết</button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <p-dialog header="Chi tiết ngày công" [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <app-cham-cong-item></app-cham-cong-item>
+  </p-dialog>
+</nz-spin>

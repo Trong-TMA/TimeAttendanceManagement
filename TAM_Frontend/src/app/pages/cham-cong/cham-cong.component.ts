@@ -1,9 +1,12 @@
+import { Gcheckinout } from './../../shared/models/getCheckinout.model';
 import { ChamcongService } from './../../shared/services/chamcong.service';
 import { Component, OnInit } from '@angular/core';
 import { InfStaff } from 'src/app/shared/models/infstaff.model';
 import { MessageService } from 'primeng/api';
 import { Checkinout } from 'src/app/shared/models/Checkinout.model';
 import { HttpClient } from '@angular/common/http';
+import * as moment from 'moment';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-cham-cong',
   templateUrl: './cham-cong.component.html',
@@ -12,25 +15,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ChamCongComponent implements OnInit {
 
-  isSpinning: boolean;
-  listCheckinout: any;
-
-  stff1 = new InfStaff('1','2022-11-13', true, false, '8:00', '');
-  stff2 = new InfStaff('2','2022-11-12', true, false, '9:00', '');
-  stff3 = new InfStaff('3','2022-11-11', true, false, '10:00', '');
-
-  listOfStaff: InfStaff[] = [this.stff1,this.stff2,this.stff3];
+  isSpinning = false;
+  listCheckinout: Array<any> = [];;
+  items: any = [];
+  stffVM: any;
   ipAddress = '';
+  hidden  =  localStorage.getItem("Status");
+
   constructor(
     private http:HttpClient,
     private  chamcongServices: ChamcongService,
-    private messageService: MessageService) {
-      this.isSpinning = false;
+    private messageService: MessageService,
+    private activatedRoute : ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.getIPAddress();
-
+    this.loadCheckinout();
   }
 
   getIPAddress()
@@ -42,28 +43,26 @@ export class ChamCongComponent implements OnInit {
 
   loadCheckinout(){
     this.isSpinning = true;
-    this.getCheckinout().subscribe((item)=>{
-      this.messageService.add({severity:'success', summary:'Cập nhật thành công!', detail:'Cập nhật dữ liệu từ server thành công!'});
+    return this.getCheckinout().subscribe((item:any)=>{
+      this.messageService.add({severity:'success', summary:'Cập nhật thành công!',
+      detail:'Cập nhật dữ liệu từ server thành công!'});
+      //Time out for load data
       setTimeout(()=>{
         this.listCheckinout = item;
         this.isSpinning = false;
-      }, 1000)
+      }, 1000);
     });
+
   }
-
-
-  getCheckinout(){
-    return this.chamcongServices.getcheckinout(localStorage.getItem("stf_Cd"),localStorage.getItem("stf_Dpm_Cd"));
-  }
-
 
   checkout(){
+    this.isSpinning = true;
     var rightNow = new Date();
     var cio_Ymd = rightNow.toISOString().slice(0,10).replace(/-/g,"");
     var cio_Day = rightNow.getDate().toString();
-    var Hh_Mm = rightNow.getHours() +":"+ rightNow.getMinutes();
+    var Hh_Mm = moment().format("HH:mm");;
     var message = "";
-    const checkin  = new Checkinout(
+    const checkout  = new Checkinout(
       localStorage.getItem("stf_Cd") || '{}',
       localStorage.getItem("stf_Dpm_Cd") || '{}',
       localStorage.getItem("stf_Name") || '{}',
@@ -73,9 +72,43 @@ export class ChamCongComponent implements OnInit {
       Hh_Mm,
       this.ipAddress
     );
-    return this.chamcongServices.checkout(checkin).subscribe((item)=>{
-      console.log(item);
+    return this.chamcongServices.checkout(checkout).subscribe((item: any)=>{
+      setTimeout(() => {
+        if(item.message === 'SUCCESS'){
+          this.getState(cio_Ymd, cio_Day, Hh_Mm, this.ipAddress);
+          console.log(this.hidden);
+          this.loadCheckinout();
+          this.isSpinning = false;
+        }
+      }, 1000);
     });
+  }
+
+  getState(cio_Ymd: any, cio_Day: any, Hh_Mm: any, ipadress: any){
+    this.isSpinning = true;
+    var message = "";
+    const status  = new Checkinout(localStorage.getItem("stf_Cd") || '{}', localStorage.getItem("stf_Dpm_Cd") || '{}',
+    localStorage.getItem("stf_Name") || '{}', message, cio_Ymd, cio_Day, Hh_Mm, ipadress);
+    return this.chamcongServices.getstatus(status).subscribe((item:any)=>{
+      this.hidden  = item.message;
+      localStorage.setItem("Status", item.message);
+      this.isSpinning = false;
+    });
+  }
+
+  getCheckinout(){
+    var rightNow = new Date();
+    this.stffVM = new Gcheckinout(
+      localStorage.getItem("stf_Cd") || '{}',
+      localStorage.getItem("stf_Dpm_Cd") || '{}',
+      localStorage.getItem("stf_Name") || '{}',
+      "",
+      "",
+      "",
+      (rightNow.getMonth()+1).toString(),
+      "month"
+    );
+    return this.chamcongServices.getcheckinout(this.stffVM);
   }
 
 }

@@ -22,11 +22,11 @@
             </a>
           </li>
           <li nz-menu-item >
-            <a routerLink="" routerLinkActive="active">
+            <a routerLink="nghi-phep" routerLinkActive="active">
               <span>Nghỉ Phép</span>
             </a>
           </li>
-          <li nz-menu-item class="textLi">
+          <li nz-menu-item class="textLi" *ngIf="this.role === '101'">
             <a routerLink="lich-su-cham-cong" routerLinkActive="active">
               <span>Lịch sử chấm công</span>
             </a>
