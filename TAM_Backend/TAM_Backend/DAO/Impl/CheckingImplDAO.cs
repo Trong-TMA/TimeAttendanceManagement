@@ -47,7 +47,7 @@ namespace TAM_Backend.DAO.Impl
                 Cio_Ymd = cio_Ymd,
                 Cio_Day = cio_Day,
                 In_Hh_Mm = in_Hh_Mm,
-                Out_Hh_Mm = in_Hh_Mm,
+                Out_Hh_Mm = string.Empty,
                 Cio_Duration = 1,
                 Cio_State = Constants.STT_000,
                 Insert_Ymd = DateTime.Now,
@@ -166,6 +166,15 @@ namespace TAM_Backend.DAO.Impl
                             && dateNowInt >= Convert.ToInt32(u.Cio_Ymd));
 
             return checkInOutList;
+        }
+
+        public void GenerateAbsence(int state)
+        {
+            switch (state)
+            {
+                case Constants.STT_002:
+                    break;
+            }
         }
     }
 }

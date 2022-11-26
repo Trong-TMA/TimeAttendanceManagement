@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TAM_Backend.Model.JsonModel;
 
 namespace TAM_Backend.Common
 {
@@ -25,12 +26,13 @@ namespace TAM_Backend.Common
                             return hh * 60 + mm;
                         }
 
-                    } catch (Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                         return -1;
                     }
-                    
+
                 }
 
             }
@@ -74,7 +76,7 @@ namespace TAM_Backend.Common
             int state;
             if (hh_Mm_From_Int < hm_09_00)
             {
-                
+
                 if (duration < 480)
                 {
                     //Return: early to work, work not enough required time
@@ -100,6 +102,64 @@ namespace TAM_Backend.Common
                 }
             }
             return state;
+        }
+
+        //Returns day of week from yyyymmdd
+        public static string GetDayOfWeek(string ymd)
+        {
+            try
+            {
+                int yyyy = Int32.Parse(ymd.Substring(0, 4));
+                int mm = Int32.Parse(ymd.Substring(4, 2));
+                int dd = Int32.Parse(ymd.Substring(6, 2));
+
+                DateTime date = new DateTime(yyyy, mm, dd);
+
+                switch (date.DayOfWeek.ToString())
+                {
+                    case "Monday":
+                        return Constants.MON;
+                    case "Tuesday":
+                        return Constants.TUE;
+                    case "Wednesday":
+                        return Constants.WED;
+                    case "Thursday":
+                        return Constants.THU;
+                    case "Friday":
+                        return Constants.FRI;
+                    case "Saturday":
+                        return Constants.SAT;
+                    case "Sunday":
+                        return Constants.SUN;
+                    default:
+                        return string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return string.Empty;
+            }
+        }
+        public static List<JsonCalendar> GetCalendar(int year, int month)
+        {
+            var dateList = new List<JsonCalendar>();
+
+            JsonCalendar jsCalendar = null;
+
+            // Loop from the first day of the month until we hit the next month, moving forward a day at a time
+            for (var date = new DateTime(year, month, 1); date.Month == month; date = date.AddDays(1))
+            {
+                jsCalendar = new JsonCalendar()
+                {
+                    Date = date.ToString("yyyyMMdd"),
+                    DayOfWeek = GetDayOfWeek(date.ToString("yyyyMMdd"))
+                };
+
+                dateList.Add(jsCalendar);
+            }
+
+            return dateList;
         }
     }
 }

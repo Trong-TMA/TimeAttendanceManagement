@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TAM_Backend.Common;
 using TAM_Backend.DAO;
 using TAM_Backend.Model.JsonModel;
@@ -27,7 +24,7 @@ namespace TAM_Backend.BLO.Impl
             {
                 if (CheckInput(jsChecking))
                 {
-                    string cio_Day = GetDayOfWeek(jsChecking.Cio_Ymd);
+                    string cio_Day = TamUtils.GetDayOfWeek(jsChecking.Cio_Ymd);
                     return _checkingDao.CheckIn((decimal)jsChecking.Stf_Cd, tam_Cd, jsChecking.Cio_Ymd, cio_Day, jsChecking.Hh_Mm, jsChecking.Ip_Chk_Log);
                 }
             }
@@ -43,7 +40,7 @@ namespace TAM_Backend.BLO.Impl
             {
                 if (CheckInput(jsChecking))
                 {
-                    string cio_Day = GetDayOfWeek(jsChecking.Cio_Ymd);
+                    string cio_Day = TamUtils.GetDayOfWeek(jsChecking.Cio_Ymd);
                     return _checkingDao.CheckOut((decimal)jsChecking.Stf_Cd, tam_Cd, jsChecking.Cio_Ymd, cio_Day, jsChecking.Hh_Mm, jsChecking.Ip_Chk_Log);
                 }
                 
@@ -60,7 +57,7 @@ namespace TAM_Backend.BLO.Impl
 
             if (CheckInput(jsChecking))
             {
-                string cio_Day = GetDayOfWeek(jsChecking.Cio_Ymd);
+                string cio_Day = TamUtils.GetDayOfWeek(jsChecking.Cio_Ymd);
                 return _checkingDao.CheckState(tam_Cd, jsChecking.Cio_Ymd, cio_Day, jsChecking.Ip_Chk_Log);
             }
 
@@ -98,48 +95,10 @@ namespace TAM_Backend.BLO.Impl
             return Constants.ERROR;
         }
 
-        //Returns day of week from yyyymmdd
-        private string GetDayOfWeek(string ymd)
-        {
-            try
-            {
-                int yyyy = Int32.Parse(ymd.Substring(0, 4));
-                int mm = Int32.Parse(ymd.Substring(4, 2));
-                int dd = Int32.Parse(ymd.Substring(6, 2));
-
-                DateTime date = new DateTime(yyyy, mm, dd);
-
-                switch (date.DayOfWeek.ToString())
-                {
-                    case "Monday":
-                        return Constants.MON;
-                    case "Tuesday":
-                        return Constants.TUE;
-                    case "Wednesday":
-                        return Constants.WED;
-                    case "Thursday":
-                        return Constants.THU;
-                    case "Friday":
-                        return Constants.FRI;
-                    case "Saturday":
-                        return Constants.SAT;
-                    case "Sunday":
-                        return Constants.SUN;
-                    default:
-                        return string.Empty;
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return string.Empty;
-            }
-        }
-
         private bool CheckInput(JsonChecking jsChecking)
         {
             //Check yyyymmdd format
-            if (string.IsNullOrEmpty(GetDayOfWeek(jsChecking.Cio_Ymd)))
+            if (string.IsNullOrEmpty(TamUtils.GetDayOfWeek(jsChecking.Cio_Ymd)))
             {
                 return false;
             }
@@ -162,12 +121,12 @@ namespace TAM_Backend.BLO.Impl
             {
                 case Constants.GET_BY_WEEK:
                     //Check yyyymmdd format
-                    if (string.IsNullOrEmpty(GetDayOfWeek(jsSearchChecking.StartDay)))
+                    if (string.IsNullOrEmpty(TamUtils.GetDayOfWeek(jsSearchChecking.StartDay)))
                     {
                         return false;
                     }
 
-                    if (string.IsNullOrEmpty(GetDayOfWeek(jsSearchChecking.EndDay)))
+                    if (string.IsNullOrEmpty(TamUtils.GetDayOfWeek(jsSearchChecking.EndDay)))
                     {
                         return false;
                     }
