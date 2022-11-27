@@ -24,6 +24,10 @@ export class ChamCongListComponent implements OnInit {
     this.isSpinning = false;
   }
 
+  loadDottonvinh(){
+    this.loadDataEmit.emit();
+  }
+
   ngOnInit(): void {
   }
 

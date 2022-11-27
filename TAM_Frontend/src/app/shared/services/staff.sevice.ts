@@ -20,4 +20,7 @@ export class StaffService {
     return this.http.post(`${environment.apiUrl}/api/StaffApi/APIGETSTF`, gStaff, {headers: this._sharedHeaders});
   }
 
+  search(){
+
+  }
 }

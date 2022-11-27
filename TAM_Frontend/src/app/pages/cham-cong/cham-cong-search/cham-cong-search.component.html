@@ -19,7 +19,7 @@
     </ng-template>
   </div>
   <div class="p-1">
-    <button nz-button nzType="primary" >
+    <button nz-button nzType="primary" (click)="search($event)" (loadDataEmit)="loadData()">
       Tìm kiếm
     </button>
   </div>

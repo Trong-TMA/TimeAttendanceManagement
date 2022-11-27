@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NghiPhepComponent implements OnInit {
 
+  switchValue = false;
   constructor() { }
 
   ngOnInit(): void {

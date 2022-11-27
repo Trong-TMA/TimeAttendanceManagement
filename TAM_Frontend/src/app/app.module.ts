@@ -18,12 +18,13 @@ import { NZ_DATE_LOCALE, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LichSuChamCongEditModule } from './pages/lich-su-cham-cong/lich-su-cham-cong-edit/lich-su-cham-cong-edit.module';
+import { NghiPhepComponent } from './pages/nghi-phep/nghi-phep.component';
 export function tokenGetter(){
   return localStorage.getItem("token");
 }
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

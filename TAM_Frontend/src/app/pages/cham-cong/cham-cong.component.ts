@@ -111,4 +111,7 @@ export class ChamCongComponent implements OnInit {
     return this.chamcongServices.getcheckinout(this.stffVM);
   }
 
+  loadCheckinoutSearch(items: any){
+    this.listCheckinout = items
+  }
 }
