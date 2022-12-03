@@ -39,4 +39,7 @@ export class ChamcongService {
     return this.http.post(`${environment.apiUrl}/api/CheckingApi/APIGETSTT`, Checkinout, {headers: this._sharedHeaders,});
   }
 
+  getcld(year : any, month: any){
+    return this.http.get(`${environment.apiUrl}/api/CheckingApi/APIGETCLD?year=${year}&month=${month}`, {headers: this._sharedHeaders,})
+  }
 }

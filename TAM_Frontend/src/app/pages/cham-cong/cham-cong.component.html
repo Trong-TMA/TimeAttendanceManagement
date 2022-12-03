@@ -7,7 +7,7 @@
   <div class="d-flex justify-content-end align-items-center p-1 w-100">
     <button nz-button nzType="primary" (click)="checkout()" *ngIf="hidden != '2'">Check out</button>
   </div>
-  <app-cham-cong-search (loadDataEmit)="loadCheckinoutSearch($event)"></app-cham-cong-search>
+    <app-cham-cong-search (loadDataEmit)="loadCheckinoutSearch($event)"></app-cham-cong-search>
   <nz-content>
     <nz-spin [nzSpinning]="isSpinning">
       <app-cham-cong-list (loadDataEmit)="loadCheckinout()" [listCheckinout]="listCheckinout"></app-cham-cong-list>

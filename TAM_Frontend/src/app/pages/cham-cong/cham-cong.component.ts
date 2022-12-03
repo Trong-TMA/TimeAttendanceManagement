@@ -112,6 +112,10 @@ export class ChamCongComponent implements OnInit {
   }
 
   loadCheckinoutSearch(items: any){
-    this.listCheckinout = items
+    this.isSpinning = true;
+    setTimeout(() => {
+      this.listCheckinout = items
+      this.isSpinning = false;
+    }, 1000);
   }
 }

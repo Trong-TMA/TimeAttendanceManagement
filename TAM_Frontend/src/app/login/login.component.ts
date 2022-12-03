@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
   {
     return this.http.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
       this.ipAddress = res.ip;
+      console.log(this.ipAddress);
+
     });
   }
 

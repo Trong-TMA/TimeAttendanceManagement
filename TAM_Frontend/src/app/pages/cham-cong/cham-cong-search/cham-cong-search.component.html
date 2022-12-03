@@ -31,12 +31,15 @@
   </nz-radio-group>
   <div class="p-1">
     <div class="d-flex align-items-center checkbox-item">
-      <p>SelectDate</p>
+      <nz-radio-group [(ngModel)]="radioValue">
+        <label nz-radio nzValue="selectdate">SelectDate</label>
+      </nz-radio-group>
       <div class="p-1 d-flex">
-        <input nz-input [(ngModel)]="fromdate" maxLength="10"/>
-        <div>~</div>
-        <input nz-input [(ngModel)]="todate" maxlength="10"/>
+        <input nz-input [(ngModel)]="startday" maxLength="8" *ngIf="radioValue === 'selectdate'"/>
+        <div *ngIf="radioValue === 'selectdate'">~</div>
+        <input nz-input [(ngModel)]="endday" maxlength="8" *ngIf="radioValue === 'selectdate'"/>
       </div>
     </div>
   </div>
 </div>
+
