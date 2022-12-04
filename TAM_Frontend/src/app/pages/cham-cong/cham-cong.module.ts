@@ -39,7 +39,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     DialogModule,
     NzSpinModule,
     HttpClientModule,
-    NzRadioModule
+    NzRadioModule,
   ]
 })
 export class ChamCongModule { }

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-
+import { getCLD } from '../models/getCLD.model';
 export interface LoginRequest{
   username: string,
   password: string
@@ -39,7 +39,7 @@ export class ChamcongService {
     return this.http.post(`${environment.apiUrl}/api/CheckingApi/APIGETSTT`, Checkinout, {headers: this._sharedHeaders,});
   }
 
-  getcld(year : any, month: any){
-    return this.http.get(`${environment.apiUrl}/api/CheckingApi/APIGETCLD?year=${year}&month=${month}`, {headers: this._sharedHeaders,})
+  getcld(cld: getCLD){
+    return this.http.post(`${environment.apiUrl}/api/CheckingApi/APIGETCLD`, cld , {headers: this._sharedHeaders,});
   }
 }

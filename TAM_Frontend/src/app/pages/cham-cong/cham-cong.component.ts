@@ -1,7 +1,6 @@
 import { Gcheckinout } from './../../shared/models/getCheckinout.model';
 import { ChamcongService } from './../../shared/services/chamcong.service';
-import { Component, OnInit } from '@angular/core';
-import { InfStaff } from 'src/app/shared/models/infstaff.model';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Checkinout } from 'src/app/shared/models/Checkinout.model';
 import { HttpClient } from '@angular/common/http';
@@ -16,6 +15,8 @@ import { ActivatedRoute } from '@angular/router';
 export class ChamCongComponent implements OnInit {
 
   isSpinning = false;
+
+
   listCheckinout: Array<any> = [];;
   items: any = [];
   stffVM: any;

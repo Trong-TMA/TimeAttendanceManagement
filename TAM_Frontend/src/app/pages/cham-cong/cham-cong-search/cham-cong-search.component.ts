@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { CLD } from 'src/app/shared/models/CLD.model';
 import { Gcheckinout } from 'src/app/shared/models/getCheckinout.model';
+import { getCLD } from 'src/app/shared/models/getCLD.model';
 import { GStaff } from 'src/app/shared/models/getStaff.model';
 import { ChamcongService } from 'src/app/shared/services/chamcong.service';
 import { StaffService } from 'src/app/shared/services/staff.sevice';
-
 @Component({
   selector: 'app-cham-cong-search',
   templateUrl: './cham-cong-search.component.html',
@@ -14,15 +15,17 @@ import { StaffService } from 'src/app/shared/services/staff.sevice';
 export class ChamCongSearchComponent implements OnInit {
 
   isSpinning: boolean;
-  stffVM: any;
-  @Input() Listnguoihienmau: any;
+  cld: any;
+  weeks: any[] = [];
+  @Input() listCheckinout: any;
   @Output() loadDataEmit: EventEmitter<any>;
-
   public message = "";
   public radioValue = "week";
   public value = null;
   public startday = "";
   public endday = "";
+  public fromdate = "";
+  public todate = "";
 
 
 
@@ -35,8 +38,7 @@ export class ChamCongSearchComponent implements OnInit {
 
   constructor(
     private  chamcongServices: ChamcongService,
-    private router: Router,
-    private modalService: NzModalService) {
+    private router: Router) {
       this.isSpinning = false;
       this.loadDataEmit = new EventEmitter();
   }
@@ -50,70 +52,61 @@ export class ChamCongSearchComponent implements OnInit {
   }
 
   search(event: any){
-    this.getCheckinout().subscribe((res: any)=>{
-        this.loadDataEmit.emit(res)
-    })
-  }
-
-  getCld(){
-    var now = new Date();
-    return this.chamcongServices.getcld(now.getFullYear(), now.getMonth()+1).subscribe((item: any)=>{
-        this.getWeeks(item);
-    });
-
-  }
-
-  getWeeks(weeks: any){
-    var now = new Date();
-    var cio_Ymd = now.toISOString().slice(0,10).replace(/-/g,"");
-    var nowDate = weeks.find((i: { date: string; }) => i.date = cio_Ymd);
-    const thisweeks = [];
-    for (const item of weeks){
-      if(item.week === nowDate.week){
-        thisweeks.push(item);
-      }
-    }
-    this.startday = thisweeks[0].date;
-    this.endday = thisweeks[thisweeks.length-1].date;
+    this.getCheckinout();
   }
 
   getCheckinout(){
     var rightNow = new Date();
     var month = (rightNow.getMonth()+1).toString();
+    var stffVM: any = new Gcheckinout('','','','','','','','');
     switch(this.radioValue){
       case 'week':{
         month = "";
         this.getCld();
-        this.stffVM = new Gcheckinout(localStorage.getItem("stf_Cd") || '{}', localStorage.getItem("stf_Dpm_Cd") || '{}',
-          localStorage.getItem("stf_Name") || '{}', "", this.startday, this.endday, month, this.radioValue);
+        stffVM = new Gcheckinout(localStorage.getItem("stf_Cd") || '{}', localStorage.getItem("stf_Dpm_Cd") || '{}',
+          localStorage.getItem("stf_Name") || '{}', "", this.fromdate, this.todate, month, this.radioValue);
         break;
       }
       case 'selectdate':{
         if(this.startday != null && this.endday != null){
-          this.stffVM = new Gcheckinout(localStorage.getItem("stf_Cd") || '{}', localStorage.getItem("stf_Dpm_Cd") || '{}',
-            localStorage.getItem("stf_Name") || '{}', "", this.startday, this.endday, month, 'week');
-            break;
+          stffVM = new Gcheckinout(localStorage.getItem("stf_Cd") || '{}', localStorage.getItem("stf_Dpm_Cd") || '{}',
+            localStorage.getItem("stf_Name") || '{}', "",this.startday, this.endday, month, 'week');
+          break;
         }
         else{
-          this.warming();
           break;
         }
       }
       case 'month':{
-        this.stffVM = new Gcheckinout(localStorage.getItem("stf_Cd") || '{}', localStorage.getItem("stf_Dpm_Cd") || '{}',
+        stffVM = new Gcheckinout(localStorage.getItem("stf_Cd") || '{}', localStorage.getItem("stf_Dpm_Cd") || '{}',
           localStorage.getItem("stf_Name") || '{}', "", "", "", month, this.radioValue);
         break;
       }
 
     }
-    return this.chamcongServices.getcheckinout(this.stffVM);
+    this.chamcongServices.getcheckinout(stffVM).subscribe(res=>{
+      this.loadDataEmit.emit(res)
+    });
   }
 
-  warming(): void {
-    const modal = this.modalService.success({
-      nzTitle: 'Start day or End day is empty',
-      nzContent: 'Empty'
-    });
-    setTimeout(() => modal.destroy(), 3000);
+  getCld(){
+    var now = new Date();
+    this.cld = new getCLD(now.getFullYear().toString(), (now.getMonth()+1).toString());
+    return this.chamcongServices.getcld(this.cld).subscribe((item: any)=>{
+      this.weeks.push(item);
+      this.getWeeks();
+  });
+
+  }
+
+  getWeeks(){
+    var now = new Date();
+    var cio_Ymd = now.toISOString().slice(0,10).replace(/-/g,"");
+    var nowDate = this.weeks[0].find((i: { date: string; }) => i.date == cio_Ymd);
+    var week = nowDate?.week
+    var thisweeks: CLD[] = this.weeks[0].filter((i: { week: string; }) => i.week === week);
+
+    this.fromdate = thisweeks[0].date;
+    this.todate = thisweeks[thisweeks.length-1].date;
   }
 }
