@@ -74,8 +74,11 @@ namespace TAM_Backend.BLO.Impl
                 switch (jsSearchChecking.GetMode)
                 {
                     case Constants.GET_BY_WEEK:
-                        DateTime fromDay = ParseToDateTime(jsSearchChecking.StartDay);
-                        DateTime toDay = ParseToDateTime(jsSearchChecking.EndDay);
+                        /*DateTime fromDay = ParseToDateTime(jsSearchChecking.StartDay);
+                        DateTime toDay = ParseToDateTime(jsSearchChecking.EndDay);*/
+
+                        int fromDay = Convert.ToInt32(jsSearchChecking.StartDay);
+                        int toDay = Convert.ToInt32(jsSearchChecking.EndDay);
 
                         return _checkingDao.GetCheckInOut(tam_Cd, fromDay, toDay);
                     case Constants.GET_BY_MONTH:

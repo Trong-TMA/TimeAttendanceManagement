@@ -148,7 +148,7 @@ namespace TAM_Backend.DAO.Impl
             }
         }
 
-        public IEnumerable<CheckInOut> GetCheckInOut(Guid tam_Cd, DateTime startDay, DateTime endDay)
+        public IEnumerable<CheckInOut> GetCheckInOut(Guid tam_Cd, int startDay, int endDay)
         {
             var dateNow = DateTime.Now;
             var dateNowInt = dateNow.Year * 10000;
@@ -157,10 +157,12 @@ namespace TAM_Backend.DAO.Impl
 
             var checkInOutList = _db.CheckInOuts
                 .Where(u => u.Cio_Map_Cd.Equals(tam_Cd)
-                            && DateTime.Compare(startDay, (u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value : DateTime.Now)) <= 0
-                            && DateTime.Compare(endDay, (u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value : DateTime.Now)) >= 0
+                            /*&& DateTime.Compare(startDay, (u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value : DateTime.Now)) <= 0
+                            && DateTime.Compare(endDay, (u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value : DateTime.Now)) >= 0*/
+                            && startDay <= Convert.ToInt32(u.Cio_Ymd)
+                            && endDay >= Convert.ToInt32(u.Cio_Ymd)
                             && dateNowInt >= Convert.ToInt32(u.Cio_Ymd))
-                .OrderByDescending(u => u.Insert_Ymd);
+                .OrderByDescending(u => u.Cio_Ymd);
 
             return checkInOutList;
         }
@@ -174,8 +176,10 @@ namespace TAM_Backend.DAO.Impl
 
             var checkInOutList = _db.CheckInOuts
                 .Where(u => u.Cio_Map_Cd.Equals(tam_Cd)
-                            && ((u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value.Month : DateTime.Now.Month) == month)
-                            && dateNowInt >= Convert.ToInt32(u.Cio_Ymd));
+                            /*&& ((u.Insert_Ymd.HasValue ? u.Insert_Ymd.Value.Month : DateTime.Now.Month) == month)*/
+                            && Convert.ToInt32(u.Cio_Ymd.Substring(4, 2)) == month
+                            && dateNowInt >= Convert.ToInt32(u.Cio_Ymd))
+                .OrderByDescending(u => u.Cio_Ymd);
 
             return checkInOutList;
         }
