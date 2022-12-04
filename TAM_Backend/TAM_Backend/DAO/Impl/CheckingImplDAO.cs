@@ -114,6 +114,18 @@ namespace TAM_Backend.DAO.Impl
 
         public string UpdateChecking(decimal stf_Cd, Guid tam_Cd, string cio_Ymd, string cio_Day, string in_Hh_Mm, string out_Hh_Mm)
         {
+            decimal psn_Cd = _db.Accounts.FirstOrDefault(u => u.Stf_Cd.Equals(stf_Cd)).Psn_Cd;
+
+            //Check if existing record in db
+            CheckInOut cioInDb = _db.CheckInOuts.FirstOrDefault(
+                u => u.Cio_Map_Cd.Equals(tam_Cd)
+                && u.Cio_Ymd.Equals(cio_Ymd)
+                && u.Cio_Day.Equals(cio_Day));
+
+            if (cioInDb != null)
+            {
+                return Constants.ERROR;
+            }
             throw new NotImplementedException();
         }
 
