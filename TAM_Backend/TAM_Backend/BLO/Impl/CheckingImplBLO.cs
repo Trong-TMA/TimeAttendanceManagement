@@ -80,6 +80,11 @@ namespace TAM_Backend.BLO.Impl
                         int fromDay = Convert.ToInt32(jsSearchChecking.StartDay);
                         int toDay = Convert.ToInt32(jsSearchChecking.EndDay);
 
+                        if (fromDay > toDay)
+                        {
+                            return Constants.ERROR;
+                        }
+
                         return _checkingDao.GetCheckInOut(tam_Cd, fromDay, toDay);
                     case Constants.GET_BY_MONTH:
                         try
