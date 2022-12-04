@@ -71,33 +71,35 @@ namespace TAM_Backend.BLO.Impl
 
             if (CheckInputSearchChecking(jsSearchChecking))
             {
-                switch (jsSearchChecking.GetMode)
+                try
                 {
-                    case Constants.GET_BY_WEEK:
-                        /*DateTime fromDay = ParseToDateTime(jsSearchChecking.StartDay);
-                        DateTime toDay = ParseToDateTime(jsSearchChecking.EndDay);*/
+                    switch (jsSearchChecking.GetMode)
+                    {
+                        case Constants.GET_BY_WEEK:
+                            /*DateTime fromDay = ParseToDateTime(jsSearchChecking.StartDay);
+                            DateTime toDay = ParseToDateTime(jsSearchChecking.EndDay);*/
 
-                        int fromDay = Convert.ToInt32(jsSearchChecking.StartDay);
-                        int toDay = Convert.ToInt32(jsSearchChecking.EndDay);
+                            int fromDay = Convert.ToInt32(jsSearchChecking.StartDay);
+                            int toDay = Convert.ToInt32(jsSearchChecking.EndDay);
 
-                        if (fromDay > toDay)
-                        {
-                            return Constants.ERROR;
-                        }
+                            if (fromDay > toDay)
+                            {
+                                return Constants.ERROR;
+                            }
 
-                        return _checkingDao.GetCheckInOut(tam_Cd, fromDay, toDay);
-                    case Constants.GET_BY_MONTH:
-                        try
-                        {
-                            int month = Int32.Parse(jsSearchChecking.Month);
+                            return _checkingDao.GetCheckInOut(tam_Cd, fromDay, toDay);
+                        case Constants.GET_BY_MONTH:
+                        
+                                int month = Int32.Parse(jsSearchChecking.Month);
 
-                            return _checkingDao.GetCheckInOut(tam_Cd, month);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                            return Constants.ERROR;
-                        }
+                                return _checkingDao.GetCheckInOut(tam_Cd, month);
+                       
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return Constants.ERROR;
                 }
             }
 
