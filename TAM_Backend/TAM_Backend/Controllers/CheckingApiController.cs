@@ -103,7 +103,7 @@ namespace TAM_Backend.Controllers
                 return new JsonResult(new { message = result });
             } else
             {
-                return new JsonResult(result);
+                return new JsonResult(new { calendar = result });
             }
         }
 
