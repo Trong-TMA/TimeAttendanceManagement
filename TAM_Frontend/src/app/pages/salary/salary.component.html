@@ -1,1 +1,15 @@
-<p>salary works!</p>
+
+<nz-layout>
+  <div class="text-center">
+    <h1>FUNY COMPANY INTRANET</h1>
+    <h5 style="color: red;">MONTHLY SUMMARY</h5>
+  </div>
+  <div class="search">
+    <app-salary-search></app-salary-search>
+  </div>
+  <nz-content>
+    <nz-spin [nzSpinning]="isSpinning">
+      <app-salary-list></app-salary-list>
+    </nz-spin>
+  </nz-content>
+</nz-layout>

@@ -1,15 +1,13 @@
 import { SummaryOfDeptComponent } from './../pages/summary-of-dept/summary-of-dept.component';
-import { SalaryComponent } from './../pages/salary/salary.component';
 import { SummaryComponent } from './../pages/summary/summary.component';
-
 import { LichSuChamCongEditComponent } from './../pages/lich-su-cham-cong/lich-su-cham-cong-edit/lich-su-cham-cong-edit.component';
 import { LichSuChamCongComponent } from './../pages/lich-su-cham-cong/lich-su-cham-cong.component';
-
 import { ChamCongComponent } from './../pages/cham-cong/cham-cong.component';
 import { DashboardComponent } from './dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NghiPhepComponent } from '../pages/nghi-phep/nghi-phep.component';
+import { SalaryComponent } from '../pages/salary/salary.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent,
