@@ -7,10 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NghiPhepComponent implements OnInit {
 
-  switchValue = false;
-  constructor() { }
+
+  displayCreate: boolean = false;
+  displayEdit: boolean = false;
+  isSpinning: boolean;
+  constructor() {
+    this.isSpinning = false;
+  }
 
   ngOnInit(): void {
   }
 
+  showDialogCreate() {
+    this.displayCreate = true;
+  }
+
+  showDialogEdit(){
+    this.displayEdit = true
+  }
 }
