@@ -1,0 +1,65 @@
+<div class="d-flex justify-content-center">
+  <form nz-form [formGroup]="validateForm" style="width: 80%;">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6">Staff</nz-form-label>
+      <nz-form-control [nzSm]="16" [nzXs]="24" >
+        <nz-input-group >
+          <input formControlName="staff" nz-input [disabled]="true"  />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6">Department</nz-form-label>
+      <nz-form-control [nzSm]="16" [nzXs]="24">
+        <nz-input-group>
+          <input formControlName="dept" nz-input [disabled]="true"  />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6">Absence Date</nz-form-label>
+      <nz-form-control [nzSm]="24" [nzXs]="24">
+        <nz-input-group>
+          <div class="p-1 d-flex">
+            <input nz-input formControlName="startday" maxLength="8"/>
+            <div>~</div>
+            <input nz-input formControlName="endday" maxlength="8"/>
+          </div>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6">Duration</nz-form-label>
+      <nz-form-control [nzSm]="24" [nzXs]="24">
+        <nz-input-group>
+          <input formControlName="duration" nz-input />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6">Kind</nz-form-label>
+      <nz-form-control [nzSm]="24" [nzXs]="24">
+        <nz-radio-group [(ngModel)]="radioValue">
+          <label nz-radio nzValue="1">Nghỉ phép có lương(trừ phép)</label>
+          <label nz-radio nzValue="2">Nghỉ phép không lương(trừ lương)</label>
+          <label nz-radio nzValue="3">Làm thêm bù vào</label>
+          <label nz-radio nzValue="4">Công ty cho nghỉ(không trừ phép, không trừ lương)</label>
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6">Reason</nz-form-label>
+      <nz-form-control [nzSm]="24" [nzXs]="24">
+        <nz-input-group>
+          <textarea rows="4" style="width: 100%;" nz-input formControlName="reason"></textarea>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button class="m-3" nz-button nzType="primary" [disabled]="!validateForm.valid" (click)="submitForm()"(loadDataEmit)="loadData()">Thêm mới</button>
+        <button class="m-3" nz-button nzType="primary" [disabled]="!validateForm.valid" (click)="submitForm()"(loadDataEmit)="loadData()">Reset</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
