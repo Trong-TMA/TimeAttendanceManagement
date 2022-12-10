@@ -1,3 +1,4 @@
+import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzOptionComponent, NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -21,11 +22,12 @@ import { SummarySummaryComponent } from './summary-summary/summary-summary.compo
   ],
   imports: [
     CommonModule,
-    NzSpinModule,
+    NzFormModule,
     NzLayoutModule,
+    NzSpinModule,
+    NzSelectModule,
     NzTableModule,
     NzButtonModule,
-    NzSelectModule,
   ]
 })
 export class SummaryModule { }
