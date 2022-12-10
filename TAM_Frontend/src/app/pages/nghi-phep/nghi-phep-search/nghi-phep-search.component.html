@@ -1,0 +1,42 @@
+<div class="bg-light d-flex justify-content-start align-items-center p-1 w-100">
+    <div class="p-1">
+      <div class="d-flex align-items-center checkbox-item">
+        <p class="">Staff</p>
+        <nz-select
+        [(ngModel)]="selectedValue"
+        [compareWith]="compareFn"
+        nzAllowClear
+        nzPlaceHolder="Choose"
+      >
+        <nz-option *ngFor="let option of optionList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+      </nz-select>
+      </div>
+    </div>
+    <div class="p-1">
+    </div>
+    <div class="p-1">
+      <button nz-button nzType="primary">
+        Tìm kiếm
+      </button>
+    </div>
+  </div>
+  <div class="bg-light d-flex justify-content-start align-items-center p-1 border-bottom w-100">
+    <nz-radio-group [(ngModel)]="radioValue">
+      <label nz-radio nzValue="week">This week</label>
+      <label nz-radio nzValue="month">This month</label>
+    </nz-radio-group>
+    <div class="p-1">
+      <div class="d-flex align-items-center checkbox-item">
+        <nz-radio-group [(ngModel)]="radioValue">
+          <label nz-radio nzValue="selectdate">SelectDate</label>
+        </nz-radio-group>
+        <div class="p-1 d-flex">
+          <input nz-input [(ngModel)]="startday" maxLength="8" *ngIf="radioValue === 'selectdate'"/>
+          <div *ngIf="radioValue === 'selectdate'">~</div>
+          <input nz-input [(ngModel)]="endday" maxlength="8" *ngIf="radioValue === 'selectdate'"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

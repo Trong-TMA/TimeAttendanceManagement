@@ -6,8 +6,8 @@ import { ChamCongComponent } from './../pages/cham-cong/cham-cong.component';
 import { DashboardComponent } from './dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { NghiPhepComponent } from '../pages/nghi-phep/nghi-phep.component';
 import { SalaryComponent } from '../pages/salary/salary.component';
+import { NghiPhepComponent } from '../pages/nghi-phep/nghi-phep.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent,
