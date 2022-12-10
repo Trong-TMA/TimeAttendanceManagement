@@ -83,5 +83,9 @@ namespace TAM_Backend.Common
         public const string API_GET_STF = "APIGETSTF";
         //Api Controller - Department - Get Departments
         public const string API_GET_DPM = "APIGETDPM";
+
+        /*Api Controller - Absence*/
+        //Api Controller - Absence - Get absence
+        public const string API_GET_ABS = "APIGETABS";
     }
 }
