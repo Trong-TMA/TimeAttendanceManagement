@@ -1,0 +1,36 @@
+<nz-spin [nzSpinning]="isSpinning" nzTip="Đang khởi động">
+  <div class="table">
+    <nz-table #basicTable [nzData]="listWorkingTime">
+      <thead>
+        <th colSpan="11">
+          <div class="bg-light d-flex justify-content-end align-items-center p-3">
+            <div class="p-3" style="color: blue;"><label>Working Time: 08:00(08:30) ~ 12:00/13:15 ~ 17:15(8h)</label></div>
+            <div class="p-1 footer-item" style="background-color: rgb(255, 144, 168);"><label>Đi trễ, có làm bù</label></div>
+            <div class="p-1 footer-item" style="background-color: rgb(133, 133, 133);"><label>Đi trễ, không có làm bù</label></div>
+            <div class="p-1 footer-item" style="background-color: rgb(246, 255, 0);"><label>Làm không đủ giờ</label></div>
+            <div class="p-1 footer-item" style="background-color: rgb(254, 73, 251);"><label>Ngày lễ</label></div>
+            <div class="p-1 footer-item" style="background-color: rgb(245, 65, 0);"><label>Nghỉ cả ngày</label></div>
+          </div>
+        </th>
+        <tr>
+          <th>No</th>
+          <th>Date</th>
+          <th style="text-align: center;">Morning <br> Afternoon</th>
+          <th>Duration</th>
+          <th>Effective</th>
+          <th style="text-align: center;">Overtime <br> Effective</th>
+          <th>Trừ phép</th>
+          <th>Trừ lương</th>
+          <th>Làm bù</th>
+          <th>Công ty cho nghỉ</th>
+          <th>Report</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr >
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</nz-spin>
+

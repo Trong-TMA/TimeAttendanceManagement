@@ -1,0 +1,29 @@
+<nz-spin [nzSpinning]="isSpinning" nzTip="Đang khởi động">
+  <div class="table">
+    <nz-table #basicTable [nzData]="listWorkingTime">
+      <thead>
+        <th colSpan="11">
+          <div class="bg-ligh p-1">
+            <div class="p-1" style="color: blue;"><label>SUMMARY</label></div>
+          </div>
+        </th>
+        <tr>
+          <th style="text-align: center;">Working <br> (Actual/Schedule)</th>
+          <th style="text-align: center;">Đi sớm<br>(trước 07:55)</th>
+          <th style="text-align: center;">Đi trễ<br>(trước 09:00/13:30)</th>
+          <th>Về sớm</th>
+          <th>Làm không đủ giờ</th>
+          <th>Trừ phép</th>
+          <th>Trừ lương</th>
+          <th>Làm bù</th>
+          <th>Công ty cho nghỉ</th>
+          <th>Overtime</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr >
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</nz-spin>

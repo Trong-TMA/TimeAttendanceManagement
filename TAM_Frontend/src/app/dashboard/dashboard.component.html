@@ -34,6 +34,23 @@
         </ul>
       </li>
       <li nz-submenu nzTitle="Quản lý Lương thưởng" nzIcon="contacts">
+        <ul>
+          <li nz-menu-item class="textLi">
+            <a routerLink="summary" routerLinkActive="active">
+              <span>Tổng kết</span>
+            </a>
+          </li>
+          <li nz-menu-item >
+            <a routerLink="salary" routerLinkActive="active">
+              <span>Lương</span>
+            </a>
+          </li>
+          <li nz-menu-item class="textLi" *ngIf="this.role === '101'">
+            <a routerLink="summary-of-dept" routerLinkActive="active">
+              <span>Tổng kết toàn khối</span>
+            </a>
+          </li>
+        </ul>
       </li>
       <li nz-submenu nzTitle="Đăng xuất" (click)="logout()"></li>
     </ul>

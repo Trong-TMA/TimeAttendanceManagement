@@ -21,7 +21,6 @@ export class ChamCongSearchComponent implements OnInit {
   @Output() loadDataEmit: EventEmitter<any>;
   public message = "";
   public radioValue = "week";
-  public value = null;
   public startday = "";
   public endday = "";
   public fromdate = "";

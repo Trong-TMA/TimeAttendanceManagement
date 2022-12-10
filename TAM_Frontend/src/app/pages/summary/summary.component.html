@@ -1,0 +1,20 @@
+
+<nz-layout>
+  <div class="text-center">
+    <h1>FUNY COMPANY INTRANET</h1>
+    <h5 style="color: red;">MONTHLY SUMMARY</h5>
+  </div>
+  <div class="search">
+    <app-summary-search></app-summary-search>
+  </div>
+  <nz-content>
+    <nz-spin [nzSpinning]="isSpinning">
+      <app-summary-working-time></app-summary-working-time>
+    </nz-spin>
+  </nz-content>
+  <nz-content>
+    <nz-spin [nzSpinning]="isSpinning">
+      <app-summary-summary></app-summary-summary>
+    </nz-spin>
+  </nz-content>
+</nz-layout>

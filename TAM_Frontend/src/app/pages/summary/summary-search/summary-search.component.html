@@ -1,0 +1,20 @@
+<div class="bg-light d-flex justify-content-start align-items-center border-bottom p-1 w-100">
+  <div class="p-1 m-2">
+    <label class="lable">Staff:</label>
+    <label>{{nameStaff}}</label>
+  </div>
+  <div class="p-1 m-2">
+    <label class="lable">Year:</label>
+    <nz-select ngModel="Year" [nzOptions]="listOfYear"></nz-select>
+  </div>
+  <div class="p-1 m-2">
+    <label class="lable">Month:</label>
+    <nz-select ngModel="Month" [nzOptions]="listOfMonth"></nz-select>
+  </div>
+  <div class="p-1 m-2">
+    <button nz-button nzType="primary">
+      Tìm kiếm
+    </button>
+  </div>
+</div>
+
