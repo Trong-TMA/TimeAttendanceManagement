@@ -42,5 +42,10 @@ namespace TAM_Backend.BLO.Impl
             }
             
         }
+
+        public string RegistAbsence(JsonAbsence jsAbsence)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
