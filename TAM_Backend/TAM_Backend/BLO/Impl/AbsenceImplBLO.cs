@@ -43,9 +43,36 @@ namespace TAM_Backend.BLO.Impl
             
         }
 
-        public string RegistAbsence(JsonAbsence jsAbsence)
+        public string RegistAbsence(JsonAnnualLeaveRegist jsAnnualLeave)
         {
-            throw new NotImplementedException();
+            if (jsAnnualLeave.Alc_Cd != null)
+            {
+                _absenceDAO.RegistAbsence(ToGuid(jsAnnualLeave.Alc_Cd), jsAnnualLeave.State);
+
+                return Constants.SUCCESS;
+            } else
+            {
+                var tam_Cd = _commonDao.GetTamCd(jsAnnualLeave.Stf_Cd);
+                _absenceDAO.RegistAbsence(ToDecimal(jsAnnualLeave.Stf_Cd), 
+                    tam_Cd, 
+                    jsAnnualLeave.State, 
+                    jsAnnualLeave.Alc_Ymd, 
+                    TamUtils.GetDayOfWeek(jsAnnualLeave.Alc_Ymd), 
+                    jsAnnualLeave.In_Hh_Mm, 
+                    jsAnnualLeave.Out_Hh_Mm);
+
+                return Constants.SUCCESS;
+            }
+        }
+
+        private static Guid ToGuid(this Guid? source)
+        {
+            return source ?? Guid.Empty;
+        }
+
+        private static decimal ToDecimal(this decimal? source)
+        {
+            return source ?? decimal.Zero;
         }
     }
 }

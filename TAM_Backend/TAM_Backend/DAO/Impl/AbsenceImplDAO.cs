@@ -36,7 +36,7 @@ namespace TAM_Backend.DAO.Impl
             return leavingRegistrationList;
         }
 
-        public string RegistAbsence(Guid cio_Cd) 
+        public string RegistAbsence(Guid cio_Cd, int state) 
         {
             var absenceInDb = _db.LeavingRegistration.Find(cio_Cd);
 
@@ -48,33 +48,50 @@ namespace TAM_Backend.DAO.Impl
             //Update state of absence
             absenceInDb.Cio_State = Constants.STT_001;
 
+            AnnualLeaveConfirm annualLeaveConfirm = new AnnualLeaveConfirm()
+            {
+                Alc_Cd = Guid.NewGuid(),
+                Alc_Map_Cd = absenceInDb.Cio_Map_Cd,
+                Alc_Day = absenceInDb.Cio_Day,
+                Alc_Ymd = absenceInDb.Cio_Ymd,
+                From_Hh_Mm = absenceInDb.In_Hh_Mm,
+                To_Hh_Mm = absenceInDb.Out_Hh_Mm,
+                Alc_Duration = absenceInDb.Cio_Duration,
+                Alc_State = state,
+                Delete_Ymd = null,
+                Insert_Ymd = DateTime.Now,
+                Insert_Psn_Cd = absenceInDb.Insert_Psn_Cd,
+                Update_Psn_Cd = null
+            };
+
             _db.LeavingRegistration.Update(absenceInDb);
+            _db.AnnualLeaveConfirm.Add(annualLeaveConfirm);
             _db.SaveChanges();
 
             return Constants.SUCCESS;
         }
 
-        public string RegistAbsence(decimal stf_Cd, Guid tam_Cd, string cio_Ymd, string cio_Day, string in_Hh_Mm, string out_Hh_Mm)
+        public string RegistAbsence(decimal stf_Cd, Guid tam_Cd, int state, string cio_Ymd, string cio_Day, string in_Hh_Mm, string out_Hh_Mm)
         {
             string from = in_Hh_Mm;
             string to = out_Hh_Mm;
             decimal psn_Cd = _db.Accounts.FirstOrDefault(u => u.Stf_Cd.Equals(stf_Cd)).Psn_Cd;
 
-            LeavingRegistration leavingRegistration = new LeavingRegistration()
+            AnnualLeaveConfirm annualLeaveConfirm = new AnnualLeaveConfirm()
             {
-                Cio_Cd = Guid.NewGuid(),
-                Cio_Map_Cd = tam_Cd,
-                Cio_Ymd = cio_Ymd,
-                Cio_Day = cio_Day,
-                Cio_State = 0,
+                Alc_Cd = Guid.NewGuid(),
+                Alc_Map_Cd = tam_Cd,
+                Alc_Day = cio_Ymd,
+                Alc_Ymd = cio_Day,
+                Alc_State = state,
                 Insert_Ymd = DateTime.Now,
                 Insert_Psn_Cd = psn_Cd,
-                In_Hh_Mm = from,
-                Out_Hh_Mm = to,
-                Cio_Duration = TamUtils.CalculateDuration(from, to)
+                From_Hh_Mm = from,
+                To_Hh_Mm = to,
+                Alc_Duration = TamUtils.CalculateDuration(from, to)
             };
 
-            _db.LeavingRegistration.Add(leavingRegistration);
+            _db.AnnualLeaveConfirm.Add(annualLeaveConfirm);
             return Constants.SUCCESS;
         }
     }

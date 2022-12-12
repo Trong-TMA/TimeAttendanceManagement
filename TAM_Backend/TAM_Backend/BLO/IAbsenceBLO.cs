@@ -12,6 +12,6 @@ namespace TAM_Backend.BLO
     public interface IAbsenceBLO
     {
         public abstract Object GetAbsences(JsonAbsence jsAbsence);
-        public abstract string RegistAbsence(JsonAbsence jsAbsence);
+        public abstract string RegistAbsence(JsonAnnualLeaveRegist jsAnnualLeave);
     }
 }

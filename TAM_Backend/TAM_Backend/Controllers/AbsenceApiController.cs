@@ -42,5 +42,30 @@ namespace TAM_Backend.Controllers
                 return new JsonResult(new { message = messageAuthorize });
             }
         }
+
+        [HttpPost(Constants.API_REG_ABS)]
+        public IActionResult RegistAbsence(JsonAnnualLeaveRegist jsAnnualLeave)
+        {
+            string messageAuthorize = _autheBlo.Authorize((decimal)jsAnnualLeave.Stf_Dpm_Cd, Constants.API_REG_ABS);
+
+            if (string.IsNullOrEmpty(messageAuthorize))
+            {
+                var result = _absenceBlo.RegistAbsence(jsAnnualLeave);
+
+                if (result.Equals(Constants.ERROR))
+                {
+                    return new JsonResult(new { message = result });
+                }
+                else
+                {
+                    return new JsonResult(result);
+                }
+
+            }
+            else
+            {
+                return new JsonResult(new { message = messageAuthorize });
+            }
+        }
     }
 }
