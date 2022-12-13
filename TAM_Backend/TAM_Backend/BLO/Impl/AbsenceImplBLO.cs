@@ -11,8 +11,8 @@ namespace TAM_Backend.BLO.Impl
 {
     public class AbsenceImplBLO : IAbsenceBLO
     {
-        private ICommonDAO _commonDao;
-        private IAbsenceDAO _absenceDAO;
+        private readonly ICommonDAO _commonDao;
+        private readonly IAbsenceDAO _absenceDAO;
 
         public AbsenceImplBLO(ICommonDAO commonDao, IAbsenceDAO absenceDAO)
         {
@@ -65,12 +65,12 @@ namespace TAM_Backend.BLO.Impl
             }
         }
 
-        private static Guid ToGuid(this Guid? source)
+        private Guid ToGuid(Guid? source)
         {
             return source ?? Guid.Empty;
         }
 
-        private static decimal ToDecimal(this decimal? source)
+        private decimal ToDecimal(decimal? source)
         {
             return source ?? decimal.Zero;
         }

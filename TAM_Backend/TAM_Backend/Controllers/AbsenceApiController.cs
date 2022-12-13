@@ -12,7 +12,7 @@ namespace TAM_Backend.Controllers
 {
     public class AbsenceApiController : BaseApiController
     {
-        public IAbsenceBLO _absenceBlo { get; set; }
+        private readonly IAbsenceBLO _absenceBlo;
         public AbsenceApiController(IAutheBLO autheBlo, IAbsenceBLO absenceBlo) : base(autheBlo)
         {
             _absenceBlo = absenceBlo;
