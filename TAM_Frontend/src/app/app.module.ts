@@ -1,3 +1,4 @@
+import { SummaryOfDeptModule } from './pages/summary-of-dept/summary-of-dept.module';
 import { NghiPhepModule } from './pages/nghi-phep/nghi-phep.module';
 import { SalaryModule } from './pages/salary/salary.module';
 import { SummaryModule } from './pages/summary/summary.module';
@@ -43,6 +44,7 @@ export function tokenGetter(){
     LichSuChamCongEditModule,
     SummaryModule,
     NghiPhepModule,
+    SummaryOfDeptModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

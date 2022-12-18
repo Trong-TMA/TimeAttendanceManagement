@@ -15,4 +15,6 @@ export class SummaryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  confirm(){}
+
 }

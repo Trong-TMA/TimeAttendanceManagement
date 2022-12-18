@@ -1,10 +1,11 @@
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzAnchorModule } from 'ng-zorro-antd/anchor';
 import { LichSuChamCongListModule } from './lich-su-cham-cong-list/lich-su-cham-cong-list.module';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { DialogModule } from 'primeng/dialog';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -21,6 +22,8 @@ import { LichSuChamCongItemComponent } from './lich-su-cham-cong-item/lich-su-ch
 import { LichSuChamCongEditModule } from './lich-su-cham-cong-edit/lich-su-cham-cong-edit.module';
 import { LichSuChamCongEditSearchComponent } from './lich-su-cham-cong-edit-search/lich-su-cham-cong-edit-search.component';
 import { LichSuChamCongEditListComponent } from './lich-su-cham-cong-edit-list/lich-su-cham-cong-edit-list.component';
+import { LichSuChamCongEditItemComponent } from './lich-su-cham-cong-edit-item/lich-su-cham-cong-edit-item.component';
+import { LichSuChamCongEditItemsComponent } from './lich-su-cham-cong-edit-items/lich-su-cham-cong-edit-items.component';
 
 
 
@@ -32,7 +35,9 @@ import { LichSuChamCongEditListComponent } from './lich-su-cham-cong-edit-list/l
     LichSuChamCongListComponent,
     LichSuChamCongItemComponent,
     LichSuChamCongEditSearchComponent,
-    LichSuChamCongEditListComponent
+    LichSuChamCongEditListComponent,
+    LichSuChamCongEditItemComponent,
+    LichSuChamCongEditItemsComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +53,10 @@ import { LichSuChamCongEditListComponent } from './lich-su-cham-cong-edit-list/l
     NzSpinModule,
     NzFormModule,
     LichSuChamCongListModule,
-    NzAnchorModule
+    NzAnchorModule,
+    NzRadioModule,
+    NzFormModule,
+    ReactiveFormsModule,
   ]
 })
 export class LichSuChamCongModule { }
