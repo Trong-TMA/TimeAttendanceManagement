@@ -18,6 +18,45 @@ namespace TAM_Backend.DAO.Impl
             this._db = db;
         }
 
+        public IEnumerable<LeavingRegistration> GetConfirm(int month)
+        {
+            var confirmList = _db.LeavingRegistration
+                .Where(u => Convert.ToInt32(u.Cio_Ymd.Substring(4, 2)) == month
+                            && u.Cio_State == 1);
+
+            return confirmList;
+        }
+
+        public IEnumerable<LeavingRegistration> GetConfirm(Guid tam_Cd, int month)
+        {
+            var confirmList = GetConfirm(month).Where(u => u.Cio_Map_Cd.Equals(tam_Cd));
+
+            return confirmList;
+        }
+
+        public string GetConfirm(List<Guid> confirmList)
+        {
+            AnnualLeaveConfirm annualLeaveConfirm;
+            foreach(var item in confirmList)
+            {
+                var recordInDb = _db.AnnualLeaveConfirm.Find(item);
+                var annualLeave = _db.AnnualLeave.Find(item);
+
+
+                switch (recordInDb.Alc_State)
+                {
+                    //Nghi phep
+                    case Constants.STT_001:
+                        break;
+                    //Nghi khong phep
+                    case Constants.STT_000:
+                        break;
+                }
+            }
+
+            return Constants.SUCCESS;
+        }
+
         public IEnumerable<LeavingRegistration> GetLeavingRegistration(Guid tam_Cd, int month)
         {
             var dateNow = DateTime.Now;

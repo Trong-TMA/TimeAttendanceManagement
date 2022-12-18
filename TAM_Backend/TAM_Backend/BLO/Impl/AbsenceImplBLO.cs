@@ -65,6 +65,11 @@ namespace TAM_Backend.BLO.Impl
             }
         }
 
+
+        public object GetConfirmAbsences(JsonCfmAbsence jsCfmAbsence)
+        {
+            throw new NotImplementedException();
+        }
         private Guid ToGuid(Guid? source)
         {
             return source ?? Guid.Empty;

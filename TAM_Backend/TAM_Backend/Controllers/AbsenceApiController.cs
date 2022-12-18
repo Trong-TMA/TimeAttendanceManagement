@@ -67,5 +67,30 @@ namespace TAM_Backend.Controllers
                 return new JsonResult(new { message = messageAuthorize });
             }
         }
+
+        [HttpPost(Constants.API_GET_CFM)]
+        public IActionResult GetCfmAbsence(JsonCfmAbsence jsCfmAbsence)
+        {
+            string messageAuthorize = _autheBlo.Authorize((decimal)jsCfmAbsence.Stf_Dpm_Cd, Constants.API_GET_CFM);
+
+            if (string.IsNullOrEmpty(messageAuthorize))
+            {
+                var result = _absenceBlo.GetConfirmAbsences(jsCfmAbsence);
+
+                if (result.Equals(Constants.ERROR))
+                {
+                    return new JsonResult(new { message = result });
+                }
+                else
+                {
+                    return new JsonResult(result);
+                }
+
+            }
+            else
+            {
+                return new JsonResult(new { message = messageAuthorize });
+            }
+        }
     }
 }

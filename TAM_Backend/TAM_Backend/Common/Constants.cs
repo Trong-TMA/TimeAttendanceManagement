@@ -88,5 +88,10 @@ namespace TAM_Backend.Common
         //Api Controller - Absence - Get absence
         public const string API_GET_ABS = "APIGETABS";
         public const string API_REG_ABS = "APIREGABS";
+        public const string API_GET_CFM = "APIGETCFM";
+
+        /*Api Controller - Summary*/
+        //Api Controller - Summary - Get summary
+        public const string API_REG_SMR = "APIREGSMR";
     }
 }
