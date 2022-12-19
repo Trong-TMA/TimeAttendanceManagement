@@ -13,5 +13,6 @@ namespace TAM_Backend.DAO
         public abstract string RegistAbsence(decimal stf_Cd, Guid tam_Cd, int state, string cio_Ymd, string cio_Day, string in_Hh_Mm, string out_Hh_Mm);
         public abstract IEnumerable<LeavingRegistration> GetConfirm(int month);
         public abstract IEnumerable<LeavingRegistration> GetConfirm(Guid tam_Cd, int month);
+        public string DoConfirm(List<Guid> confirmList);
     }
 }

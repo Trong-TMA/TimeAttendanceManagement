@@ -92,5 +92,23 @@ namespace TAM_Backend.Controllers
                 return new JsonResult(new { message = messageAuthorize });
             }
         }
+
+        [HttpPost(Constants.API_CFM_ABS)]
+        public IActionResult ConfirmAbsence(JsonApproveAbsence jsApprove)
+        {
+            string messageAuthorize = _autheBlo.Authorize((decimal)jsApprove.Stf_Dpm_Cd, Constants.API_CFM_ABS);
+
+            if (string.IsNullOrEmpty(messageAuthorize))
+            {
+                var result = _absenceBlo.DoConfirmAbsences(jsApprove.AbsenceList);
+
+                return new JsonResult(new { message = result });
+
+            }
+            else
+            {
+                return new JsonResult(new { message = messageAuthorize });
+            }
+        }
     }
 }

@@ -89,6 +89,7 @@ namespace TAM_Backend.Common
         public const string API_GET_ABS = "APIGETABS";
         public const string API_REG_ABS = "APIREGABS";
         public const string API_GET_CFM = "APIGETCFM";
+        public const string API_CFM_ABS = "APICFMABS";
 
         /*Api Controller - Summary*/
         //Api Controller - Summary - Get summary

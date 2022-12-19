@@ -34,25 +34,66 @@ namespace TAM_Backend.DAO.Impl
             return confirmList;
         }
 
-        public string GetConfirm(List<Guid> confirmList)
+        public string DoConfirm(List<Guid> confirmList)
         {
             AnnualLeaveConfirm annualLeaveConfirm;
-            foreach(var item in confirmList)
+            AnnualLeave annualLeave;
+            foreach (var item in confirmList)
             {
-                var recordInDb = _db.AnnualLeaveConfirm.Find(item);
-                var annualLeave = _db.AnnualLeave.Find(item);
+                annualLeaveConfirm = _db.AnnualLeaveConfirm.Find(item);
+                annualLeave = _db.AnnualLeave.Find(item);
 
 
-                switch (recordInDb.Alc_State)
+                switch (annualLeaveConfirm.Alc_State)
                 {
                     //Nghi phep
                     case Constants.STT_001:
+                        if (annualLeaveConfirm.Alc_Duration <= annualLeave.Anl_Minute_Left)
+                        {
+                            //Tru phep
+                            annualLeaveConfirm.Alc_State = Constants.STT_003;
+                            annualLeave.Anl_Minute_Left -= annualLeaveConfirm.Alc_Duration;
+                            annualLeave.Anl_Day_Left = annualLeave.Anl_Minute_Left / 480;
+
+                            _db.AnnualLeaveConfirm.Update(annualLeaveConfirm);
+                            _db.AnnualLeave.Update(annualLeave);
+                        } else
+                        {
+                            var newEnd = TamUtils.ConvertToHour(TamUtils.ConvertToMinute(annualLeaveConfirm.From_Hh_Mm) + (int)annualLeave.Anl_Minute_Left);
+                            var newStart = newEnd;
+
+                            var newRecord = annualLeaveConfirm;
+                            newRecord.Alc_Cd = Guid.NewGuid();
+                            newRecord.To_Hh_Mm = newEnd;
+                            newRecord.Alc_Duration = TamUtils.CalculateDuration(newRecord.From_Hh_Mm, newRecord.To_Hh_Mm);
+                            newRecord.Alc_State = Constants.STT_003;
+
+                            _db.AnnualLeaveConfirm.Add(newRecord);
+
+                            newRecord = annualLeaveConfirm;
+                            newRecord.Alc_Cd = Guid.NewGuid();
+                            newRecord.From_Hh_Mm = newStart;
+                            newRecord.Alc_Duration = TamUtils.CalculateDuration(newRecord.From_Hh_Mm, newRecord.To_Hh_Mm);
+                            newRecord.Alc_State = Constants.STT_002;
+
+                            _db.AnnualLeaveConfirm.Add(newRecord);
+
+                            //Tru phep + nghi ko luong
+                            annualLeaveConfirm.Delete_Ymd = DateTime.Now;
+
+                            _db.AnnualLeaveConfirm.Update(annualLeaveConfirm);
+                        }
                         break;
                     //Nghi khong phep
                     case Constants.STT_000:
+                        //Duyet nghi khong phep
+                        annualLeaveConfirm.Alc_State = Constants.STT_002;
+                        _db.AnnualLeaveConfirm.Update(annualLeaveConfirm);
                         break;
                 }
             }
+
+            _db.SaveChanges();
 
             return Constants.SUCCESS;
         }

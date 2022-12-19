@@ -14,5 +14,6 @@ namespace TAM_Backend.BLO
         public abstract Object GetAbsences(JsonAbsence jsAbsence);
         public abstract string RegistAbsence(JsonAnnualLeaveRegist jsAnnualLeave);
         public abstract Object GetConfirmAbsences(JsonCfmAbsence jsCfmAbsence);
+        public abstract string DoConfirmAbsences(List<Guid> confirmList);
     }
 }

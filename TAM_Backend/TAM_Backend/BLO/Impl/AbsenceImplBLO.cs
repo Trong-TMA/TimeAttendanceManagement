@@ -79,5 +79,11 @@ namespace TAM_Backend.BLO.Impl
         {
             return source ?? decimal.Zero;
         }
+
+        public string DoConfirmAbsences(List<Guid> confirmList)
+        {
+            var result = _absenceDAO.DoConfirm(confirmList);
+            return result;
+        }
     }
 }
