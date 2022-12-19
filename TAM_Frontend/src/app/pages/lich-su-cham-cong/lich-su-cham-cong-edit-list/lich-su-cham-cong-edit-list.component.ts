@@ -11,6 +11,7 @@ export class LichSuChamCongEditListComponent implements OnInit {
   @Input() listStaff: any;
   isSpinning: boolean;
   products: Staff[] = [];
+  display: boolean = false;
 
 
   constructor() {
@@ -27,4 +28,8 @@ export class LichSuChamCongEditListComponent implements OnInit {
 	isAllCheckBoxChecked() {
 
 	}
+
+  showDialog() {
+    this.display = true;
+  }
 }

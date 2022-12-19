@@ -3,6 +3,7 @@
       <nz-table #basicTable [nzData]="listAbsence">
         <thead>
           <tr>
+            <th><input type="checkbox"></th>
             <th>No</th>
             <th>Date</th>
             <th>Duration</th>
@@ -10,8 +11,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr >
-
+          <tr *ngFor="let item of basicTable.data index as i">
+            <td><input type="checkbox"></td>
+            <td>{{i+1}}</td>
+            <td>{{item.date}}</td>
+            <td>{{item.duration}}</td>
+            <td>{{item.note}}</td>
           </tr>
         </tbody>
       </nz-table>

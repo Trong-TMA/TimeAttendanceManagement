@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lich-su-cham-cong-edit-search',
@@ -16,21 +17,43 @@ export class LichSuChamCongEditSearchComponent implements OnInit {
   public fromdate = null;
   public todate = null;
 
-  selectedValueDept = { label: 'Dept 4', value: '01'};
+  isSpinning: boolean;
+  cld: any;
+  weeks: any[] = [];
+  @Input() listCheckinout: any;
+  @Output() loadDataEmit: EventEmitter<any>;
+  public message = "";
+  public radioValue = "week";
+  public startday = "";
+  public endday = "";
+  display: boolean = false;
 
-  optionListStaff = [
-    { label: '++Võ Minh Trọng', value: '01'},
-    { label: '++Hoàng Minh Nhân', value: '02'}
-  ];
-  selectedValueStaff = { label: '++Võ Minh Trọng', value: '01'};
 
+  //Select staff
+  optionList = [{ label: localStorage.getItem('stf_Name'), value: localStorage.getItem('stf_Cd')}];
+  selectedValue = { label: localStorage.getItem('stf_Name'), value: localStorage.getItem('stf_Cd')};
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   compareFn = (o1: any, o2: any): boolean => (o1 && o2 ? o1.value === o2.value : o1 === o2);
 
-  constructor() { }
+
+  constructor(private router: Router) {
+      this.isSpinning = false;
+      this.loadDataEmit = new EventEmitter();
+  };
+
 
   ngOnInit(): void {
     this.idDepartment = this.idDpm;
   }
 
+  search(event: any){
+
+  }
+  loadData(){
+
+  }
+
+  showDialog(){
+    this.display = true;
+  }
 }

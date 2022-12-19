@@ -1,1 +1,26 @@
-<p>summary-of-dept works!</p>
+<div class="text-center">
+  <h1>FUNY COMPANY INTRANET</h1>
+  <h5 style="color: red;">MONTHLY ALL SUMMARY</h5>
+</div>
+<div class="table">
+  <nz-table #basicTable [nzData]="listDpm">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Department</th>
+        <th>Note</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of basicTable.data index as i" >
+        <td>{{i+1}}</td>
+        <td>{{item.nameDpm}}</td>
+        <td>{{item.note}}</td>
+        <td>
+          <button nz-button nzType="primary" (click)="export()">Xuất</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
