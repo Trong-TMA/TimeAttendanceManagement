@@ -27,6 +27,7 @@ namespace TAM_Backend.DataContext
         public DbSet<AnnualLeaveConfirm> AnnualLeaveConfirm { get; set; }
         public DbSet<LeavingRegistration> LeavingRegistration { get; set; }
         public DbSet<Summary> Summary { get; set; }
+        public DbSet<SalaryTable> SalaryTable { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

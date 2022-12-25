@@ -12,7 +12,7 @@ namespace TAM_Backend.Model
     public class Summary : BaseEntity
     {
         [Key]
-        public Guid Sal_Cd { get; set; }
+        public Guid Smr_Cd { get; set; }
         [Column("SMR_MAP_CD")]
         public Guid Smr_Map_Cd { get; set; }
         [Column("SMR_Year")]

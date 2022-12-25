@@ -94,5 +94,7 @@ namespace TAM_Backend.Common
         /*Api Controller - Summary*/
         //Api Controller - Summary - Get summary
         public const string API_REG_SMR = "APIREGSMR";
+        public const string API_CAL_SAL = "APICALSAL";
+        public const string API_GET_SAL = "APIGETSAL";
     }
 }

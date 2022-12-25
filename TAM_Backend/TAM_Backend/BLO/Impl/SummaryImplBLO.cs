@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TAM_Backend.Common;
 using TAM_Backend.DAO;
+using TAM_Backend.Model;
 using TAM_Backend.Model.JsonModel;
 
 namespace TAM_Backend.BLO.Impl
@@ -24,5 +25,18 @@ namespace TAM_Backend.BLO.Impl
             _summaryDao.RegistSummary(tam_Cd, jsSummary.Year, jsSummary.Month);
             return Constants.SUCCESS;
         }
+
+        public string CalculateSalary(List<JsonSalaryTable> jsSalaryTbList)
+        {
+            _summaryDao.SummarySalary(jsSalaryTbList);
+            return Constants.SUCCESS;
+        }
+
+        public SalaryTable GetSalaryTable(decimal stf_Cd)
+        {
+            var tam_Cd = _commonDao.GetTamCd(stf_Cd);
+            return _summaryDao.GetSalary(tam_Cd);
+        }
+
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TAM_Backend.Common;
 using TAM_Backend.DataContext;
 using TAM_Backend.Model;
+using TAM_Backend.Model.JsonModel;
 
 namespace TAM_Backend.DAO.Impl
 {
@@ -51,7 +52,7 @@ namespace TAM_Backend.DAO.Impl
 
             Summary summary = new Summary()
             {
-                Sal_Cd = Guid.NewGuid(),
+                Smr_Cd = Guid.NewGuid(),
                 Smr_Map_Cd = tam_Cd,
                 Smr_Year = year,
                 Smr_Month = month,
@@ -64,6 +65,50 @@ namespace TAM_Backend.DAO.Impl
             _db.Summary.Add(summary);
             _db.SaveChanges();
             return Constants.SUCCESS;
+        }
+
+        public string SummarySalary(List<JsonSalaryTable> jsSalaryTbList)
+        {
+            foreach(var item in jsSalaryTbList)
+            {
+                SummarySalary(item);
+            }
+
+            return Constants.SUCCESS;
+        }
+
+        public SalaryTable GetSalary(Guid tam_Cd)
+        {
+            return _db.SalaryTable.FirstOrDefault(u => u.St_Map_Cd.Equals(tam_Cd));
+        }
+
+        private void SummarySalary(JsonSalaryTable jsSalaryTb)
+        {
+            var summary = _db.Summary.FirstOrDefault(
+                u => u.Smr_Map_Cd.Equals(jsSalaryTb.Tam_Cd) 
+                && u.Smr_Month == jsSalaryTb.Month 
+                && u.Smr_Year == jsSalaryTb.Year);
+
+            var salary = _db.Salary.FirstOrDefault(u => u.Sal_Map_Cd.Equals(jsSalaryTb.Tam_Cd));
+
+            //Tinh luong
+            long totalSalary = (long)((salary.Sal_Base * salary.Sal_Coef + jsSalaryTb.Allowance) / 24 * summary.Smr_Days) + jsSalaryTb.Bonus;
+
+            SalaryTable slrTable = new SalaryTable()
+            {
+                St_Cd = Guid.NewGuid(),
+                St_Map_Cd = jsSalaryTb.Tam_Cd,
+                St_Year = jsSalaryTb.Year,
+                St_Month = jsSalaryTb.Month,
+                St_Days = summary.Smr_Days,
+                St_Times = summary.Smr_Times,
+                St_Allowance = jsSalaryTb.Allowance,
+                St_Bonus = jsSalaryTb.Bonus,
+                St_Total = totalSalary,
+                Insert_Ymd = DateTime.Now
+            };
+
+            _db.SalaryTable.Add(slrTable);
         }
     }
 }
