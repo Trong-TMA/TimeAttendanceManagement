@@ -47,7 +47,7 @@ namespace TAM_Backend.BLO.Impl
         {
             if (jsAnnualLeave.Alc_Cd != null)
             {
-                _absenceDAO.RegistAbsence(ToGuid(jsAnnualLeave.Alc_Cd), jsAnnualLeave.State);
+                _absenceDAO.RegistAbsence(ToGuid(jsAnnualLeave.Alc_Cd), jsAnnualLeave.State, jsAnnualLeave.Reason);
 
                 return Constants.SUCCESS;
             } else
@@ -69,7 +69,16 @@ namespace TAM_Backend.BLO.Impl
 
         public object GetConfirmAbsences(JsonCfmAbsence jsCfmAbsence)
         {
-            throw new NotImplementedException();
+            if (jsCfmAbsence.StaffCode == null)
+            {
+                var result = _absenceDAO.GetConfirm(Convert.ToInt32(jsCfmAbsence.Month));
+                return result;
+            }
+            else
+            {
+                var result = _absenceDAO.GetConfirm(ToGuid(jsCfmAbsence.StaffCode), Convert.ToInt32(jsCfmAbsence.Month));
+                return result;
+            }
         }
         private Guid ToGuid(Guid? source)
         {

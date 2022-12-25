@@ -20,11 +20,11 @@ namespace TAM_Backend.Model
         [Column("SMR_MONTH")]
         public int Smr_Month { get; set; }
         [Column("SMR_DAYS")]
-        public int Smr_Days { get; set; }
+        public decimal Smr_Days { get; set; }
         [Column("SMR_TIMES")]
-        public int Smr_Times { get; set; }
+        public decimal Smr_Times { get; set; }
         [Column("SMR_MINS")]
-        public int Smr_Mins { get; set; }
+        public decimal Smr_Mins { get; set; }
 
         [ForeignKey("Smr_Map_Cd")]
         public virtual TAManager TAManager { get; set; }

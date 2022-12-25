@@ -8,6 +8,6 @@ namespace TAM_Backend.DAO
 {
     public interface ISummaryDAO
     {
-
+        public abstract string RegistSummary(Guid tam_Cd, int year, int month);
     }
 }
