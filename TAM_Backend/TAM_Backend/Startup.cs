@@ -55,6 +55,7 @@ namespace TAM_Backend
             services.AddTransient<ICheckingDAO, CheckingImplDAO>();
             services.AddTransient<IStaffDAO, StaffImplDAO>();
             services.AddTransient<IAbsenceDAO, AbsenceImplDAO>();
+            services.AddTransient<ISummaryDAO, SummaryImplDAO>();
 
             services.AddMvc();
         }

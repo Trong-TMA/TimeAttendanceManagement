@@ -59,7 +59,8 @@ namespace TAM_Backend.BLO.Impl
                     jsAnnualLeave.Alc_Ymd, 
                     TamUtils.GetDayOfWeek(jsAnnualLeave.Alc_Ymd), 
                     jsAnnualLeave.In_Hh_Mm, 
-                    jsAnnualLeave.Out_Hh_Mm);
+                    jsAnnualLeave.Out_Hh_Mm,
+                    jsAnnualLeave.Reason);
 
                 return Constants.SUCCESS;
             }

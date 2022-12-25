@@ -27,6 +27,8 @@ namespace TAM_Backend.Model
         public int Alc_Duration { get; set; }
         [Column("ALC_STATE")]
         public int Alc_State { get; set; }
+        [Column("ALC_REASON")]
+        public string Alc_Reason { get; set; }
         [Column("UPDATE_PSN_CD")]
         public decimal? Update_Psn_Cd { get; set; }
 

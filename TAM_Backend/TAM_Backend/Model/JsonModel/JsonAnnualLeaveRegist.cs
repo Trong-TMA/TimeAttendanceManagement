@@ -12,5 +12,6 @@ namespace TAM_Backend.Model.JsonModel
         public string Alc_Ymd { get; set; }
         public string In_Hh_Mm { get; set; }
         public string Out_Hh_Mm { get; set; }
+        public string Reason { get; set; }
     }
 }

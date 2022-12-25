@@ -116,7 +116,7 @@ namespace TAM_Backend.DAO.Impl
             return leavingRegistrationList;
         }
 
-        public string RegistAbsence(Guid cio_Cd, int state) 
+        public string RegistAbsence(Guid cio_Cd, int state, string reason) 
         {
             var absenceInDb = _db.LeavingRegistration.Find(cio_Cd);
 
@@ -138,6 +138,7 @@ namespace TAM_Backend.DAO.Impl
                 To_Hh_Mm = absenceInDb.Out_Hh_Mm,
                 Alc_Duration = absenceInDb.Cio_Duration,
                 Alc_State = state,
+                Alc_Reason = reason,
                 Delete_Ymd = null,
                 Insert_Ymd = DateTime.Now,
                 Insert_Psn_Cd = absenceInDb.Insert_Psn_Cd,
@@ -151,7 +152,7 @@ namespace TAM_Backend.DAO.Impl
             return Constants.SUCCESS;
         }
 
-        public string RegistAbsence(decimal stf_Cd, Guid tam_Cd, int state, string cio_Ymd, string cio_Day, string in_Hh_Mm, string out_Hh_Mm)
+        public string RegistAbsence(decimal stf_Cd, Guid tam_Cd, int state, string cio_Ymd, string cio_Day, string in_Hh_Mm, string out_Hh_Mm, string reason)
         {
             string from = in_Hh_Mm;
             string to = out_Hh_Mm;
@@ -168,7 +169,8 @@ namespace TAM_Backend.DAO.Impl
                 Insert_Psn_Cd = psn_Cd,
                 From_Hh_Mm = from,
                 To_Hh_Mm = to,
-                Alc_Duration = TamUtils.CalculateDuration(from, to)
+                Alc_Duration = TamUtils.CalculateDuration(from, to),
+                Alc_Reason = reason,
             };
 
             _db.AnnualLeaveConfirm.Add(annualLeaveConfirm);
