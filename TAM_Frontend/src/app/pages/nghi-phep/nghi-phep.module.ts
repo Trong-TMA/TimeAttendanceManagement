@@ -13,7 +13,6 @@ import { NghiPhepComponent } from './nghi-phep.component';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NghiPhepListComponent } from './nghi-phep-list/nghi-phep-list.component';
 import { NghiPhepSearchComponent } from './nghi-phep-search/nghi-phep-search.component';
-import { NghiPhepEditComponent } from './nghi-phep-edit/nghi-phep-edit.component';
 import { NghiPhepCreateComponent } from './nghi-phep-create/nghi-phep-create.component';
 
 
@@ -22,7 +21,6 @@ import { NghiPhepCreateComponent } from './nghi-phep-create/nghi-phep-create.com
     NghiPhepComponent,
     NghiPhepListComponent,
     NghiPhepSearchComponent,
-    NghiPhepEditComponent,
     NghiPhepCreateComponent
   ],
   imports: [
@@ -36,6 +34,7 @@ import { NghiPhepCreateComponent } from './nghi-phep-create/nghi-phep-create.com
     NzTableModule,
     DialogModule,
     NzFormModule,
+    NzSelectModule,
     ReactiveFormsModule,
   ],
   exports:[

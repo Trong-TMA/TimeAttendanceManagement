@@ -8,20 +8,9 @@
     </div>
     <nz-content>
         <nz-spin [nzSpinning]="isSpinning">
-            <app-nghi-phep-list></app-nghi-phep-list>
+            <app-nghi-phep-list (loadDataEmit)="loadAbsence()" [listAbsence]="listAbsence"></app-nghi-phep-list>
         </nz-spin>
     </nz-content>
-    <nz-content>
-        <div>
-          <button class="m-3" nz-button nzType="primary" (click)="showDialogCreate()">Tạo mới</button>
-          <button class="m-3"nz-button nzType="primary" (click)="showDialogEdit()">Chỉnh sửa</button>
-        </div>
-    </nz-content>
 </nz-layout>
-<p-dialog header="Tạo mới" [(visible)]="displayCreate" [breakpoints]="{'1500px': '100vw', '800px': '100vw'}" [style]="{width: '70vw'}">
-    <app-nghi-phep-create></app-nghi-phep-create>
-</p-dialog>
-<p-dialog header="Chỉnh sửa" [(visible)]="displayEdit" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
-    <app-nghi-phep-edit></app-nghi-phep-edit>
-</p-dialog>
+
 
