@@ -7,7 +7,7 @@ namespace TAM_Backend.Model.JsonModel
 {
     public class JsonSalaryTable
     {
-        public Guid Tam_Cd { get; set; }
+        public decimal Stf_Cd { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
         public long Allowance { get; set; }

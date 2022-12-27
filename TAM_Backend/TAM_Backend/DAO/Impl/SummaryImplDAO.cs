@@ -22,7 +22,15 @@ namespace TAM_Backend.DAO.Impl
 
         public string RegistSummary(Guid tam_Cd, int year, int month)
         {
-            var smrInDb = _db.Summary.FirstOrDefault(u => u.Smr_Map_Cd.Equals)
+            var smrInDb = _db.Summary.FirstOrDefault(
+                u => u.Smr_Map_Cd.Equals(tam_Cd)
+                && u.Smr_Year == year
+                && u.Smr_Month == month);
+
+            if (smrInDb != null)
+            {
+                return Constants.ERROR;
+            }
 
             decimal countDay = _db.CheckInOuts.Where(u => u.Cio_Map_Cd.Equals(tam_Cd)
                 && Convert.ToInt32(u.Cio_Ymd.Substring(0, 4)) == year
@@ -91,12 +99,13 @@ namespace TAM_Backend.DAO.Impl
 
         private void SummarySalary(JsonSalaryTable jsSalaryTb)
         {
+            var tam_Cd = _commonDao.GetTamCd(jsSalaryTb.Stf_Cd);
             var summary = _db.Summary.FirstOrDefault(
-                u => u.Smr_Map_Cd.Equals(jsSalaryTb.Tam_Cd) 
+                u => u.Smr_Map_Cd.Equals(tam_Cd) 
                 && u.Smr_Month == jsSalaryTb.Month 
                 && u.Smr_Year == jsSalaryTb.Year);
 
-            var salary = _db.Salary.FirstOrDefault(u => u.Sal_Map_Cd.Equals(jsSalaryTb.Tam_Cd));
+            var salary = _db.Salary.FirstOrDefault(u => u.Sal_Map_Cd.Equals(tam_Cd));
 
             //Tinh luong
             long totalSalary = (long)((salary.Sal_Base * salary.Sal_Coef + jsSalaryTb.Allowance) / 24 * summary.Smr_Days) + jsSalaryTb.Bonus;
@@ -104,7 +113,7 @@ namespace TAM_Backend.DAO.Impl
             SalaryTable slrTable = new SalaryTable()
             {
                 St_Cd = Guid.NewGuid(),
-                St_Map_Cd = jsSalaryTb.Tam_Cd,
+                St_Map_Cd = tam_Cd,
                 St_Year = jsSalaryTb.Year,
                 St_Month = jsSalaryTb.Month,
                 St_Days = summary.Smr_Days,
