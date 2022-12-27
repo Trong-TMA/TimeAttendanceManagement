@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { GStaff } from 'src/app/shared/models/getStaff.model';
+import { StaffService } from 'src/app/shared/services/staff.sevice';
 
 @Component({
   selector: 'app-lich-su-cham-cong-search',
@@ -11,17 +13,18 @@ export class LichSuChamCongSearchComponent implements OnInit {
   public fromdate = null;
   public todate = null;
 
-  optionList = [
-    { label: 'Dept 4', value: '01'},
-    { label: 'Dept5', value: '02'}
-  ];
-  selectedValue = { label: '++Võ Minh Trọng', value: '01'};
+  isSpinning: boolean;
+  @Input() listDpm: any;
+  @Output() loadDataEmit: EventEmitter<any>;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  compareFn = (o1: any, o2: any): boolean => (o1 && o2 ? o1.value === o2.value : o1 === o2);
-  constructor() { }
+  constructor() {
+    this.loadDataEmit =  new EventEmitter();
+    this.isSpinning = false;
+
+  }
 
   ngOnInit(): void {
   }
+
 
 }

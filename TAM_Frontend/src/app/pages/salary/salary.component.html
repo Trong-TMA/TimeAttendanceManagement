@@ -9,7 +9,7 @@
   </div>
   <nz-content>
     <nz-spin [nzSpinning]="isSpinning">
-      <app-salary-list></app-salary-list>
+      <app-salary-list (loadDataEmit)="loadSalary()" [salary]="salary"></app-salary-list>
     </nz-spin>
   </nz-content>
 </nz-layout>

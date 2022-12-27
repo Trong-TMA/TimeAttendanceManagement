@@ -1,18 +1,37 @@
-<nz-spin [nzSpinning]="isSpinning" nzTip="Đang khởi động">
-    <div class="table">
-      <nz-table #basicTable [nzData]="listSalary">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Salary</th>
-            <th>Duration</th>
-            <th>Note</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of basicTable.data index as i" >
-          </tr>
-        </tbody>
-      </nz-table>
+
+<section class="intro">
+  <div class="bg-image h-100" style="background-color: #f5f7fa;">
+    <div class="mask d-flex align-items-center h-100 w-100">
+      <div class="w-100">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body p-0">
+                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height: 700px">
+                  <table class="table table-striped mb-0">
+                    <thead style="background-color: #1890ff;">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Salary</th>
+                        <th scope="col">Bonus</th>
+                        <th scope="col">Allowance</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td>{{this.salary.st_Total}}</td>
+                        <td>{{this.salary.st_Bonus}}</td>
+                        <td>{{this.salary.st_Allowance}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </nz-spin>
+  </div>
+</section>

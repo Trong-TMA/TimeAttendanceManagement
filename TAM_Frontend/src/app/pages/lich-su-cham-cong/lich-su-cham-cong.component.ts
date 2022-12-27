@@ -1,7 +1,9 @@
+import { StaffService } from 'src/app/shared/services/staff.sevice';
 import { Component, OnInit } from '@angular/core';
 import { Department } from 'src/app/shared/models/department.model';
 import { InfStaff } from 'src/app/shared/models/infstaff.model';
 import { Staff } from 'src/app/shared/models/staff.model';
+import { getDept } from 'src/app/shared/models/getDepartment.model';
 
 
 @Component({
@@ -12,29 +14,25 @@ import { Staff } from 'src/app/shared/models/staff.model';
 export class LichSuChamCongComponent implements OnInit {
 
   isSpinning: boolean;
-  listDpm: any;
   listStaff: any;
+  listInfDpm: any;
 
-  //Du lieu gia
-  stff1 = new Staff('1',"Trong-vm","8:00","","","");
-  stff2 = new Staff('1',"Nhan-hm","8:00","","","");
-  listOfStaff: Staff[] = [this.stff1,this.stff2];
-  dpm1 = new Department("101","Dept4",this.listOfStaff,"");
-  dpm2 = new Department("102","Dept4",this.listOfStaff,"");
-
-
-
-  listInfDpm: Department[] = [this.dpm1, this.dpm2];
-
-
-  constructor() {
+  constructor(private staffservice: StaffService) {
     this.isSpinning = false;
   }
 
   ngOnInit(): void {
+    this.loadDept();
   }
 
-  loadStaff(){
-
+  loadDept(){
+    const dept = new getDept(
+      localStorage.getItem("stf_Cd") || '{}',
+      localStorage.getItem("stf_Dpm_Cd") || '{}',
+      localStorage.getItem("stf_Name") || '{}',
+      "");
+    this.staffservice.getDept(dept).subscribe((item:any)=>{
+      this.listInfDpm = item;
+    });
   }
 }

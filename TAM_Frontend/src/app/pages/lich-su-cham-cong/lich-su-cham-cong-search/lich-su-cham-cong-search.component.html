@@ -3,12 +3,10 @@
     <div class="d-flex align-items-center checkbox-item">
       <p class="">Dept/Team</p>
       <nz-select
-        [(ngModel)]="selectedValue"
-        [compareWith]="compareFn"
         nzAllowClear
-        nzPlaceHolder="Choose"
+        nzPlaceHolder="Chọn phòng ban"
       >
-        <nz-option *ngFor="let option of optionList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+        <nz-option *ngFor="let option of listDpm" [nzValue]="option" [nzLabel]="option.dpm_Name"></nz-option>
       </nz-select>
     </div>
   </div>

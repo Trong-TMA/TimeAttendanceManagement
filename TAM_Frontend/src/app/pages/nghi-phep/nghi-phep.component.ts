@@ -10,8 +10,8 @@ import { NghiPhepService } from 'src/app/shared/services/nghiphep.service';
 export class NghiPhepComponent implements OnInit {
 
 
-  listAbsence: Array<any> = [];
   isSpinning: boolean;
+  listAbsence: Array<any> = [];
   stffVM: any;
 
   constructor(private nghiphepService: NghiPhepService) {

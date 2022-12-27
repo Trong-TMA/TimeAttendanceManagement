@@ -45,6 +45,7 @@ export function tokenGetter(){
     SummaryModule,
     NghiPhepModule,
     SummaryOfDeptModule,
+    SalaryModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

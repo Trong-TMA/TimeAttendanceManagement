@@ -7,7 +7,7 @@ import { BaseService } from './base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class StaffService {
+export class SummaryService {
 
   private _sharedHeaders = new HttpHeaders();
   constructor(
@@ -16,11 +16,16 @@ export class StaffService {
       this._sharedHeaders = this._sharedHeaders.set('Content-Type', 'application/json');
   }
 
-  getStaff(gStaff: any){
-    return this.http.post(`${environment.apiUrl}/api/StaffApi/APIGETSTF`, gStaff, {headers: this._sharedHeaders});
+  getSummary(summary:any){
+    return this.http.post(`${environment.apiUrl}/api/SummaryApi/APIGETSAL`, summary, {headers: this._sharedHeaders});
   }
 
-  getDept(gDept: any){
-    return this.http.post(`${environment.apiUrl}/api/StaffApi/APIGETDPM`, gDept, {headers: this._sharedHeaders});
+  regisSummary(summary:any){
+    return this.http.post(`${environment.apiUrl}/api/SummaryApi/APIREGSMR`, summary, {headers: this._sharedHeaders});
   }
+
+  callSummary(summary:any){
+    return this.http.post(`${environment.apiUrl}/api/SummaryApi/APICALSAL`, summary, {headers: this._sharedHeaders});
+  }
+
 }

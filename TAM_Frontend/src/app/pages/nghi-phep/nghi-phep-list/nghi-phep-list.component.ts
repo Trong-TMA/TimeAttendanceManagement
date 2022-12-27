@@ -1,12 +1,6 @@
 import { Absence } from './../../../shared/models/absence.model';
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 
-interface absence{
-  date: any;
-  duration: any;
-  note: any;
-}
-
 @Component({
   selector: 'app-nghi-phep-list',
   templateUrl: './nghi-phep-list.component.html',

@@ -14,6 +14,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NghiPhepListComponent } from './nghi-phep-list/nghi-phep-list.component';
 import { NghiPhepSearchComponent } from './nghi-phep-search/nghi-phep-search.component';
 import { NghiPhepCreateComponent } from './nghi-phep-create/nghi-phep-create.component';
+import { NghiPhepConfirmComponent } from './nghi-phep-confirm/nghi-phep-confirm.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { NghiPhepCreateComponent } from './nghi-phep-create/nghi-phep-create.com
     NghiPhepComponent,
     NghiPhepListComponent,
     NghiPhepSearchComponent,
-    NghiPhepCreateComponent
+    NghiPhepCreateComponent,
+    NghiPhepConfirmComponent
   ],
   imports: [
     CommonModule,
