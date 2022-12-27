@@ -48,6 +48,7 @@ namespace TAM_Backend
             services.AddTransient<ICheckingBLO, CheckingImplBLO>();
             services.AddTransient<IStaffBLO, StaffImplBLO>();
             services.AddTransient<IAbsenceBLO, AbsenceImplBLO>();
+            services.AddTransient<ISummaryBLO, SummaryImplBLO>();
 
             //DAO dependence injection regist
             services.AddTransient<ICommonDAO, CommonImplDAO>();
