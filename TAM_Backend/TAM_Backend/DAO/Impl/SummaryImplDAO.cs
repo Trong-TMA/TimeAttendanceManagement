@@ -109,6 +109,7 @@ namespace TAM_Backend.DAO.Impl
             };
 
             _db.SalaryTable.Add(slrTable);
+            _db.SaveChanges();
         }
     }
 }
