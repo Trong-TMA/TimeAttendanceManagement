@@ -17,7 +17,7 @@ export class ChamCongComponent implements OnInit {
   isSpinning = false;
 
 
-  listCheckinout: Array<any> = [];;
+  listCheckinout: Array<any> = [];
   items: any = [];
   stffVM: any;
   ipAddress = '';

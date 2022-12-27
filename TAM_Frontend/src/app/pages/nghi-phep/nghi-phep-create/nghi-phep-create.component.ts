@@ -1,4 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Regisabsence } from './../../../shared/models/Regisabsence.model';
+import { Absence } from './../../../shared/models/absence.model';
+import { NghiPhepService } from './../../../shared/services/nghiphep.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -12,61 +15,65 @@ export class NghiPhepCreateComponent implements OnInit {
 
   isSpinning: boolean;
   validateForm!: FormGroup;
-  radioValue : any
   startday: any
   endday:any
+  state = 0;
+  @Input() absence: Absence = new Absence();
   @Output() loadDataEmit: EventEmitter<any>;
 
   constructor(
+    private nghiphpeService: NghiPhepService,
     private fb: FormBuilder,
-    private router: Router,
-
-    ) {
+    private router: Router) {
       this.loadDataEmit = new EventEmitter();
       this.isSpinning = false;
-  }
-  submitForm(){
-    // this.dottonvinid = this.validateForm.get('dottonvinhid')?.value
-    // this.donviid = this.validateForm.get('donviid')?.value
-    // this.nguoihienmau.HoTen = this.validateForm.get('hoten')?.value
-    // this.nguoihienmau.GioiTinh = this.validateForm.get('gioitinh')?.value
-    // this.nguoihienmau.NamSinh = this.validateForm.get('namsinh')?.value
-    // this.nguoihienmau.NgheNghiep = this.validateForm.get('nghenghiep')?.value
-    // this.nguoihienmau.DiaChi = this.validateForm.get('diachi')?.value
-    // this.nguoihienmau.NhomMau = this.validateForm.get('nhommau')?.value
-    // this.nguoihienmau.TV = this.validateForm.get('tv')?.value
-    // this.isSpinning = true;
-    // this.nguoihienmauService.createNguoiHienMau(this.dottonvinid,this.donviid,this.nguoihienmau).subscribe((item)=>{
-    //   this.loadDataEmit.emit();
-    //   this.validateForm = this.fb.group({
-    //     dottonvinhid:[null,[Validators.required]],
-    //     donviid:[null,[Validators.required]],
-    //     hoten: [null,[Validators.required]],
-    //     gioitinh: [true],
-    //     namsinh: [null,[Validators.required]],
-    //     nghenghiep: [null],
-    //     diachi: [null],
-    //     nhommau: [null,[Validators.required]],
-    //     tv: [null],
-    //   });
-    //   this.router.navigate(["/Danh-sach-hien-mau"], {
-    //     // skipLocationChange: true,
-    //     // queryParams:{
-    //     //   id: ''
-    //     // }
-    //   })
-    // })
+
+    }
+
+  ngOnInit(){
+    this.loadData();
+    this.validateForm = this.fb.group({
+      staff: [localStorage.getItem('stf_Name'),[Validators.required]],
+      dept:[localStorage.getItem('stf_Dpm_Cd'),[Validators.required]],
+      alc_Ymd:[this.absence.cio_Ymd],
+      cio_Duration:[this.convertMinsToHrsMins(this.absence.cio_Duration)],
+      state: [0, [Validators.required]],
+      reason: [null, [Validators.required]]
+    });
   }
 
   loadData(){
     this.loadDataEmit.emit();
   }
 
-  ngOnInit(){
-    this.validateForm = this.fb.group({
-      staff: [localStorage.getItem('stf_Name'),[Validators.required]],
-      dept:[localStorage.getItem('stf_Dpm_Cd'),[Validators.required]],
-    });
+  convertMinsToHrsMins (minutes : any) {
+    var h = Math.floor(minutes / 60);
+    var m = minutes % 60;
+    return (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m);
   }
+
+  submitForm(){
+    this.isSpinning = true;
+    const regisabsence = new Regisabsence(localStorage.getItem("stf_Cd") || '', localStorage.getItem("stf_Dpm_Cd") || '',
+      localStorage.getItem("stf_Name") || '',"", this.absence.cio_Cd || '', this.validateForm.get("state")?.value, this.absence.cio_Ymd || '',
+      this.absence.in_Hh_Mm || '',this.absence.out_Hh_Mm || '', this.validateForm.get("reason")?.value || '');
+    this.nghiphpeService.registerabsence(regisabsence).subscribe((item)=>{
+      this.loadDataEmit.emit();
+      this.validateForm = this.fb.group({
+        staff: [null,[Validators.required]],
+        dept:[null,[Validators.required]],
+        alc_Ymd:[null],
+        cio_Duration:[null],
+      });
+      this.router.navigate(["/nghi-phep"], {
+        skipLocationChange: true,
+        queryParams:{
+          id: ''
+        }
+      })
+    })
+  }
+
+
 
 }

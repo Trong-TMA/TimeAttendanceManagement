@@ -1,25 +1,34 @@
 <nz-spin [nzSpinning]="isSpinning" nzTip="Đang khởi động">
-    <div class="table">
-      <nz-table #basicTable [nzData]="listAbsence">
-        <thead>
-          <tr>
-            <th><input type="checkbox"></th>
-            <th>No</th>
-            <th>Date</th>
-            <th>Duration</th>
-            <th>Note</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of basicTable.data index as i">
-            <td><input type="checkbox"></td>
-            <td>{{i+1}}</td>
-            <td>{{item.date}}</td>
-            <td>{{item.duration}}</td>
-            <td>{{item.note}}</td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </div>
-  </nz-spin>
+  <div class="table">
+    <nz-table #basicTable [nzData]="listAbsence">
+      <thead>
+        <tr>
+          <th><input type="checkbox"></th>
+          <th>No</th>
+          <th>Date</th>
+          <th>Duration</th>
+          <th>Note</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of basicTable.data index as i">
+          <td><input type="checkbox"></td>
+          <td>{{i+1}}</td>
+          <td>{{item.cio_Ymd}}</td>
+          <td>{{convertMinsToHrsMins(item.cio_Duration)}}</td>
+          <td>{{item.note}}</td>
+          <td>
+            <button class="m-3" nz-button nzType="primary" (click)="showDialogCreate(item)">Đăng ký</button>
+            <button class="m-3"nz-button nzType="primary" (click)="showDialogConfirm(item)">Duyệt</button></td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</nz-spin>
+<div *ngIf="displayCreate == true">
+  <p-dialog header="Tạo mới" [(visible)]="displayCreate" [breakpoints]="{'1500px': '100vw', '800px': '100vw'}" [style]="{width: '70vw'}">
+      <app-nghi-phep-create (loadDataEmit)="loadData()" [absence]="absence" ></app-nghi-phep-create>
+  </p-dialog>
+</div>
 
