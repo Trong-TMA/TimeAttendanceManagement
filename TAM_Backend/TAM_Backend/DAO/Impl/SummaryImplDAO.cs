@@ -11,24 +11,31 @@ namespace TAM_Backend.DAO.Impl
 {
     public class SummaryImplDAO : ISummaryDAO
     {
-        private readonly AppDbContext _db;
+        private readonly AppDbContext _db; 
+        private readonly ICommonDAO _commonDao;
 
-        public SummaryImplDAO(AppDbContext db)
+        public SummaryImplDAO(AppDbContext db, ICommonDAO commonDao)
         {
             this._db = db;
+            this._commonDao = commonDao;
         }
 
         public string RegistSummary(Guid tam_Cd, int year, int month)
         {
-            decimal countDay = _db.CheckInOuts.Where(u => u.Cio_Map_Cd.Equals(tam_Cd) 
+            var smrInDb = _db.Summary.FirstOrDefault(u => u.Smr_Map_Cd.Equals)
+
+            decimal countDay = _db.CheckInOuts.Where(u => u.Cio_Map_Cd.Equals(tam_Cd)
+                && Convert.ToInt32(u.Cio_Ymd.Substring(0, 4)) == year
                 && Convert.ToInt32(u.Cio_Ymd.Substring(4, 2)) == month
                 && u.Cio_State == Constants.STT_001).Count();
 
             var absenceDay = _db.CheckInOuts.Where(u => u.Cio_Map_Cd.Equals(tam_Cd)
+                && Convert.ToInt32(u.Cio_Ymd.Substring(0, 4)) == year
                 && Convert.ToInt32(u.Cio_Ymd.Substring(4, 2)) == month
                 && u.Cio_State != Constants.STT_001);
 
             var annualLeaveDay = _db.AnnualLeaveConfirm.Where(u => u.Alc_Map_Cd.Equals(tam_Cd)
+                && Convert.ToInt32(u.Alc_Ymd.Substring(0, 4)) == year
                 && Convert.ToInt32(u.Alc_Ymd.Substring(4, 2)) == month
                 && u.Alc_State != Constants.STT_003);
 
