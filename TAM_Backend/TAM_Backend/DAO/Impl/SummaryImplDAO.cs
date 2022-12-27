@@ -20,15 +20,15 @@ namespace TAM_Backend.DAO.Impl
 
         public string RegistSummary(Guid tam_Cd, int year, int month)
         {
-            decimal countDay = _db.CheckInOuts.Where(u => u.Cio_Cd.Equals(tam_Cd) 
+            decimal countDay = _db.CheckInOuts.Where(u => u.Cio_Map_Cd.Equals(tam_Cd) 
                 && Convert.ToInt32(u.Cio_Ymd.Substring(4, 2)) == month
                 && u.Cio_State == Constants.STT_001).Count();
 
-            var absenceDay = _db.CheckInOuts.Where(u => u.Cio_Cd.Equals(tam_Cd)
+            var absenceDay = _db.CheckInOuts.Where(u => u.Cio_Map_Cd.Equals(tam_Cd)
                 && Convert.ToInt32(u.Cio_Ymd.Substring(4, 2)) == month
                 && u.Cio_State != Constants.STT_001);
 
-            var annualLeaveDay = _db.AnnualLeaveConfirm.Where(u => u.Alc_Cd.Equals(tam_Cd)
+            var annualLeaveDay = _db.AnnualLeaveConfirm.Where(u => u.Alc_Map_Cd.Equals(tam_Cd)
                 && Convert.ToInt32(u.Alc_Ymd.Substring(4, 2)) == month
                 && u.Alc_State != Constants.STT_003);
 
@@ -45,10 +45,10 @@ namespace TAM_Backend.DAO.Impl
             }
 
             //Calculate days
-            decimal totalDay = countDay + countMins / 480;
-            countMins = countMins + countDay * 480;
-            decimal totalHours = countMins / 60;
-            
+            decimal totalDay = Math.Round((countDay + countMins / 480), 2);
+            countMins = Math.Round(countMins + countDay * 480, 2);
+            decimal totalHours = Math.Round(countMins / 60, 2);
+
 
             Summary summary = new Summary()
             {
