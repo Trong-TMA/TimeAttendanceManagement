@@ -12,7 +12,7 @@
   </div>
   <nz-content>
     <nz-spin [nzSpinning]="isSpinning">
-      <app-summary-working-time></app-summary-working-time>
+      <app-summary-working-time (loadDataEmit)="loadCheckinout()" [listWorkingtime]="listWorkingtime"></app-summary-working-time>
     </nz-spin>
   </nz-content>
   <nz-content>
