@@ -6,6 +6,8 @@
           <th><input type="checkbox"></th>
           <th>No</th>
           <th>Date</th>
+          <th>From</th>
+          <th>To</th>
           <th>Duration</th>
           <th>Note</th>
           <th>Action</th>
@@ -16,6 +18,8 @@
           <td><input type="checkbox"></td>
           <td>{{i+1}}</td>
           <td>{{item.cio_Ymd}}</td>
+          <td>{{item.in_Hh_Mm}}</td>
+          <td>{{item.out_Hh_Mm}}</td>
           <td>{{convertMinsToHrsMins(item.cio_Duration)}}</td>
           <td>{{item.note}}</td>
           <td>

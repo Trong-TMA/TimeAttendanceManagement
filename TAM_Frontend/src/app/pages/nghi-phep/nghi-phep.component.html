@@ -10,7 +10,13 @@
         <nz-spin [nzSpinning]="isSpinning">
             <app-nghi-phep-list (loadDataEmit)="loadAbsence()" [listAbsence]="listAbsence"></app-nghi-phep-list>
         </nz-spin>
+        <button class="m-3" nz-button nzType="primary" (click)="showDialogCreate()">Đăng ký</button>
     </nz-content>
 </nz-layout>
+<div *ngIf="displayCreate == true">
+  <p-dialog header="Tạo mới" [(visible)]="displayCreate" [breakpoints]="{'1500px': '100vw', '800px': '100vw'}" [style]="{width: '70vw'}">
+      <app-nghi-phep-create (loadDataEmit)="loadData()" [absence]="absence"></app-nghi-phep-create>
+  </p-dialog>
+</div>
 
 

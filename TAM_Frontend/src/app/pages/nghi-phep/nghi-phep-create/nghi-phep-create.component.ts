@@ -18,6 +18,7 @@ export class NghiPhepCreateComponent implements OnInit {
   startday: any
   endday:any
   state = 0;
+  Abs: Absence = new Absence;
   @Input() absence: Absence = new Absence();
   @Output() loadDataEmit: EventEmitter<any>;
 
@@ -36,7 +37,8 @@ export class NghiPhepCreateComponent implements OnInit {
       staff: [localStorage.getItem('stf_Name'),[Validators.required]],
       dept:[localStorage.getItem('stf_Dpm_Cd'),[Validators.required]],
       alc_Ymd:[this.absence.cio_Ymd],
-      cio_Duration:[this.convertMinsToHrsMins(this.absence.cio_Duration)],
+      in_Hh_Mm: [this.absence.in_Hh_Mm],
+      out_Hh_Mm: [this.absence.out_Hh_Mm],
       state: [0, [Validators.required]],
       reason: [null, [Validators.required]]
     });
@@ -57,13 +59,16 @@ export class NghiPhepCreateComponent implements OnInit {
     const regisabsence = new Regisabsence(localStorage.getItem("stf_Cd") || '', localStorage.getItem("stf_Dpm_Cd") || '',
       localStorage.getItem("stf_Name") || '',"", this.absence.cio_Cd || '', this.validateForm.get("state")?.value, this.absence.cio_Ymd || '',
       this.absence.in_Hh_Mm || '',this.absence.out_Hh_Mm || '', this.validateForm.get("reason")?.value || '');
+      console.log(regisabsence);
+
     this.nghiphpeService.registerabsence(regisabsence).subscribe((item)=>{
       this.loadDataEmit.emit();
       this.validateForm = this.fb.group({
         staff: [null,[Validators.required]],
         dept:[null,[Validators.required]],
         alc_Ymd:[null],
-        cio_Duration:[null],
+        in_Hh_Mm: [null],
+        out_Hh_Mm: [null],
       });
       this.router.navigate(["/nghi-phep"], {
         skipLocationChange: true,
@@ -72,6 +77,7 @@ export class NghiPhepCreateComponent implements OnInit {
         }
       })
     })
+
   }
 
 

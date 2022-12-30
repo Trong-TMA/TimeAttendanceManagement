@@ -61,7 +61,7 @@ export class ChamCongComponent implements OnInit {
     var rightNow = new Date();
     var cio_Ymd = rightNow.toISOString().slice(0,10).replace(/-/g,"");
     var cio_Day = rightNow.getDate().toString();
-    var Hh_Mm = moment().format("HH:mm");;
+    var Hh_Mm = moment().format("HH:mm");
     var message = "";
     const checkout  = new Checkinout(
       localStorage.getItem("stf_Cd") || '{}',
