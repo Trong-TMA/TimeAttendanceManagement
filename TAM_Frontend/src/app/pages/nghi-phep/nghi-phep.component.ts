@@ -4,6 +4,8 @@ import { Gabsence } from 'src/app/shared/models/getAbsence.model';
 import { Gcheckinout } from 'src/app/shared/models/getCheckinout.model';
 import { NghiPhepService } from 'src/app/shared/services/nghiphep.service';
 import { Absence } from 'src/app/shared/models/absence.model';
+import { Guid } from 'guid-typescript';
+import { isNull } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-nghi-phep',
@@ -69,7 +71,6 @@ export class NghiPhepComponent implements OnInit {
   showDialogCreate() {
     this.getCheckinout().subscribe((item: any)=>{
       item.forEach((elm: Absence) => {
-        this.absence.cio_Cd = elm.cio_Cd;
         this.absence.cio_Map_Cd = elm.cio_Map_Cd;
         this.absence.cio_Ymd = elm.cio_Ymd;
         this.absence.cio_Day = elm.cio_Day;

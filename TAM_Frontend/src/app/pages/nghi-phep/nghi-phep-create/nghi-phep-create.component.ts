@@ -57,7 +57,7 @@ export class NghiPhepCreateComponent implements OnInit {
   submitForm(){
     this.isSpinning = true;
     const regisabsence = new Regisabsence(localStorage.getItem("stf_Cd") || '', localStorage.getItem("stf_Dpm_Cd") || '',
-      localStorage.getItem("stf_Name") || '',"", this.absence.cio_Cd || '', this.validateForm.get("state")?.value, this.absence.cio_Ymd || '',
+      localStorage.getItem("stf_Name") || '',"", this.absence.cio_Cd?.toString(), this.validateForm.get("state")?.value, this.absence.cio_Ymd || '',
       this.absence.in_Hh_Mm || '',this.absence.out_Hh_Mm || '', this.validateForm.get("reason")?.value || '');
       console.log(regisabsence);
 

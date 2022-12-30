@@ -1,7 +1,9 @@
+import { Guid } from "guid-typescript";
+
 export class Absence{
 
   constructor(
-    public cio_Cd?: string,
+    public cio_Cd?: Guid,
     public cio_Map_Cd?: string,
     public cio_Ymd?: string,
     public cio_Day?: string,
