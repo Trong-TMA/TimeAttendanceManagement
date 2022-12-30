@@ -20,7 +20,7 @@
           <td>{{item.note}}</td>
           <td>
             <button class="m-3" nz-button nzType="primary" (click)="showDialogCreate(item)">Đăng ký</button>
-            <button class="m-3"nz-button nzType="primary" (click)="showDialogConfirm(item)">Duyệt</button></td>
+            <button *ngIf="confirmsts == '101'" class="m-3"nz-button nzType="primary" (click)="showDialogConfirm(item)">Duyệt</button></td>
         </tr>
       </tbody>
     </nz-table>

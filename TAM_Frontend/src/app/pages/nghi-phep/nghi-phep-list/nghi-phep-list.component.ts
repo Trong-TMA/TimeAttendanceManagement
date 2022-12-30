@@ -15,6 +15,7 @@ export class NghiPhepListComponent implements OnInit {
   displayConfirm = false;
   isSpinning: boolean;
   absence: Absence = new Absence();
+  public confirmsts = localStorage.getItem("stf_Dpm_Cd");
 
 
   constructor() {
