@@ -21,9 +21,12 @@ export class NghiPhepSearchComponent implements OnInit {
   compareFn = (o1: any, o2: any): boolean => (o1 && o2 ? o1.value === o2.value : o1 === o2);
 
 
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit(): void {
   }
 
+  search(){
+  }
 }
