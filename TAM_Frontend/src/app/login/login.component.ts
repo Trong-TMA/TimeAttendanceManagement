@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
         if(item?.message === "-1" ){
           localStorage.clear();
           this.router.navigateByUrl('/login');
-          this.errorMessage = "Please connect local internet";
+          this.errorMessage = "Vui lòng kết nối với mạng nội bộ";
           this.isSpinning = false;
         }
         else{
