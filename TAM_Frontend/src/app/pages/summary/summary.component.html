@@ -1,23 +1,25 @@
 
-<nz-layout>
-  <div class="text-center">
-    <h1>FUNY COMPANY INTRANET</h1>
-    <h5 style="color: red;">MONTHLY SUMMARY</h5>
-  </div>
-  <div class="d-flex justify-content-end align-items-center p-1 w-100">
-    <button nz-button nzType="primary" (click)="confirm()" *ngIf="this.message != 'SUCCESS'">Xác nhận</button>
-  </div>
-  <div class="search">
-    <app-summary-search></app-summary-search>
-  </div>
-  <nz-content>
-    <nz-spin [nzSpinning]="isSpinning">
-      <app-summary-working-time (loadDataEmit)="loadCheckinout()" [listWorkingtime]="listWorkingtime"></app-summary-working-time>
-    </nz-spin>
-  </nz-content>
-  <nz-content>
-    <nz-spin [nzSpinning]="isSpinning">
-      <app-summary-summary></app-summary-summary>
-    </nz-spin>
-  </nz-content>
-</nz-layout>
+<nz-spin [nzSpinning]="isSpinning">
+  <nz-layout>
+    <div class="text-center">
+      <h1>FUNY COMPANY INTRANET</h1>
+      <h5 style="color: red;">MONTHLY SUMMARY</h5>
+    </div>
+    <div class="d-flex justify-content-end align-items-center p-1 w-100">
+      <button nz-button nzType="primary" (click)="confirm()" *ngIf="this.message != 'SUCCESS'">Xác nhận</button>
+    </div>
+    <div class="search">
+      <app-summary-search></app-summary-search>
+    </div>
+    <nz-content>
+      <nz-spin [nzSpinning]="isSpinning">
+        <app-summary-working-time (loadDataEmit)="loadCheckinout()" [listWorkingtime]="listWorkingtime"></app-summary-working-time>
+      </nz-spin>
+    </nz-content>
+    <nz-content>
+      <nz-spin [nzSpinning]="isSpinning">
+        <app-summary-summary (loadDataEmit)="loadSummary()" [listSummary]="listSummary"></app-summary-summary>
+      </nz-spin>
+    </nz-content>
+  </nz-layout>
+</nz-spin>

@@ -1,12 +1,22 @@
 <div class="bg-light d-flex justify-content-start align-items-center border-bottom p-1 w-100">
-    <div class="p-1 m-2">
-      <label class="lable">Year:</label>
-      <nz-select ngModel="Year" [nzOptions]="listOfYear"></nz-select>
-    </div>
-    <div class="p-1 m-2">
-      <label class="lable">Month:</label>
-      <nz-select ngModel="Month" [nzOptions]="listOfMonth"></nz-select>
-    </div>
+  <div class="p-1 m-2">
+    <label class="lable">Year:</label>
+    <nz-select
+      nzAllowClear
+      nzPlaceHolder="Choose"
+    >
+      <nz-option *ngFor="let option of listOfYear" [nzValue]="option" [nzLabel]="option.toString()"></nz-option>
+    </nz-select>
+  </div>
+  <div class="p-1 m-2">
+    <label class="lable">Month:</label>
+    <nz-select
+      nzAllowClear
+      nzPlaceHolder="Choose"
+    >
+      <nz-option *ngFor="let option of listOfMonth" [nzValue]="option" [nzLabel]="option.toString()"></nz-option>
+    </nz-select>
+  </div>
     <div class="p-1 m-2">
         <nz-radio-group [(ngModel)]="radioValue">
             <label nz-radio nzValue="chitietluong">Chi tiết lương</label>

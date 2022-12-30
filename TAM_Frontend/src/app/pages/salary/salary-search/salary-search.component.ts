@@ -8,12 +8,25 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SalarySearchComponent implements OnInit {
 
 
-  listOfYear: any
-  listOfMonth: any
+  listOfYear: Array<Number> = [];
+  listOfMonth: Array<Number> = [];
   public radioValue = 'chitietluong'
   constructor() { }
 
   ngOnInit(): void {
+    this.getyear();
+    this.getmonth();
   }
 
+  getyear(){
+    var rightNow = new Date();
+    for (let index = 2020; index <= rightNow.getFullYear(); index++) {
+      this.listOfYear.push(index);
+    }
+  }
+  getmonth(){
+    for (let index = 1; index <= 12; index++) {
+      this.listOfMonth.push(index);
+    }
+  }
 }

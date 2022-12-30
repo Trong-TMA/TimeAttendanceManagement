@@ -1,6 +1,6 @@
 <nz-spin [nzSpinning]="isSpinning" nzTip="Đang khởi động">
   <div class="table">
-    <nz-table #basicTable [nzData]="listWorkingTime">
+    <nz-table #basicTable [nzData]="listSummary">
       <thead>
         <th colSpan="11">
           <div class="bg-ligh p-1">
@@ -8,6 +8,7 @@
           </div>
         </th>
         <tr>
+          <th>No.</th>
           <th style="text-align: center;">Working <br> (Actual/Schedule)</th>
           <th style="text-align: center;">Đi sớm<br>(trước 07:55)</th>
           <th style="text-align: center;">Đi trễ<br>(trước 09:00/13:30)</th>
@@ -21,7 +22,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr >
+        <tr *ngFor="let item of basicTable.data index as i">
+          <td>#</td>
+          <td>Summary Date: {{item.year +" "+item.month}} <br> Days: {{item.days}} <br> Times: {{item.times}}</td>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+          <td>Fri-20221230</td>
+          <td>0</td>
+          <td>200.000 VND</td>
+          <td>Không có</td>
+          <td>Không có</td>
+          <td>Không có</td>
         </tr>
       </tbody>
     </nz-table>

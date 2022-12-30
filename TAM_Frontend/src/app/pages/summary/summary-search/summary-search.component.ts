@@ -22,7 +22,7 @@ export class SummarySearchComponent implements OnInit {
 
   getyear(){
     var rightNow = new Date();
-    for (let index = 1990; index <= rightNow.getFullYear(); index++) {
+    for (let index = 2020; index <= rightNow.getFullYear(); index++) {
       this.listOfYear.push(index);
     }
   }

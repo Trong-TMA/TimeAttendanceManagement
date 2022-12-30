@@ -13,6 +13,7 @@ export class SummaryComponent implements OnInit {
 
 
   listWorkingtime: Array<any> = [];
+  listSummary: Array<any> = [];
   stffVM: any;
   isSpinning = false;
   message = "";
@@ -27,6 +28,7 @@ export class SummaryComponent implements OnInit {
   }
 
   confirm(){
+    this.isSpinning = true;
     var rightNow = new Date();
     var year = rightNow.getFullYear().toString();
     var month = (rightNow.getMonth() + 1).toString();
@@ -34,7 +36,10 @@ export class SummaryComponent implements OnInit {
       localStorage.getItem("stf_Cd") || '', localStorage.getItem("stf_Dpm_Cd") || '',
       localStorage.getItem("stf_Name") || '',"",year, month);
     this.summaryservice.regisSummary(regissummary).subscribe((item:any)=>{
-      this.message = item.message;
+      setTimeout(() => {
+        this.message = item.message;
+        this.isSpinning = false;
+      }, 1000);
     });
   }
 
@@ -64,4 +69,7 @@ export class SummaryComponent implements OnInit {
     });
   }
 
+  loadSummary(){
+
+  }
 }

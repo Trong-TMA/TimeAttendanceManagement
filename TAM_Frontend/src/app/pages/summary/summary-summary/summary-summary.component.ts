@@ -7,12 +7,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SummarySummaryComponent implements OnInit {
 
-  @Input() listWorkingTime: any
+  @Input() listSummary: any
 
   isSpinning = false;
   constructor() { }
 
   ngOnInit(): void {
+    const summary = {year: '2022', month: '12', days:'2.80', times: '22.43', status: '1' }
+    this.listSummary.push(summary);
   }
 
 }
