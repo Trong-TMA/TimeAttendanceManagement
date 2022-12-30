@@ -69,6 +69,7 @@ export class NghiPhepComponent implements OnInit {
   }
 
   showDialogCreate() {
+    this.displayCreate = true;
     this.getCheckinout().subscribe((item: any)=>{
       item.forEach((elm: Absence) => {
         this.absence.cio_Map_Cd = elm.cio_Map_Cd;
@@ -89,7 +90,6 @@ export class NghiPhepComponent implements OnInit {
         this.loadData();
       });
     });
-    this.displayCreate = true;
   }
 
 }
