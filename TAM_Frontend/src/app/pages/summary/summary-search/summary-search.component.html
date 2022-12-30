@@ -5,11 +5,21 @@
   </div>
   <div class="p-1 m-2">
     <label class="lable">Year:</label>
-    <nz-select ngModel="Year" [nzOptions]="listOfYear"></nz-select>
+    <nz-select
+      nzAllowClear
+      nzPlaceHolder="Choose"
+    >
+      <nz-option *ngFor="let option of listOfYear" [nzValue]="option" [nzLabel]="option.toString()"></nz-option>
+    </nz-select>
   </div>
   <div class="p-1 m-2">
     <label class="lable">Month:</label>
-    <nz-select ngModel="Month" [nzOptions]="listOfMonth"></nz-select>
+    <nz-select
+      nzAllowClear
+      nzPlaceHolder="Choose"
+    >
+      <nz-option *ngFor="let option of listOfMonth" [nzValue]="option" [nzLabel]="option.toString()"></nz-option>
+    </nz-select>
   </div>
   <div class="p-1 m-2">
     <button nz-button nzType="primary">

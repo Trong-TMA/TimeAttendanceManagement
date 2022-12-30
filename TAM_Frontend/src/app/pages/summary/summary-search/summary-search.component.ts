@@ -7,14 +7,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummarySearchComponent implements OnInit {
 
-  listOfYear: any
-  listOfMonth: any
-  nameStaff = localStorage.getItem('stf_Name')
+  listOfYear: Array<Number> = [];
+  listOfMonth: Array<Number> = [];
+  nameStaff = localStorage.getItem('stf_Name');
 
+  constructor() {
 
-  constructor() { }
+  }
 
   ngOnInit(): void {
+    this.getyear();
+    this.getmonth();
+  }
+
+  getyear(){
+    var rightNow = new Date();
+    for (let index = 1990; index <= rightNow.getFullYear(); index++) {
+      this.listOfYear.push(index);
+    }
+  }
+  getmonth(){
+    for (let index = 1; index <= 12; index++) {
+      this.listOfMonth.push(index);
+    }
   }
 
 }

@@ -20,7 +20,7 @@ export class ChamCongSearchComponent implements OnInit {
   @Input() listCheckinout: any;
   @Output() loadDataEmit: EventEmitter<any>;
   public message = "";
-  public radioValue = "week";
+  public radioValue = "month";
   public startday = "";
   public endday = "";
   public fromdate = "";
@@ -67,7 +67,7 @@ export class ChamCongSearchComponent implements OnInit {
         break;
       }
       case 'selectdate':{
-        if(this.startday != null && this.endday != null){
+        if(this.startday != "" && this.endday != ""){
           stffVM = new Gcheckinout(localStorage.getItem("stf_Cd") || '{}', localStorage.getItem("stf_Dpm_Cd") || '{}',
             localStorage.getItem("stf_Name") || '{}', "",this.startday, this.endday, month, 'week');
           break;
